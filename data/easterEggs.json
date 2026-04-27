@@ -1,0 +1,26 @@
+{
+  "_note": "Rule-based easter eggs. Each rule has constraints: { questionId: choiceCode | null }. A null/missing/blank value acts as a wildcard — that question can be anything. If ALL constraints are satisfied, the rule fires and short-circuits the normal scoring.",
+  "rules": [
+    {
+      "id": "biew_vangard_rolon",
+      "label": "เบียว + vangard → roll-on",
+      "enabled": true,
+      "priority": 100,
+      "constraints": {
+        "q1": null,
+        "q2": null,
+        "q3": null,
+        "q4": "D",
+        "q5": "J"
+      },
+      "result": {
+        "fragrance": "แนะนำให้เริ่มจากโรลออนก่อน 😅",
+        "house": null,
+        "family": "Easter Egg",
+        "notes": [],
+        "blurb": "เลือก \"เบียว\" + \"ไปเล่นการ์ด vangard\" — ระบบขอแนะนำให้เริ่มจากน้ำหอมแบบโรลออนก่อน พกง่าย ราคาเป็นมิตร แล้วค่อยอัปเกรดเมื่อเจอกลิ่นที่ใช่จริงๆ",
+        "image": null
+      }
+    }
+  ]
+}

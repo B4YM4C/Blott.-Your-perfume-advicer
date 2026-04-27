@@ -1,0 +1,357 @@
+{
+  "_note": "Edited via /admin/questions",
+  "questions": [
+    {
+      "id": "q1",
+      "order": 1,
+      "title": "งบประมาณของคุณ",
+      "subtitle": "What is your budget?",
+      "image": null,
+      "multiSelect": false,
+      "choices": [
+        {
+          "code": "A",
+          "label": "100 – 1,000 บาท",
+          "image": null,
+          "scores": {
+            "Maturity": -2,
+            "Luxury": -3,
+            "Intensity": -1,
+            "Playful": 2,
+            "Modern": 2
+          }
+        },
+        {
+          "code": "B",
+          "label": "1,000 – 5,000 บาท",
+          "image": null,
+          "scores": {
+            "Modern": 1,
+            "Playful": 1,
+            "Time": 0
+          }
+        },
+        {
+          "code": "C",
+          "label": "5,000 – 10,000 บาท",
+          "image": null,
+          "scores": {
+            "Maturity": 2,
+            "Luxury": 2,
+            "Formality": 1,
+            "Modern": 1,
+            "Time": 0
+          }
+        },
+        {
+          "code": "D",
+          "label": "10,000 บาท ขึ้นไป",
+          "image": null,
+          "scores": {
+            "Luxury": 5,
+            "Intensity": 2,
+            "Formality": 2,
+            "Maturity": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "title": "ช่วงอายุของคุณ",
+      "subtitle": "What is your age range?",
+      "image": null,
+      "multiSelect": false,
+      "choices": [
+        {
+          "code": "A",
+          "label": "10 – 19 ปี",
+          "image": null,
+          "scores": {
+            "Maturity": -5,
+            "Playful": 3,
+            "Freshness": 2,
+            "Intensity": -1,
+            "Modern": 2
+          }
+        },
+        {
+          "code": "B",
+          "label": "20 – 29 ปี",
+          "image": null,
+          "scores": {
+            "Maturity": 0,
+            "Modern": 2,
+            "Sexy": 1,
+            "Freshness": 1,
+            "Playful": 1,
+            "Luxury": 1
+          }
+        },
+        {
+          "code": "C",
+          "label": "30 – 39 ปี",
+          "image": null,
+          "scores": {
+            "Maturity": 2,
+            "Formality": 1,
+            "Luxury": 2
+          }
+        },
+        {
+          "code": "D",
+          "label": "40 – 60 ปี",
+          "image": null,
+          "scores": {
+            "Maturity": 4,
+            "Formality": 3,
+            "Sweetness": -1,
+            "Luxury": 2,
+            "Modern": 0,
+            "Intensity": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "title": "ลักษณะการแต่งตัวของคุณ",
+      "subtitle": "Your everyday style",
+      "image": null,
+      "multiSelect": false,
+      "choices": [
+        {
+          "code": "A",
+          "label": "Casual wear",
+          "image": null,
+          "scores": {
+            "Playful": 2,
+            "Modern": 1,
+            "Formality": -2
+          }
+        },
+        {
+          "code": "B",
+          "label": "Street wear",
+          "image": null,
+          "scores": {
+            "Modern": 3,
+            "Masculine": 1,
+            "Playful": 1
+          }
+        },
+        {
+          "code": "C",
+          "label": "Sport wear",
+          "image": null,
+          "scores": {
+            "Freshness": 3,
+            "Masculine": 2,
+            "Playful": 1
+          }
+        },
+        {
+          "code": "D",
+          "label": "Formal",
+          "image": null,
+          "scores": {
+            "Formality": 5,
+            "Maturity": 2,
+            "Luxury": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "title": "คุณอยากให้ตัวเองดูเป็นคนยังไง",
+      "subtitle": "How do you want to be perceived?",
+      "image": null,
+      "multiSelect": false,
+      "choices": [
+        {
+          "code": "A",
+          "label": "เฟรนลี่ · Friendly",
+          "image": null,
+          "scores": {
+            "Sweetness": 2,
+            "Playful": 3,
+            "Freshness": 1
+          }
+        },
+        {
+          "code": "B",
+          "label": "ลึกลับน่าค้นหา · Mysterious",
+          "image": null,
+          "scores": {
+            "Intensity": 3,
+            "Sexy": 4,
+            "Time": -2
+          }
+        },
+        {
+          "code": "C",
+          "label": "อบอุ่น · Warm",
+          "image": null,
+          "scores": {
+            "Sweetness": 3,
+            "Maturity": 1,
+            "Sexy": 1
+          }
+        },
+        {
+          "code": "D",
+          "label": "เบียว · Cringe-cool",
+          "image": null,
+          "scores": {
+            "Playful": 5,
+            "Modern": -1,
+            "Maturity": -3
+          }
+        },
+        {
+          "code": "E",
+          "label": "เซ็กซี่ · Sexy",
+          "image": null,
+          "scores": {
+            "Sexy": 5,
+            "Intensity": 2,
+            "Sweetness": 1
+          }
+        },
+        {
+          "code": "F",
+          "label": "หรูหรา · Luxurious",
+          "image": null,
+          "scores": {
+            "Luxury": 5,
+            "Formality": 3,
+            "Maturity": 2
+          }
+        },
+        {
+          "code": "G",
+          "label": "สดชื่น · Fresh",
+          "image": null,
+          "scores": {
+            "Freshness": 5,
+            "Time": 3,
+            "Modern": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "title": "สถานที่ที่คุณชอบไป",
+      "subtitle": "Your favourite place to be",
+      "image": null,
+      "multiSelect": false,
+      "choices": [
+        {
+          "code": "A",
+          "label": "สถานที่เที่ยวกลางคืน",
+          "image": null,
+          "scores": {
+            "Sexy": 3,
+            "Intensity": 2,
+            "Time": -5
+          }
+        },
+        {
+          "code": "B",
+          "label": "ห้างสรรพสินค้า",
+          "image": null,
+          "scores": {
+            "Modern": 2,
+            "Formality": 1,
+            "Time": 1
+          }
+        },
+        {
+          "code": "C",
+          "label": "สวนสาธารณะ",
+          "image": null,
+          "scores": {
+            "Freshness": 5,
+            "Time": 3,
+            "Playful": 1
+          }
+        },
+        {
+          "code": "D",
+          "label": "สปา",
+          "image": null,
+          "scores": {
+            "Maturity": 2,
+            "Luxury": 2,
+            "Sweetness": 1
+          }
+        },
+        {
+          "code": "E",
+          "label": "ร้านกาแฟ",
+          "image": null,
+          "scores": {
+            "Modern": 2,
+            "Sweetness": 1,
+            "Playful": 1
+          }
+        },
+        {
+          "code": "F",
+          "label": "หาด · ทะเล",
+          "image": null,
+          "scores": {
+            "Freshness": 5,
+            "Time": 3,
+            "Playful": 2
+          }
+        },
+        {
+          "code": "G",
+          "label": "ภูเขา · ธรรมชาติ",
+          "image": null,
+          "scores": {
+            "Freshness": 3,
+            "Maturity": 1,
+            "Modern": -1
+          }
+        },
+        {
+          "code": "H",
+          "label": "บาร์ · cocktail",
+          "image": null,
+          "scores": {
+            "Sexy": 3,
+            "Intensity": 2,
+            "Luxury": 2
+          }
+        },
+        {
+          "code": "I",
+          "label": "งานอีเวนต์ · ฮอลล์",
+          "image": null,
+          "scores": {
+            "Formality": 3,
+            "Luxury": 2,
+            "Modern": 1
+          }
+        },
+        {
+          "code": "J",
+          "label": "ไปเล่นการ์ด vangard",
+          "image": null,
+          "scores": {
+            "Playful": 3,
+            "Modern": -2
+          }
+        }
+      ]
+    }
+  ]
+}

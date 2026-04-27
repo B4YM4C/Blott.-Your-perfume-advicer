@@ -1,0 +1,60 @@
+{
+  "_note": "Answer pattern → Fragrance result. Pattern format: 1A2B3C4D5A. Use '*' as wildcard for any choice on that question.",
+  "_fallback": "default",
+  "mappings": [
+    {
+      "pattern": "1B2B3C4D5B",
+      "fragrance": "Montblanc Explorer",
+      "house": "Montblanc",
+      "notes": ["Bergamot", "Vetiver", "Patchouli"],
+      "family": "Woody Aromatic",
+      "blurb": "ตัวอย่างจากสเปก — สำหรับคนที่ใช้ชีวิตในเมืองแต่ใจอยากเดินทาง กลิ่นไม้ผสมเครื่องเทศที่หรูแต่ไม่หนัก เหมาะกับ formal day-wear ที่ต้องการเสน่ห์แบบลึกลับ",
+      "image": null
+    },
+    {
+      "pattern": "1A*3*4A5C",
+      "fragrance": "Jo Malone English Pear & Freesia",
+      "house": "Jo Malone London",
+      "notes": ["Pear", "Freesia", "Patchouli"],
+      "family": "Fruity Floral",
+      "blurb": "เฟรนลี่ สดใส ใส่แล้วเหมือนเดินในสวน — เหมาะกับงบประหยัดที่ยังอยากได้กลิ่นพรีเมียมระดับนานาชาติ",
+      "image": null
+    },
+    {
+      "pattern": "1*2*3D4*5*",
+      "fragrance": "Tom Ford Oud Wood",
+      "house": "Tom Ford",
+      "notes": ["Oud", "Sandalwood", "Vanilla"],
+      "family": "Woody Oriental",
+      "blurb": "Formal · luxurious · timeless. กลิ่นไม้ตะวันออกที่เหมาะกับโอกาสสำคัญและคนที่ต้องการ presence ในห้องประชุม",
+      "image": null
+    },
+    {
+      "pattern": "1*2A*4D5A",
+      "fragrance": "Maison Margiela REPLICA Jazz Club",
+      "house": "Maison Margiela",
+      "notes": ["Rum", "Tobacco Leaf", "Vanilla"],
+      "family": "Warm Spicy",
+      "blurb": "กลิ่น night-out สำหรับสายเฮ บรรยากาศบาร์ jazz มืดๆ มี warmth จาก vanilla และ tobacco",
+      "image": null
+    },
+    {
+      "pattern": "1*2*3C4D5*",
+      "fragrance": "Issey Miyake L'Eau d'Issey Sport",
+      "house": "Issey Miyake",
+      "notes": ["Yuzu", "Mandarin", "Cedarwood"],
+      "family": "Aromatic Citrus",
+      "blurb": "สดชื่น สปอร์ต เหมาะกับไลฟ์สไตล์ active กลิ่นเบาที่ใส่ได้ทุกวัน",
+      "image": null
+    },
+    {
+      "pattern": "default",
+      "fragrance": "Le Labo Santal 33",
+      "house": "Le Labo",
+      "notes": ["Sandalwood", "Cardamom", "Iris"],
+      "family": "Woody Aromatic",
+      "blurb": "Default match — กลิ่น signature ที่ใส่ได้ทุกโอกาส ทุกช่วงอายุ มี warmth และ uniqueness ในเวลาเดียวกัน",
+      "image": null
+    }
+  ]
+}

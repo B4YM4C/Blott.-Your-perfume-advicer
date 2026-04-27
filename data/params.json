@@ -1,0 +1,20 @@
+{
+  "_note": "Configurable list of scoring axes. CORE axes get distance weight 1.0; META axes get weight = metaWeight (default 0.5). Admin can add/remove/rename axes — the names here must match the keys in choice.scores and perfume.dna.",
+  "metaWeight": 0.5,
+  "clamp": { "min": -10, "max": 10 },
+  "core": [
+    { "name": "Masculine", "label": "Masculine", "description": "+ มาส, − หวาน/ละมุน" },
+    { "name": "Maturity",  "label": "Maturity",  "description": "+ ผู้ใหญ่/นิ่ง, − เด็ก/วัยรุ่น" },
+    { "name": "Freshness", "label": "Freshness", "description": "+ สดชื่น, − หนัก/อบอุ่น" },
+    { "name": "Sweetness", "label": "Sweetness", "description": "+ หวาน, − แห้ง/ขม" },
+    { "name": "Intensity", "label": "Intensity", "description": "+ จัดจ้าน, − เบา" },
+    { "name": "Formality", "label": "Formality", "description": "+ ทางการ, − ลำลอง" },
+    { "name": "Time",      "label": "Time",      "description": "+ กลางวัน, − กลางคืน" }
+  ],
+  "meta": [
+    { "name": "Modern",  "label": "Modern",  "description": "+ ทันสมัย, − คลาสสิก" },
+    { "name": "Sexy",    "label": "Sexy",    "description": "+ เซ็กซี่, − สุภาพ" },
+    { "name": "Luxury",  "label": "Luxury",  "description": "+ หรูหรา, − สบายๆ" },
+    { "name": "Playful", "label": "Playful", "description": "+ สนุกขี้เล่น, − จริงจัง" }
+  ]
+}
