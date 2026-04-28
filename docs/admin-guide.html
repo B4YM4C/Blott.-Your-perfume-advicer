@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Blot. — Admin Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0a; --paper:#ffffff; --offwhite:#fafaf8;
+    --grey-1:#1a1a1a; --grey-2:#4a4a4a; --grey-3:#8a8a8a; --grey-4:#c8c8c8; --grey-5:#e8e8e6;
+    --serif:'Cormorant Garamond',serif; --sans:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--offwhite);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:64px 40px 120px}
+  .meta{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey-3)}
+  h1{font-family:var(--serif);font-weight:400;font-size:64px;line-height:1.05;letter-spacing:-.015em;margin-top:14px}
+  h2{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.15;letter-spacing:-.01em;margin-top:0}
+  h3{font-family:var(--serif);font-weight:400;font-size:22px;letter-spacing:-.005em;margin-bottom:6px}
+  p{color:var(--grey-2);margin-top:8px;max-width:62ch}
+  ul{margin:8px 0 0 18px;color:var(--grey-2)}
+  ul li{margin-bottom:4px}
+  code,kbd{font-family:var(--mono);font-size:.86em;background:var(--paper);border:1px solid var(--grey-5);padding:1px 6px}
+  pre{font-family:var(--mono);font-size:13px;line-height:1.55;background:var(--ink);color:var(--paper);padding:18px 20px;overflow:auto;margin-top:14px}
+  pre .c{color:#777}
+  .section{background:var(--paper);border:1px solid var(--grey-5);padding:36px 40px;margin-top:28px}
+  .section .num{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--grey-3)}
+  .section h2{margin-top:8px}
+  .row{display:grid;grid-template-columns:200px 1fr;gap:32px;border-top:1px solid var(--grey-5);padding:22px 0}
+  .row:first-of-type{border-top:none;padding-top:18px}
+  .row .label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--grey-3)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:18px}
+  .card{border:1px solid var(--grey-5);background:var(--offwhite);padding:22px}
+  .pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:4px 10px;margin-right:6px}
+  .pill.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+  table{width:100%;border-collapse:collapse;margin-top:14px;background:var(--paper)}
+  th,td{border:1px solid var(--grey-5);padding:10px 12px;text-align:left;font-size:13.5px;vertical-align:top}
+  th{background:var(--offwhite);font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--grey-2);font-weight:500}
+  .step{display:grid;grid-template-columns:36px 1fr;gap:14px;margin-top:14px}
+  .step .n{font-family:var(--serif);font-size:30px;line-height:1;color:var(--grey-3);text-align:right;padding-top:2px}
+  .step .b{border-left:1px solid var(--grey-5);padding-left:16px}
+  .callout{background:var(--ink);color:var(--paper);padding:22px 26px;margin-top:22px;display:flex;gap:18px;align-items:flex-start}
+  .callout .dot{width:10px;height:10px;background:var(--paper);margin-top:8px;flex-shrink:0}
+  .callout p{color:#cfcfcf;max-width:none}
+  .toc{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 28px;margin-top:18px;padding-top:18px;border-top:1px solid var(--grey-5)}
+  .toc a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey-2);text-decoration:none;display:flex;justify-content:space-between;border-bottom:1px dotted var(--grey-4);padding:10px 0}
+  .toc a:hover{color:var(--ink)}
+  .swatch{display:inline-block;width:10px;height:10px;background:var(--ink);margin-right:6px;vertical-align:middle}
+  /* mock browser bar for screenshots */
+  .mock{border:1px solid var(--grey-5);background:var(--paper);margin-top:18px}
+  .mock .bar{background:var(--offwhite);padding:8px 14px;border-bottom:1px solid var(--grey-5);font-family:var(--mono);font-size:11px;color:var(--grey-2);display:flex;gap:8px;align-items:center}
+  .mock .bar .dots{display:flex;gap:5px}
+  .mock .bar .dots span{width:8px;height:8px;border-radius:50%;background:var(--grey-4)}
+  .mock .body{padding:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <header>
+    <div class="meta">Blot. · Operations · v.beta</div>
+    <h1>Admin Guide<br/><span style="color:var(--grey-3);font-style:italic;font-weight:300;font-size:42px">How to run &amp; manage the back-office</span></h1>
+    <p style="margin-top:18px">เอกสารฉบับเดียวสำหรับนักพัฒนา + คนดูแลเนื้อหา. เริ่มจาก install → run → เปิด <code>/admin</code> → แก้คำถาม + ผลลัพธ์ → deploy production. ทุกอย่างทำได้ในเครื่องโดยไม่ต้องต่อ database.</p>
+
+    <div class="toc">
+      <a href="#quickstart"><span>01 · Quick start</span><span>30s</span></a>
+      <a href="#urls"><span>02 · URLs to know</span><span>map</span></a>
+      <a href="#admin-tour"><span>03 · Admin tour</span><span>UI</span></a>
+      <a href="#questions"><span>04 · Manage questions</span><span>CRUD</span></a>
+      <a href="#mappings"><span>05 · Result mappings</span><span>logic</span></a>
+      <a href="#patterns"><span>06 · Pattern cheat-sheet</span><span>1A2B…</span></a>
+      <a href="#data-storage"><span>07 · Where data goes</span><span>local vs prod</span></a>
+      <a href="#production"><span>08 · Going to production</span><span>SQL</span></a>
+      <a href="#troubleshooting"><span>09 · Troubleshooting</span><span>FAQ</span></a>
+    </div>
+  </header>
+
+  <!-- 01 Quick start -->
+  <section id="quickstart" class="section">
+    <div class="num">01</div>
+    <h2>Quick start (30 seconds)</h2>
+    <p>The app is committed under <code>blott-app/</code>. Local mode uses an in-memory mock DB seeded from JSON, so <strong>no MySQL/Postgres required</strong> to play with the admin UI.</p>
+
+<pre><span class="c"># 1. install once</span>
+cd blott-app
+npm install
+
+<span class="c"># 2. (optional) copy env template — already includes a .env.local default</span>
+cp .env.example .env.local       <span class="c"># skip if .env.local already exists</span>
+
+<span class="c"># 3. start dev server</span>
+npm run dev
+
+<span class="c"># → ready on http://localhost:3000</span>
+<span class="c"># → admin   on http://localhost:3000/admin</span></pre>
+
+    <div class="callout">
+      <div class="dot"></div>
+      <div>
+        <strong style="font-family:var(--serif);font-size:18px">Beta convention</strong>
+        <p style="margin-top:6px">No login wall yet. Anyone with the URL can edit. Lock it down before staging — see <a href="#production" style="color:#fff;text-decoration:underline">section 08</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 URLs -->
+  <section id="urls" class="section">
+    <div class="num">02</div>
+    <h2>URLs to know</h2>
+    <table>
+      <tr><th style="width:30%">Path</th><th style="width:18%">Audience</th><th>What you'll see</th></tr>
+      <tr><td><code>/</code></td><td>Public</td><td>Landing page · "Begin the dip" CTA</td></tr>
+      <tr><td><code>/quiz</code></td><td>Public</td><td>Username step → 5 questions → email step (skippable in beta) → result</td></tr>
+      <tr><td><code>/result?session=…</code></td><td>Public</td><td>Suggested fragrance, family, notes, blurb</td></tr>
+      <tr><td><code>/admin</code></td><td>Admin</td><td>Dashboard · live counts of users / sessions / completed quizzes / events</td></tr>
+      <tr><td><code>/admin/questions</code></td><td>Admin</td><td>List of all questions with edit/delete</td></tr>
+      <tr><td><code>/admin/questions/new</code></td><td>Admin</td><td>Create a brand-new question (1–6 choices)</td></tr>
+      <tr><td><code>/admin/questions/[id]</code></td><td>Admin</td><td>Edit / delete an existing question</td></tr>
+      <tr><td><code>/admin/mappings</code></td><td>Admin</td><td>Edit answer-pattern → fragrance lookup table</td></tr>
+      <tr><td><code>/api/admin/questions</code></td><td>API</td><td>GET list · POST create</td></tr>
+      <tr><td><code>/api/admin/questions/[id]</code></td><td>API</td><td>PUT update · DELETE remove</td></tr>
+      <tr><td><code>/api/admin/mappings</code></td><td>API</td><td>GET list · PUT replace whole list</td></tr>
+    </table>
+  </section>
+
+  <!-- 03 Admin tour -->
+  <section id="admin-tour" class="section">
+    <div class="num">03</div>
+    <h2>Admin tour</h2>
+    <p>The back-office uses a fixed left rail (260px) + main panel layout. Three top-level sections: <strong>Dashboard</strong>, <strong>Questions</strong>, <strong>Result Mapping</strong>.</p>
+
+    <div class="mock">
+      <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span style="margin-left:14px">localhost:3000/admin</span></div>
+      <div class="body">
+        <svg viewBox="0 0 980 460" width="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;background:var(--offwhite)">
+          <!-- sidebar -->
+          <rect x="0" y="0" width="260" height="460" fill="#0a0a0a"/>
+          <text x="24" y="48" font-family="Cormorant Garamond" font-size="22" fill="#fff">Blot.<tspan fill="#8a8a8a">/admin</tspan></text>
+          <text x="24" y="66" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="#8a8a8a">BACK OFFICE · v.beta</text>
+          <line x1="24" y1="84" x2="236" y2="84" stroke="#1a1a1a"/>
+          <g font-family="JetBrains Mono" font-size="11" letter-spacing="1.8" fill="#fff">
+            <rect x="20" y="108" width="220" height="34" fill="#1a1a1a"/>
+            <text x="36" y="129">DASHBOARD</text>
+            <text x="36" y="166">QUESTIONS</text>
+            <text x="36" y="200">RESULT MAPPING</text>
+          </g>
+          <text x="24" y="424" font-family="JetBrains Mono" font-size="10" letter-spacing="1.6" fill="#8a8a8a">← BACK TO SITE</text>
+
+          <!-- main -->
+          <text x="304" y="60" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="#8a8a8a">DASHBOARD</text>
+          <text x="304" y="100" font-family="Cormorant Garamond" font-size="40" fill="#0a0a0a">Overview</text>
+          <text x="304" y="124" font-family="Inter" font-size="12" fill="#4a4a4a">Mode: local · in-memory mock (no persistence)</text>
+
+          <!-- stat grid -->
+          <g font-family="Cormorant Garamond" font-size="34" fill="#0a0a0a">
+            <rect x="304" y="148" width="156" height="86" fill="#fff" stroke="#e8e8e6"/>
+            <text x="320" y="172" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="#8a8a8a">USERS</text>
+            <text x="320" y="218">12</text>
+
+            <rect x="464" y="148" width="156" height="86" fill="#fff" stroke="#e8e8e6"/>
+            <text x="480" y="172" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="#8a8a8a">SESSIONS</text>
+            <text x="480" y="218">12</text>
+
+            <rect x="624" y="148" width="156" height="86" fill="#fff" stroke="#e8e8e6"/>
+            <text x="640" y="172" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="#8a8a8a">COMPLETED</text>
+            <text x="640" y="218">9</text>
+
+            <rect x="784" y="148" width="156" height="86" fill="#fff" stroke="#e8e8e6"/>
+            <text x="800" y="172" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="#8a8a8a">RESULTS</text>
+            <text x="800" y="218">9</text>
+          </g>
+
+          <text x="304" y="290" font-family="Cormorant Garamond" font-size="22" fill="#0a0a0a">Quick actions</text>
+          <rect x="304" y="306" width="148" height="40" fill="#0a0a0a"/>
+          <text x="318" y="332" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="#fff">EDIT QUESTIONS</text>
+          <rect x="460" y="306" width="190" height="40" fill="none" stroke="#0a0a0a"/>
+          <text x="476" y="332" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="#0a0a0a">EDIT RESULT MAPPING</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Manage questions -->
+  <section id="questions" class="section">
+    <div class="num">04</div>
+    <h2>Manage questions</h2>
+    <p>Each question has: <code>order</code> · <code>title (TH)</code> · <code>subtitle (EN)</code> · optional image URL · 2–6 choices (codes A → F). When you delete a choice, the remaining ones get re-coded automatically.</p>
+
+    <div class="step"><div class="n">1</div><div class="b"><h3>Add a question</h3><p>Open <code>/admin/questions</code> → click <kbd>+ Add question</kbd> top-right. Fill in title + at least 2 choices → <kbd>Save question</kbd>.</p></div></div>
+    <div class="step"><div class="n">2</div><div class="b"><h3>Edit a question</h3><p>Click <kbd>Edit →</kbd> on any row. Change anything; press <kbd>Save question</kbd>.</p></div></div>
+    <div class="step"><div class="n">3</div><div class="b"><h3>Add a choice</h3><p>Inside the editor → <kbd>+ Add choice</kbd>. Letter codes A–F are assigned automatically — you don't pick them.</p></div></div>
+    <div class="step"><div class="n">4</div><div class="b"><h3>Remove a choice</h3><p><kbd>Remove</kbd> next to the choice. Two choices is the minimum (the button disables below that).</p></div></div>
+    <div class="step"><div class="n">5</div><div class="b"><h3>Delete a question</h3><p><kbd>Delete</kbd> at the bottom of the editor. In production this is a soft delete (sets <code>deleted_at</code>) so historical answers stay intact.</p></div></div>
+
+    <div class="callout">
+      <div class="dot"></div>
+      <div>
+        <strong style="font-family:var(--serif);font-size:18px">Adding question 6 doesn't break anything</strong>
+        <p style="margin-top:6px">Answers are stored 1-row-per-question, not as a wide table — so changing question count never requires a migration. Just remember to refresh your <strong>result mappings</strong> to cover the new code.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Mappings -->
+  <section id="mappings" class="section">
+    <div class="num">05</div>
+    <h2>Result mappings</h2>
+    <p>Each mapping is a row of: <code>pattern</code> → <code>fragrance</code> + house + family + notes + blurb + image. Open <code>/admin/mappings</code>.</p>
+
+    <table>
+      <tr><th>Field</th><th>Example</th><th>Notes</th></tr>
+      <tr><td>Pattern</td><td><code>1B2B3C4D5B</code></td><td>Concatenation of question# + chosen letter, in order. Or <code>default</code>.</td></tr>
+      <tr><td>Fragrance name</td><td>Montblanc Explorer</td><td>Shown big on the result page.</td></tr>
+      <tr><td>House</td><td>Montblanc</td><td>Brand / maison.</td></tr>
+      <tr><td>Family</td><td>Woody Aromatic</td><td>Olfactive family label.</td></tr>
+      <tr><td>Notes</td><td>Bergamot, Vetiver, Patchouli</td><td>Comma-separated; stored as array.</td></tr>
+      <tr><td>Blurb</td><td>"For the everyday explorer…"</td><td>Long form description on result page.</td></tr>
+      <tr><td>Image URL</td><td>(optional)</td><td>Bottle / mood image.</td></tr>
+    </table>
+
+    <p style="margin-top:18px">Click <kbd>+ Add mapping</kbd> for a new row. Click <kbd>Remove</kbd> to delete one. <strong>Important:</strong> nothing saves until you press <kbd>Save all</kbd> — the editor sends the entire list as a single PUT request and replaces the table atomically.</p>
+  </section>
+
+  <!-- 06 Pattern cheat-sheet -->
+  <section id="patterns" class="section">
+    <div class="num">06</div>
+    <h2>Pattern cheat-sheet</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <span class="pill">Exact match</span>
+        <h3 style="margin-top:10px">User picked B, B, C, D, B</h3>
+        <p>Pattern: <code>1B2B3C4D5B</code> → first exact match wins.</p>
+      </div>
+      <div class="card">
+        <span class="pill ghost">Wildcard</span>
+        <h3 style="margin-top:10px">Any user who picked C on Q3</h3>
+        <p>Pattern: <code>1*2*3C4*5*</code> → matches any combo of choices on the other questions.</p>
+      </div>
+      <div class="card">
+        <span class="pill ghost">Group</span>
+        <h3 style="margin-top:10px">Formal + Mysterious</h3>
+        <p><code>1*2*3D4B5*</code> → catches formal-dressed mysterious types regardless of budget/age/location.</p>
+      </div>
+      <div class="card">
+        <span class="pill ghost">Catch-all</span>
+        <h3 style="margin-top:10px">Nothing else matched</h3>
+        <p>Pattern: <code>default</code> → fallback. Always have one or the user sees an error.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:18px">Matching order in <code>lib/quizLogic.js</code>: <strong>exact → wildcard (first match) → default</strong>.</p>
+  </section>
+
+  <!-- 07 Where data goes -->
+  <section id="data-storage" class="section">
+    <div class="num">07</div>
+    <h2>Where data goes</h2>
+
+    <div class="row">
+      <div><div class="label">APP_MODE = local</div><div class="meta" style="margin-top:6px">Default · dev / demo</div></div>
+      <div>
+        <p style="margin-top:0">In-memory <code>Map</code>s inside the Node process. Seeded from <code>data/questions.json</code> + <code>data/mappings.json</code> on first read.</p>
+        <p>✓ Zero setup · ✓ Edits in admin work immediately · ✗ Everything resets when you restart <code>npm run dev</code>.</p>
+        <p>Want changes to survive restart? Either switch to production mode, or export and overwrite the JSON files manually.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div><div class="label">APP_MODE = production</div><div class="meta" style="margin-top:6px">Persistent · staging / live</div></div>
+      <div>
+        <p style="margin-top:0">SQL via <code>mysql2</code> or <code>pg</code>. Schema in <code>sql/schema.sql</code> — 8 tables: users, sessions, questions, choices, answers, result_mappings, results, tracking_events, consent_log.</p>
+        <p>Both adapters expose the same async interface (see <code>lib/db/index.js</code>) — your routes/components don't change one bit when you swap.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 Production -->
+  <section id="production" class="section">
+    <div class="num">08</div>
+    <h2>Going to production</h2>
+
+    <div class="step"><div class="n">1</div><div class="b"><h3>Create database + user</h3><p>MySQL example below. Postgres equivalent in <code>sql/schema.sql</code> comments.</p>
+<pre>mysql -u root -p
+CREATE DATABASE blott CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'blott'@'%' IDENTIFIED BY 'change_me';
+GRANT ALL ON blott.* TO 'blott'@'%';
+FLUSH PRIVILEGES;</pre></div></div>
+
+    <div class="step"><div class="n">2</div><div class="b"><h3>Apply schema + seed</h3>
+<pre>mysql -u blott -p blott &lt; sql/schema.sql
+
+<span class="c"># or via the Node helper:</span>
+APP_MODE=production node scripts/init-db.js
+APP_MODE=production node scripts/seed.js</pre></div></div>
+
+    <div class="step"><div class="n">3</div><div class="b"><h3>Switch app mode</h3><p>Edit <code>.env.local</code> (or your deploy env):</p>
+<pre>APP_MODE=production
+DB_DRIVER=mysql
+DB_HOST=…
+DB_USER=blott
+DB_PASSWORD=…
+DB_NAME=blott
+ADMIN_USERNAME=…
+ADMIN_PASSWORD=…</pre></div></div>
+
+    <div class="step"><div class="n">4</div><div class="b"><h3>Build + run</h3>
+<pre>npm run build
+npm run start  <span class="c"># serves on :3000</span></pre></div></div>
+
+    <div class="step"><div class="n">5</div><div class="b"><h3>Lock <code>/admin</code></h3><p>Beta has no auth gate. Before staging, add a Next middleware that rejects requests to <code>/admin/**</code> + <code>/api/admin/**</code> unless basic-auth credentials match <code>ADMIN_USERNAME</code> / <code>ADMIN_PASSWORD</code> from env. Or put the whole back-office behind a VPN / IP allowlist.</p></div></div>
+  </section>
+
+  <!-- 09 Troubleshooting -->
+  <section id="troubleshooting" class="section">
+    <div class="num">09</div>
+    <h2>Troubleshooting</h2>
+
+    <div class="row">
+      <div class="label">"Cannot find module '@/lib/db'"</div>
+      <div><p style="margin-top:0">Make sure you ran <code>npm install</code> inside <code>blott-app/</code>. The <code>@/</code> alias is defined in <code>jsconfig.json</code>; restart <code>npm run dev</code> after touching it.</p></div>
+    </div>
+
+    <div class="row">
+      <div class="label">Edits in /admin don't persist</div>
+      <div><p style="margin-top:0">You're in <code>APP_MODE=local</code> — that's expected. The mock DB resets on every Node restart. Switch to production mode (section 08) for persistence.</p></div>
+    </div>
+
+    <div class="row">
+      <div class="label">Result page says "no match"</div>
+      <div><p style="margin-top:0">No mapping matched the user's pattern <em>and</em> there's no <code>default</code> row. Add a <code>default</code> mapping in <code>/admin/mappings</code>.</p></div>
+    </div>
+
+    <div class="row">
+      <div class="label">User finished quiz but result is wrong</div>
+      <div><p style="margin-top:0">Open the dashboard → check the <em>Sessions</em> count went up. Then walk through your mappings — the matcher tries <strong>exact</strong> first, then iterates wildcard rows in the order they appear, then falls back to <code>default</code>. If two wildcards both match, the earlier one wins. Reorder rows accordingly.</p></div>
+    </div>
+
+    <div class="row">
+      <div class="label">Email step is blocking testers</div>
+      <div><p style="margin-top:0">Beta intentionally exposes a <kbd>Skip</kbd> button on the email step. If you want to force email collection later, edit <code>app/quiz/QuizClient.jsx</code> → remove the Skip button from <code>EmailStep</code>.</p></div>
+    </div>
+
+    <div class="row">
+      <div class="label">Tracking is silent</div>
+      <div><p style="margin-top:0">Two gates: (1) <code>TRACKING_ENABLED=true</code> in env, (2) the user accepted the consent banner. Either says no → <code>/api/tracking</code> writes nothing.</p></div>
+    </div>
+  </section>
+
+  <footer style="margin-top:64px;padding-top:24px;border-top:1px solid var(--grey-5);display:flex;justify-content:space-between;align-items:flex-end">
+    <div>
+      <div class="meta">Blot. · Admin Guide · v.beta</div>
+      <p style="margin-top:6px;font-size:12px">For dev questions see <code>blott-app/README.md</code>. For full system spec see <code>docs/project-spec.html</code>.</p>
+    </div>
+    <div style="font-family:var(--serif);font-size:32px;line-height:1">Blot.<span style="display:inline-block;width:18px;height:2px;background:var(--ink);margin-left:6px;vertical-align:middle"></span></div>
+  </footer>
+
+</div>
+</body>
+</html>

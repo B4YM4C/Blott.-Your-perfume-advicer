@@ -10,14 +10,13 @@ export const runtime = 'nodejs';
  *
  * Storage backend (auto-detected, in priority order):
  *   1. Vercel Blob — when BLOB_READ_WRITE_TOKEN is set in env
- *      Returns the public CDN URL from @vercel/blob.
- *   2. Local disk — fallback for `npm run dev`
+ *      Uses @vercel/blob's put() and returns the public CDN URL.
+ *   2. Local disk — fallback for `npm run dev` ONLY.
  *      Writes to public/uploads/<timestamp>-<safe-name>
- *      Returns /uploads/<filename>
  *
- * Vercel's serverless filesystem is read-only, so disk writes only work
- * locally. Configure Vercel Blob in the project's Storage tab and Vercel
- * will inject BLOB_READ_WRITE_TOKEN automatically at build + runtime.
+ * On Vercel the serverless filesystem is read-only, so any disk-write attempt
+ * will ENOENT. To prevent surfacing a confusing error to the admin UI we
+ * detect the runtime up-front and return a clear, actionable message instead.
  */
 export async function POST(req) {
   try {
@@ -31,14 +30,22 @@ export async function POST(req) {
     const ts = Date.now();
     const filename = `${ts}-${safe}`;
 
+    // Detect read-only/serverless runtime so we don't try (and fail) to mkdir
+    const isServerless =
+      process.env.VERCEL === '1' ||
+      process.env.VERCEL_ENV ||
+      process.env.AWS_LAMBDA_FUNCTION_NAME ||
+      (process.env.APP_MODE || '').toLowerCase() === 'production';
+
+    const hasBlobToken = !!process.env.BLOB_READ_WRITE_TOKEN;
+
     // ---------- Backend 1: Vercel Blob ----------
-    if (process.env.BLOB_READ_WRITE_TOKEN) {
+    if (hasBlobToken) {
       try {
         const { put } = await import('@vercel/blob');
         const blob = await put(`uploads/${filename}`, file, {
           access: 'public',
           contentType: file.type || 'application/octet-stream',
-          // addRandomSuffix off — we already have a timestamp prefix
           addRandomSuffix: false,
         });
         return NextResponse.json({
@@ -48,18 +55,37 @@ export async function POST(req) {
           size: file.size,
         });
       } catch (e) {
-        // If the @vercel/blob package isn't installed, surface a useful error
         if (/Cannot find package/.test(e.message)) {
           return NextResponse.json({
             ok: false,
-            error: 'BLOB_READ_WRITE_TOKEN is set but @vercel/blob is not installed. Run `npm install @vercel/blob`.',
+            error: 'BLOB_READ_WRITE_TOKEN is set but @vercel/blob is not installed. Run `npm install @vercel/blob` and redeploy.',
+            backend: 'vercel-blob',
           }, { status: 500 });
         }
-        throw e;
+        console.error('[upload] @vercel/blob put failed:', e);
+        return NextResponse.json({
+          ok: false,
+          error: `Vercel Blob upload failed: ${e.message}`,
+          backend: 'vercel-blob',
+        }, { status: 500 });
       }
     }
 
-    // ---------- Backend 2: local disk ----------
+    // ---------- Refuse disk fallback in serverless ----------
+    if (isServerless) {
+      return NextResponse.json({
+        ok: false,
+        error:
+          'File uploads are not configured for this deploy. ' +
+          'Connect a Vercel Blob store (Project → Storage → Connect Store → Blob), ' +
+          'then redeploy. The BLOB_READ_WRITE_TOKEN env var will be auto-injected. ' +
+          'Until then, paste a hosted image URL into the field instead.',
+        backend: 'none',
+        hint: 'BLOB_READ_WRITE_TOKEN is missing in this environment.',
+      }, { status: 503 });
+    }
+
+    // ---------- Backend 2: local disk (dev only) ----------
     const buf = Buffer.from(await file.arrayBuffer());
     const dir = path.join(process.cwd(), 'public', 'uploads');
     fs.mkdirSync(dir, { recursive: true });
@@ -72,6 +98,7 @@ export async function POST(req) {
       size: buf.length,
     });
   } catch (e) {
+    console.error('[upload] unexpected error:', e);
     return NextResponse.json({ ok: false, error: e.message }, { status: 500 });
   }
 }

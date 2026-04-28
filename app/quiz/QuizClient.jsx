@@ -5,7 +5,11 @@ import { useRouter } from 'next/navigation';
 
 const STAGE = { USERNAME: 'username', QUIZ: 'quiz', EMAIL: 'email', SUBMITTING: 'submitting' };
 
-export default function QuizClient({ questions = [] }) {
+export default function QuizClient({ questions = [], copy = {} }) {
+  // Pull every editable string from copy so the admin /copy page is the
+  // single source of truth. Falls back to /data/copy.json defaults via
+  // mergeWithDefaults() upstream, so these reads can't be undefined.
+  const c = copy.quiz || {};
   const router = useRouter();
   const [stage, setStage] = useState(STAGE.USERNAME);
   const [username, setUsername] = useState('');
@@ -97,11 +101,11 @@ export default function QuizClient({ questions = [] }) {
   if (questions.length === 0) {
     return (
       <div className="container-narrow" style={{ padding: '120px 24px', textAlign: 'center' }}>
-        <p className="meta">No questions configured</p>
+        <p className="meta">{c.empty?.eyebrow}</p>
         <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 36, marginTop: 12 }}>
-          The quiz isn&apos;t ready yet.
+          {c.empty?.title}
         </h2>
-        <p style={{ color: 'var(--grey-2)', marginTop: 12 }}>กรุณาให้ admin เพิ่มคำถามใน back office ก่อน</p>
+        <p style={{ color: 'var(--grey-2)', marginTop: 12 }}>{c.empty?.body}</p>
       </div>
     );
   }
@@ -117,7 +121,12 @@ export default function QuizClient({ questions = [] }) {
 
       <div className="container-narrow" style={s.frame}>
         {stage === STAGE.USERNAME && (
-          <UsernameStep username={username} setUsername={setUsername} onContinue={() => setStage(STAGE.QUIZ)} />
+          <UsernameStep
+            copy={c.username || {}}
+            username={username}
+            setUsername={setUsername}
+            onContinue={() => setStage(STAGE.QUIZ)}
+          />
         )}
 
         {stage === STAGE.QUIZ && current && (
@@ -137,6 +146,7 @@ export default function QuizClient({ questions = [] }) {
 
         {stage === STAGE.EMAIL && (
           <EmailStep
+            copy={c.email || {}}
             email={email}
             setEmail={setEmail}
             onSubmit={() => submit({ skip: false })}
@@ -148,9 +158,9 @@ export default function QuizClient({ questions = [] }) {
 
         {stage === STAGE.SUBMITTING && (
           <div style={{ textAlign: 'center', padding: '120px 0' }}>
-            <p className="meta">Computing your match…</p>
+            <p className="meta">{c.computing?.eyebrow}</p>
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 32, marginTop: 12 }}>
-              Dipping the strips
+              {c.computing?.title}
             </h2>
           </div>
         )}
@@ -161,20 +171,18 @@ export default function QuizClient({ questions = [] }) {
 
 // ============================ STEPS ============================
 
-function UsernameStep({ username, setUsername, onContinue }) {
+function UsernameStep({ copy = {}, username, setUsername, onContinue }) {
   return (
     <div style={s.stepBox}>
-      <span className="meta">Step · 00 / Greeting</span>
-      <h1 style={s.h1}>What should we<br /><em style={s.em}>call you?</em></h1>
-      <p style={s.body}>
-        ไม่ต้องสมัครสมาชิก ใส่แค่ชื่อที่อยากให้เราเรียก เพื่อทำให้ผลลัพธ์รู้สึกเป็นส่วนตัวของคุณ
-      </p>
+      <span className="meta">{copy.eyebrow}</span>
+      <h1 style={s.h1}>{copy.titleA}<br /><em style={s.em}>{copy.titleB}</em></h1>
+      <p style={s.body}>{copy.body}</p>
       <div style={{ marginTop: 32 }}>
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="e.g. Pim, Khun A, Voyager"
+          placeholder={copy.placeholder}
           maxLength={48}
           style={s.input}
           aria-label="Display name"
@@ -183,10 +191,10 @@ function UsernameStep({ username, setUsername, onContinue }) {
       </div>
       <div style={{ marginTop: 28, display: 'flex', gap: 12, alignItems: 'center' }}>
         <button className="btn btn-lg" onClick={onContinue} disabled={!username.trim()}>
-          Begin →
+          {copy.cta}
         </button>
         <span style={{ fontSize: 12, color: 'var(--grey-3)' }}>
-          {username.trim() ? '' : 'พิมพ์ชื่อก่อนเริ่ม'}
+          {username.trim() ? '' : copy.missing}
         </span>
       </div>
     </div>
@@ -218,12 +226,19 @@ function QuestionStep({ question, current, total, selected, onSelect, onConfirm,
         <img src={question.image} alt="" style={s.qImage} />
       )}
 
-      <div style={s.choices}>
+      {/*
+        key on the wrapping grid forces a full unmount/remount when the
+        question changes, so the previous question's selected/unselected
+        styles can never bleed into the new question through CSS transitions.
+      */}
+      <div key={question.id} style={s.choices}>
         {question.choices.map((ch) => {
           const isSelected = selectedSet.has(ch.code);
           return (
             <button
-              key={ch.code}
+              // key includes question.id so React treats this as a fresh node
+              // on every question change → no transition flicker.
+              key={`${question.id}-${ch.code}`}
               type="button"
               onClick={() => onSelect(ch.code)}
               aria-pressed={isSelected}
@@ -262,21 +277,19 @@ function QuestionStep({ question, current, total, selected, onSelect, onConfirm,
   );
 }
 
-function EmailStep({ email, setEmail, onSubmit, onSkip, onBack, error }) {
+function EmailStep({ copy = {}, email, setEmail, onSubmit, onSkip, onBack, error }) {
   return (
     <div style={s.stepBox}>
-      <span className="meta">Step · Final / Send Result</span>
-      <h2 style={s.h1}>Where shall we<br /><em style={s.em}>send your match?</em></h2>
-      <p style={s.body}>
-        ใส่ email เพื่อรับน้ำหอมที่เราเลือกให้ พร้อมเหตุผลและตัวอย่างกลิ่นใกล้เคียง
-      </p>
+      <span className="meta">{copy.eyebrow}</span>
+      <h2 style={s.h1}>{copy.titleA}<br /><em style={s.em}>{copy.titleB}</em></h2>
+      <p style={s.body}>{copy.body}</p>
 
       <div style={{ marginTop: 32 }}>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
+          placeholder={copy.placeholder}
           style={s.input}
           aria-label="Email address"
         />
@@ -286,22 +299,24 @@ function EmailStep({ email, setEmail, onSubmit, onSkip, onBack, error }) {
 
       <div style={{ marginTop: 28, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         <button className="btn btn-lg" onClick={onSubmit} disabled={!email.trim()}>
-          Send my match →
+          {copy.ctaSubmit}
         </button>
         <button className="btn ghost btn-lg" onClick={onSkip}>
-          Skip · ดูบนเว็บ
+          {copy.ctaSkip}
         </button>
       </div>
 
-      <div style={s.skipNote}>
-        <span className="meta">Optional</span>
-        <p style={{ marginTop: 8, color: 'var(--grey-2)', fontSize: 13 }}>
-          ไม่อยากรับ email ก็ได้ — กด Skip แล้วเราจะแสดงผลลัพธ์บนหน้าเว็บให้ทันที
-        </p>
-      </div>
+      {copy.skipNote && (
+        <div style={s.skipNote}>
+          <span className="meta">{copy.skipNote.eyebrow}</span>
+          <p style={{ marginTop: 8, color: 'var(--grey-2)', fontSize: 13 }}>
+            {copy.skipNote.body}
+          </p>
+        </div>
+      )}
 
       <div style={{ marginTop: 20 }}>
-        <button className="btn ghost btn-sm" onClick={onBack}>← Edit my answers</button>
+        <button className="btn ghost btn-sm" onClick={onBack}>{copy.backLabel || '← Edit my answers'}</button>
       </div>
     </div>
   );
@@ -338,7 +353,11 @@ const s = {
     border: '1px solid var(--grey-5)', background: 'var(--paper)',
     borderRadius: 'var(--radius-md)',
     boxShadow: 'var(--shadow-soft)',
-    transition: 'all .18s ease',
+    // Only transition the lift + shadow + border — never `background`/`color`.
+    // Animating background causes a visible flicker if React re-uses the DOM
+    // node from the previous question. With the keyed wrapper above + a
+    // narrow transition list, the swap is instant and clean.
+    transition: 'transform .18s ease, box-shadow .18s ease, border-color .18s ease',
     color: 'var(--ink)',
   },
   // Strong, unmistakable selected state: dark background, white text,
@@ -355,7 +374,7 @@ const s = {
     background: 'var(--paper)',
     display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
     flexShrink: 0,
-    transition: 'all .15s ease',
+    transition: 'border-color .15s ease',
   },
   indicatorOn: {
     background: 'var(--paper)',

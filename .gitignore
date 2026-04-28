@@ -1,0 +1,19 @@
+.env.local
+.env*.local
+node_modules/
+.next/
+*.log
+.DS_Store
+*\ 2
+*\ 2.*
+*\ 2/
+/Blotter.MP4
+/Site\ Loading\ Animation.MOV
+/Stories\ board.png
+/footer.MP4
+/process.MP4
+/storyboard.mov
+/storyboard.mp4
+/logo-concepts.html
+/name\ site.svg
+/site\ logo.svg

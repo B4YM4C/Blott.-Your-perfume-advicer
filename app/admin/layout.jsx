@@ -12,10 +12,12 @@ export default function AdminLayout({ children }) {
         </div>
         <nav style={nav}>
           <Link href="/admin" style={navLink}>Dashboard</Link>
+          <Link href="/admin/sessions" style={navLink}>Sessions</Link>
           <Link href="/admin/params" style={navLink}>Parameters</Link>
           <Link href="/admin/questions" style={navLink}>Questions</Link>
           <Link href="/admin/perfumes" style={navLink}>Perfumes</Link>
           <Link href="/admin/easter-eggs" style={navLink}>Easter Eggs</Link>
+          <Link href="/admin/copy" style={navLink}>Site Copy</Link>
           <Link href="/admin/mappings" style={{ ...navLink, color: 'var(--grey-3)' }}>Result Mapping (legacy)</Link>
           <a href="/" style={{ ...navLink, marginTop: 32, color: 'var(--grey-3)' }}>← Back to site</a>
         </nav>

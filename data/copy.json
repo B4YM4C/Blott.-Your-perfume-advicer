@@ -1,0 +1,81 @@
+{
+  "_note": "Editable site copy. Edit via /admin/copy or directly here in dev. Reads merge DB overrides on top of these defaults so any missing key falls back to this file.",
+  "home": {
+    "title": "Found in a few dips.",
+    "lead": "ตอบคำถาม 5–10 ข้อ แล้วให้เราช่วยเลือกน้ำหอมที่ใช่สำหรับคุณ — ไม่ต้องสมัคร ไม่ต้องล็อกอิน แค่จุ่มกระดาษทดสอบกับเรา",
+    "ctaPrimary": "Begin the dip →",
+    "ctaSecondary": "How it works"
+  },
+  "method": {
+    "eyebrow": "Method · 01",
+    "title": "Three steps. One match.",
+    "cta": "Start the quiz →",
+    "steps": [
+      {
+        "title": "Tell us about you",
+        "body": "งบประมาณ ช่วงอายุ สไตล์การแต่งตัว สถานที่ที่คุณชอบ — เริ่มจากเรื่องง่ายๆ"
+      },
+      {
+        "title": "We dip the strips",
+        "body": "ระบบจะกรองกลิ่นกว่า 200 ตัวเลือก ผ่าน logic ที่ออกแบบโดยทีมน้ำหอมจริง"
+      },
+      {
+        "title": "Meet your match",
+        "body": "ได้รับน้ำหอมที่ตรงใจที่สุดพร้อมเหตุผล — ส่งให้ทาง email หรือดูบนหน้าเว็บก็ได้"
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "About · 02",
+    "title": "A blotter is where every scent story begins.",
+    "lead": "Blot. คือกระดาษทดลองน้ำหอมที่กลายเป็น quiz — เราเชื่อว่าทุกคนมีกลิ่นที่ใช่ แค่ต้องมีคนช่วยกรองให้เหลือคำตอบเดียว",
+    "cta": "Find my match →"
+  },
+  "quiz": {
+    "username": {
+      "eyebrow": "Step · 00 / Greeting",
+      "titleA": "What should we",
+      "titleB": "call you?",
+      "body": "ไม่ต้องสมัครสมาชิก ใส่แค่ชื่อที่อยากให้เราเรียก เพื่อทำให้ผลลัพธ์รู้สึกเป็นส่วนตัวของคุณ",
+      "placeholder": "e.g. Pim, Khun A, Voyager",
+      "cta": "Begin →",
+      "missing": "พิมพ์ชื่อก่อนเริ่ม"
+    },
+    "email": {
+      "eyebrow": "Step · Final / Send Result",
+      "titleA": "Where shall we",
+      "titleB": "send your match?",
+      "body": "ใส่ email เพื่อรับน้ำหอมที่เราเลือกให้ พร้อมเหตุผลและตัวอย่างกลิ่นใกล้เคียง",
+      "placeholder": "you@example.com",
+      "ctaSubmit": "Send my match →",
+      "ctaSkip": "Skip · ดูบนเว็บ",
+      "skipNote": {
+        "eyebrow": "Optional",
+        "body": "ไม่อยากรับ email ก็ได้ — กด Skip แล้วเราจะแสดงผลลัพธ์บนหน้าเว็บให้ทันที"
+      },
+      "backLabel": "← Edit my answers"
+    },
+    "computing": {
+      "eyebrow": "Computing your match…",
+      "title": "Dipping the strips"
+    },
+    "empty": {
+      "eyebrow": "No questions configured",
+      "title": "The quiz isn't ready yet.",
+      "body": "กรุณาให้ admin เพิ่มคำถามใน back office ก่อน"
+    }
+  },
+  "result": {
+    "eyebrowPrefix": "Your Match · Pattern ",
+    "titleLine1": "The strip points to",
+    "actions": {
+      "again": "Take it again",
+      "home": "Back to home"
+    },
+    "alternatives": {
+      "eyebrow": "Also nearby",
+      "title": "Two more strips that came close"
+    },
+    "specialEyebrow": "Easter Egg · Special Result"
+  }
+}

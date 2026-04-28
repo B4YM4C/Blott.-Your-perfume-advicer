@@ -3,7 +3,18 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-export default function ResultClient({ sessionId }) {
+export default function ResultClient({ sessionId, copy = {} }) {
+  // Pull editable copy keys with sensible fallbacks so a missing override
+  // never produces empty UI strings.
+  const c = {
+    eyebrowPrefix: copy.eyebrowPrefix ?? 'Your Match · Pattern ',
+    titleLine1: copy.titleLine1 ?? 'The strip points to',
+    actionAgain: copy.actions?.again ?? 'Take it again',
+    actionHome: copy.actions?.home ?? 'Back to home',
+    altsEyebrow: copy.alternatives?.eyebrow ?? 'Also nearby',
+    altsTitle: copy.alternatives?.title ?? 'Two more strips that came close',
+    specialEyebrow: copy.specialEyebrow ?? 'Easter Egg · Special Result',
+  };
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
 
@@ -37,12 +48,12 @@ export default function ResultClient({ sessionId }) {
   if (data.special) {
     return (
       <div className="container-narrow" style={s.specialWrap}>
-        <span className="meta">Easter Egg · Special Result</span>
+        <span className="meta">{c.specialEyebrow}</span>
         <h1 style={s.specialH1}>{data.fragrance}</h1>
         <p style={s.specialBlurb}>{data.blurb}</p>
         <div style={s.actions}>
-          <Link href="/quiz" className="btn">Take it again</Link>
-          <Link href="/" className="btn ghost">Back to home</Link>
+          <Link href="/quiz" className="btn">{c.actionAgain}</Link>
+          <Link href="/" className="btn ghost">{c.actionHome}</Link>
         </div>
       </div>
     );
@@ -52,9 +63,9 @@ export default function ResultClient({ sessionId }) {
   return (
     <div className="container" style={s.wrap}>
       <header style={s.header}>
-        <span className="meta">Your Match · Pattern {data.pattern}</span>
+        <span className="meta">{c.eyebrowPrefix}{data.pattern}</span>
         <h1 style={s.h1}>
-          The strip points to<br />
+          {c.titleLine1}<br />
           <em style={s.em}>{data.fragrance}</em>
         </h1>
       </header>
@@ -105,8 +116,8 @@ export default function ResultClient({ sessionId }) {
           )}
 
           <div style={s.actions}>
-            <Link href="/quiz" className="btn">Take it again</Link>
-            <Link href="/" className="btn ghost">Back to home</Link>
+            <Link href="/quiz" className="btn">{c.actionAgain}</Link>
+            <Link href="/" className="btn ghost">{c.actionHome}</Link>
           </div>
         </div>
       </article>
@@ -115,8 +126,8 @@ export default function ResultClient({ sessionId }) {
       {data.alternatives?.length > 0 && (
         <section style={{ marginTop: 56 }}>
           <div style={{ textAlign: 'center', marginBottom: 24 }}>
-            <span className="meta">Also nearby</span>
-            <h3 style={s.altHead}>Two more strips that came close</h3>
+            <span className="meta">{c.altsEyebrow}</span>
+            <h3 style={s.altHead}>{c.altsTitle}</h3>
           </div>
           <div style={s.altGrid}>
             {data.alternatives.map((alt, i) => (

@@ -96,11 +96,19 @@ CREATE TABLE IF NOT EXISTS results (
   notes         JSONB,
   blurb         TEXT,
   image         VARCHAR(512),
+  distance      REAL,
+  special       BOOLEAN      NOT NULL DEFAULT FALSE,
+  rule_id       VARCHAR(64),
+  perfume_id    VARCHAR(64),
+  -- Full result payload (vector + alternatives + reasons) for admin detail view.
+  result_blob   JSONB,
   email_sent    BOOLEAN      NOT NULL DEFAULT FALSE,
   email_skipped BOOLEAN      NOT NULL DEFAULT FALSE,
   created_at    TIMESTAMPTZ  NOT NULL DEFAULT NOW()
 );
-CREATE INDEX IF NOT EXISTS idx_results_pattern ON results(pattern);
+CREATE INDEX IF NOT EXISTS idx_results_pattern   ON results(pattern);
+CREATE INDEX IF NOT EXISTS idx_results_fragrance ON results(fragrance);
+CREATE INDEX IF NOT EXISTS idx_results_created   ON results(created_at DESC);
 
 -- ---------- Vector-scoring DNA library ------------------------
 
@@ -139,6 +147,14 @@ CREATE TABLE IF NOT EXISTS easter_eggs (
   updated_at   TIMESTAMPTZ  NOT NULL DEFAULT NOW()
 );
 CREATE INDEX IF NOT EXISTS idx_eggs_priority ON easter_eggs(priority DESC);
+
+-- Editable static page copy. Single-row store, id='current'. Reads merge
+-- with /data/copy.json defaults so missing keys never blank the public site.
+CREATE TABLE IF NOT EXISTS site_copy (
+  id          VARCHAR(16)  PRIMARY KEY,        -- always 'current'
+  data        JSONB        NOT NULL DEFAULT '{}'::jsonb,
+  updated_at  TIMESTAMPTZ  NOT NULL DEFAULT NOW()
+);
 
 -- ---------- Tracking + consent (PDPA) -------------------------
 
