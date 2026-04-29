@@ -17,7 +17,8 @@ export default function AdminLayout({ children }) {
           <Link href="/admin/questions" style={navLink}>Questions</Link>
           <Link href="/admin/perfumes" style={navLink}>Perfumes</Link>
           <Link href="/admin/easter-eggs" style={navLink}>Easter Eggs</Link>
-          <Link href="/admin/copy" style={navLink}>Site Copy</Link>
+          <Link href="/admin/site-editor" style={navLink}>Site Editor</Link>
+          <Link href="/admin/copy" style={{ ...navLink, color: 'var(--grey-3)' }}>Site Copy (text only)</Link>
           <Link href="/admin/mappings" style={{ ...navLink, color: 'var(--grey-3)' }}>Result Mapping (legacy)</Link>
           <a href="/" style={{ ...navLink, marginTop: 32, color: 'var(--grey-3)' }}>← Back to site</a>
         </nav>

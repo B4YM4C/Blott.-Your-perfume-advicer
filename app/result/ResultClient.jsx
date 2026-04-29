@@ -19,6 +19,15 @@ export default function ResultClient({ sessionId, copy = {} }) {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    // /result?preview=1 is used by the admin Site Editor iframe — show a
+    // synthetic result so the page can be styled without needing to walk
+    // through the whole quiz first.
+    const isPreview = typeof window !== 'undefined'
+      && new URLSearchParams(window.location.search).get('preview') === '1';
+    if (isPreview && !sessionId) {
+      setData(PREVIEW_SAMPLE);
+      return;
+    }
     if (!sessionId) { setError('No session id'); return; }
     fetch(`/api/quiz/result?sessionId=${encodeURIComponent(sessionId)}`)
       .then(r => r.json())
@@ -249,4 +258,44 @@ const s = {
   specialWrap: { padding: '120px 24px', textAlign: 'center' },
   specialH1: { fontFamily: 'var(--font-serif)', fontSize: 'clamp(34px, 5vw, 56px)', fontWeight: 400, letterSpacing: '-.015em', marginTop: 16, lineHeight: 1.2 },
   specialBlurb: { marginTop: 24, maxWidth: 560, marginLeft: 'auto', marginRight: 'auto', color: 'var(--grey-2)', fontSize: 16, lineHeight: 1.75 },
+};
+
+// Synthetic data used by /result?preview=1 in the admin Site Editor so the
+// page can be styled even before any quiz has been completed. Mirrors the
+// shape returned by /api/quiz/result (special: false, has alternatives).
+const PREVIEW_SAMPLE = {
+  special: false,
+  pattern: 'A1',
+  fragrance: 'Sample Fragrance EDP',
+  house: 'Maison Demo',
+  family: 'Woody Aromatic',
+  notes: ['cedar', 'paper', 'amber', 'vetiver'],
+  blurb: 'A demo result used by the admin Site Editor preview. Edit theme '
+       + 'and copy in the side panel — this card stays the same so you can '
+       + 'see how text and colour changes affect the layout.',
+  image: null,
+  distance: 0.42,
+  reasons: [
+    { param: 'Masculine', score: 4.2, label: 'Strong match' },
+    { param: 'Modern',    score: 3.8, label: 'Aligned' },
+    { param: 'Mood',      score: 4.0, label: 'Warm + grounded' },
+  ],
+  alternatives: [
+    {
+      fragrance: 'Adjacent Strip One',
+      house: 'Studio Two',
+      family: 'Woody',
+      distance: 0.51,
+      notes: ['oak', 'leather', 'tobacco'],
+      blurb: 'A close neighbour — slightly drier, more nighttime.',
+    },
+    {
+      fragrance: 'Adjacent Strip Two',
+      house: 'Studio Three',
+      family: 'Aromatic',
+      distance: 0.58,
+      notes: ['sage', 'fig', 'rosemary'],
+      blurb: 'Same family of feeling — a touch greener and brighter.',
+    },
+  ],
 };

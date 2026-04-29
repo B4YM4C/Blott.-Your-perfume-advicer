@@ -1,5 +1,20 @@
 {
   "_note": "Editable site copy. Edit via /admin/copy or directly here in dev. Reads merge DB overrides on top of these defaults so any missing key falls back to this file.",
+  "theme": {
+    "ink": "#0a0a0a",
+    "paper": "#ffffff",
+    "offwhite": "#f8f8f8",
+    "grey1": "#1a1a1a",
+    "grey2": "#4a4a4a",
+    "grey3": "#8a8a8a",
+    "grey4": "#bfbfbf",
+    "grey5": "#e8e8e8",
+    "fontSerif": "'Cormorant Garamond', Georgia, serif",
+    "fontSans": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+    "fontMono": "'JetBrains Mono', ui-monospace, monospace",
+    "headlineScale": 1.0,
+    "bodyScale": 1.0
+  },
   "home": {
     "title": "Found in a few dips.",
     "lead": "ตอบคำถาม 5–10 ข้อ แล้วให้เราช่วยเลือกน้ำหอมที่ใช่สำหรับคุณ — ไม่ต้องสมัคร ไม่ต้องล็อกอิน แค่จุ่มกระดาษทดสอบกับเรา",
