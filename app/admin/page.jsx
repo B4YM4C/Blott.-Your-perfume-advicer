@@ -1,18 +1,33 @@
 import Link from 'next/link';
 import { db, dbMode } from '@/lib/db';
 import { ui } from './_ui';
+import HeroTiles from './HeroTiles';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboard() {
-  // Pull everything in parallel — these are all small queries.
+  // Pull a wider page of recent completions so we can bucket them per
+  // hero-tile (today / week / lifetime / special) — 50 is plenty for the
+  // 3-record preview each tile shows on click.
   const [summary, recent, questions, perfumes, eggs] = await Promise.all([
     db.dashboardSummary(),
-    db.listCompletedSessions({ limit: 10, offset: 0 }),
+    db.listCompletedSessions({ limit: 50, offset: 0 }),
     db.listQuestions(),
     db.listPerfumes(),
     db.listEasterEggs(),
   ]);
+
+  // Bucket the recent rows on the server so the client component stays
+  // dumb. Each preview is capped at 3 most-recent matches.
+  const now = Date.now();
+  const DAY_MS = 24 * 60 * 60 * 1000;
+  const previews = {
+    today:   recent.filter((s) => s.completedAt && now - s.completedAt <= DAY_MS).slice(0, 3),
+    week:    recent.filter((s) => s.completedAt && now - s.completedAt <= 7 * DAY_MS).slice(0, 3),
+    total:   recent.slice(0, 3),
+    special: recent.filter((s) => s.special).slice(0, 3),
+  };
+  const eggsActive = eggs.filter((e) => e.enabled).length;
 
   return (
     <div>
@@ -27,13 +42,8 @@ export default async function AdminDashboard() {
         </p>
       </header>
 
-      {/* Hero strip — the four numbers admins actually care about */}
-      <div style={heroGrid}>
-        <Hero label="Completed today"  value={summary.completedToday}  hint="last 24 hours" />
-        <Hero label="This week"        value={summary.completedWeek}   hint="last 7 days" />
-        <Hero label="All-time"         value={summary.completedTotal}  hint="lifetime completions" />
-        <Hero label="Easter eggs hit"  value={summary.specialHits}     hint={`${eggs.filter(e => e.enabled).length} rules active`} />
-      </div>
+      {/* Hero strip — clickable; expands a drawer with last 3 records */}
+      <HeroTiles summary={summary} eggsActive={eggsActive} previews={previews} />
 
       {/* Library snapshot + behaviour */}
       <div style={statRow}>
@@ -134,15 +144,6 @@ export default async function AdminDashboard() {
   );
 }
 
-function Hero({ label, value, hint }) {
-  return (
-    <div style={heroBox}>
-      <div className="meta">{label}</div>
-      <div style={heroValue}>{value}</div>
-      {hint && <div style={{ color: 'var(--grey-3)', fontSize: 12, marginTop: 4 }}>{hint}</div>}
-    </div>
-  );
-}
 function Stat({ label, value }) {
   return (
     <div style={statBox}>
@@ -165,20 +166,6 @@ function fmtRel(ts) {
   if (day < 30) return `${day}d ago`;
   return new Date(ts).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
 }
-
-const heroGrid = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))',
-  gap: 14,
-};
-const heroBox = {
-  background: 'var(--paper)',
-  padding: '24px 22px',
-  border: '1px solid var(--grey-5)',
-  borderRadius: 'var(--radius-md)',
-  boxShadow: 'var(--shadow-soft)',
-};
-const heroValue = { fontFamily: 'var(--font-serif)', fontSize: 44, marginTop: 8, lineHeight: 1 };
 
 const statRow = {
   display: 'grid',

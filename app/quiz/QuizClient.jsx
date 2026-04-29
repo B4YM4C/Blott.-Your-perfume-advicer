@@ -350,14 +350,17 @@ const s = {
   choice: {
     display: 'flex', alignItems: 'center', gap: 16,
     padding: '20px 22px', textAlign: 'left', cursor: 'pointer',
-    border: '1px solid var(--grey-5)', background: 'var(--paper)',
+    // Default state always has a solid black border so the toggle is a clean
+    // 2-stage flip: black-outline (unselected) ↔ black-fill (selected). No
+    // intermediate grey→black ramp when navigating between questions.
+    border: '1px solid var(--ink)', background: 'var(--paper)',
     borderRadius: 'var(--radius-md)',
     boxShadow: 'var(--shadow-soft)',
-    // Only transition the lift + shadow + border — never `background`/`color`.
-    // Animating background causes a visible flicker if React re-uses the DOM
-    // node from the previous question. With the keyed wrapper above + a
-    // narrow transition list, the swap is instant and clean.
-    transition: 'transform .18s ease, box-shadow .18s ease, border-color .18s ease',
+    // Only transition lift + shadow. We deliberately do NOT animate
+    // `border-color` or `background` — both states share the same border
+    // colour, and the fill flip should be instant to avoid the previous
+    // 3-stage flicker (grey → black → filled).
+    transition: 'transform .18s ease, box-shadow .18s ease',
     color: 'var(--ink)',
   },
   // Strong, unmistakable selected state: dark background, white text,
