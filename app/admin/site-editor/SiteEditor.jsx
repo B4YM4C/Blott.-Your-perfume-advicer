@@ -88,6 +88,22 @@ export default function SiteEditor({ initial, defaults }) {
 
   const tabDef = TABS.find((t) => t.id === tab) || TABS[0];
 
+  // Set of every JSON-path that holds a STRING leaf in the merged copy —
+  // used to tell text-keys (e.g. "home.title") from style-only keys
+  // (e.g. "result.card.fragranceName" — the text is dynamic from the DB).
+  const textKeySet = useMemo(() => {
+    const set = new Set();
+    walkStrings(initial, '', (path) => {
+      if (path === '_note' || path.startsWith('theme.') || path === 'theme'
+          || path.startsWith('styles.') || path === 'styles') return;
+      set.add(path);
+    });
+    // The pickedKey can also use TEXT_PATH_OVERRIDES, so every override
+    // target counts as a text-key too.
+    for (const v of Object.values(TEXT_PATH_OVERRIDES)) set.add(v);
+    return set;
+  }, [initial]);
+
   // ---- Live push to iframe whenever the draft changes -----------------
   useEffect(() => {
     if (!iframeReady) return;
@@ -136,9 +152,13 @@ export default function SiteEditor({ initial, defaults }) {
     setDraft((prev) => {
       const styles = { ...(prev.styles || {}) };
       delete styles[key];
-      const text = readPath(defaults, textPathFor(key));
-      const next = writePath({ ...prev, styles }, textPathFor(key), text);
-      return next;
+      const path = textPathFor(key);
+      const defaultText = readPath(defaults, path);
+      // For style-only keys (no text in copy.json) we just clear the
+      // style override — there's no text to reset because the content
+      // is dynamic from the DB.
+      if (defaultText === undefined) return { ...prev, styles };
+      return writePath({ ...prev, styles }, path, defaultText);
     });
   }
   function discard() {
@@ -182,7 +202,12 @@ export default function SiteEditor({ initial, defaults }) {
   // ---- Derived: current values for the picked element ----------------
   const pickedKey   = picked?.key || null;
   const pickedStyle = pickedKey ? (draft.styles?.[pickedKey] || {}) : null;
-  const pickedText  = pickedKey ? (readPath(draft, textPathFor(pickedKey)) ?? '') : '';
+  const pickedTextPath = pickedKey ? textPathFor(pickedKey) : null;
+  // A picked element is "style-only" when its key doesn't correspond to a
+  // string leaf in copy.json — i.e. the text is dynamic (DB content like
+  // a fragrance name, an iterated note, an alternate's blurb, etc.).
+  const isStyleOnly = pickedKey ? !textKeySet.has(pickedTextPath) : false;
+  const pickedText  = pickedKey ? (readPath(draft, pickedTextPath) ?? '') : '';
 
   return (
     <div style={layout}>
@@ -286,6 +311,7 @@ export default function SiteEditor({ initial, defaults }) {
                   computed={picked.computed}
                   style={pickedStyle}
                   text={pickedText}
+                  isStyleOnly={isStyleOnly}
                   onText={(v) => setElementText(pickedKey, v)}
                   onStyle={(prop, v) => setElementStyle(pickedKey, prop, v)}
                   onResetElement={() => resetElement(pickedKey)}
@@ -328,7 +354,7 @@ function EmptyHint() {
   );
 }
 
-function ElementInspector({ pickedKey, computed, style, text, onText, onStyle, onResetElement }) {
+function ElementInspector({ pickedKey, computed, style, text, isStyleOnly, onText, onStyle, onResetElement }) {
   // Pull a sensible "current value" for each control: prefer the override
   // already in draft.styles; otherwise show what the iframe is computing.
   const get = (prop) => style?.[prop] ?? computed?.[prop] ?? '';
@@ -336,14 +362,27 @@ function ElementInspector({ pickedKey, computed, style, text, onText, onStyle, o
   return (
     <>
       <Section title={`Element · ${pickedKey}`}>
-        <FieldRow label="Text">
-          <textarea
-            value={text || ''}
-            onChange={(e) => onText(e.target.value)}
-            rows={3}
-            style={{ ...textInput, resize: 'vertical', flex: 1 }}
-          />
-        </FieldRow>
+        {isStyleOnly ? (
+          <div style={dynamicNotice}>
+            <strong style={{ display: 'block', fontSize: 12, marginBottom: 4 }}>
+              Style-only element
+            </strong>
+            <span style={{ fontSize: 12, color: 'var(--grey-2)', lineHeight: 1.6 }}>
+              ข้อความตรงนี้มาจากฐานข้อมูล (ชื่อน้ำหอม / รายละเอียดใน card / โน้ต ฯลฯ)
+              จึงแก้ตรงนี้ไม่ได้ — แต่ปรับ <em>สี / ฟอนต์ / ขนาด / น้ำหนัก</em> ได้ทุกที่
+              ที่ใช้ key นี้พร้อมกัน
+            </span>
+          </div>
+        ) : (
+          <FieldRow label="Text">
+            <textarea
+              value={text || ''}
+              onChange={(e) => onText(e.target.value)}
+              rows={3}
+              style={{ ...textInput, resize: 'vertical', flex: 1 }}
+            />
+          </FieldRow>
+        )}
       </Section>
 
       <Section title="Color">
@@ -569,7 +608,16 @@ function collectTextOverrides(draft) {
 function walkStrings(node, path, onLeaf) {
   if (node == null) return;
   if (typeof node === 'string') { onLeaf(path, node); return; }
-  if (Array.isArray(node)) return; // skip arrays — array indices aren't tagged
+  if (Array.isArray(node)) {
+    // Walk arrays too — JSX tags like `method.steps.${i}.title` produce
+    // indexed edit-keys, and we want those to count as text-keys (so the
+    // inspector shows the textarea, not the "style only" notice).
+    node.forEach((item, i) => {
+      const next = path ? `${path}.${i}` : String(i);
+      walkStrings(item, next, onLeaf);
+    });
+    return;
+  }
   if (typeof node !== 'object') return;
   for (const [k, v] of Object.entries(node)) {
     const next = path ? `${path}.${k}` : k;
@@ -672,6 +720,13 @@ const presetChip = {
   padding: '4px 8px', background: 'var(--offwhite)',
   border: '1px solid var(--grey-5)', borderRadius: 'var(--radius-pill)',
   fontSize: 11, cursor: 'pointer',
+};
+const dynamicNotice = {
+  padding: '10px 12px',
+  background: 'var(--offwhite)',
+  border: '1px dashed var(--grey-4)',
+  borderRadius: 'var(--radius-sm)',
+  fontFamily: 'var(--font-sans)',
 };
 
 const previewWrap = {

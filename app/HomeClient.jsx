@@ -90,10 +90,10 @@ export default function HomeClient({ copy }) {
           </div>
           <div style={s.steps}>
             {steps.map((step, i) => (
-              <article key={i} style={s.stepCard}>
-                <div style={s.stepNum}>{String(i + 1).padStart(2, '0')}</div>
-                <h3 style={s.stepTitle}>{step.title}</h3>
-                <p style={s.stepBody}>{step.body}</p>
+              <article key={i} style={s.stepCard} data-edit-key="home.method.stepCard">
+                <div style={s.stepNum} data-edit-key="home.method.stepNum">{String(i + 1).padStart(2, '0')}</div>
+                <h3 style={s.stepTitle} data-edit-key={`method.steps.${i}.title`}>{step.title}</h3>
+                <p style={s.stepBody} data-edit-key={`method.steps.${i}.body`}>{step.body}</p>
               </article>
             ))}
           </div>

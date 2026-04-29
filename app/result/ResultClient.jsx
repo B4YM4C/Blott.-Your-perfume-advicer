@@ -58,8 +58,8 @@ export default function ResultClient({ sessionId, copy = {} }) {
     return (
       <div className="container-narrow" style={s.specialWrap}>
         <span className="meta" data-edit-key="result.specialEyebrow">{c.specialEyebrow}</span>
-        <h1 style={s.specialH1}>{data.fragrance}</h1>
-        <p style={s.specialBlurb}>{data.blurb}</p>
+        <h1 style={s.specialH1} data-edit-key="result.special.fragranceName">{data.fragrance}</h1>
+        <p style={s.specialBlurb} data-edit-key="result.special.blurb">{data.blurb}</p>
         <div style={s.actions}>
           <Link href="/quiz" className="btn" data-edit-key="result.actions.again">{c.actionAgain}</Link>
           <Link href="/" className="btn ghost" data-edit-key="result.actions.home">{c.actionHome}</Link>
@@ -75,7 +75,7 @@ export default function ResultClient({ sessionId, copy = {} }) {
         <span className="meta" data-edit-key="result.eyebrowPrefix">{c.eyebrowPrefix}{data.pattern}</span>
         <h1 style={s.h1}>
           <span data-edit-key="result.titleLine1">{c.titleLine1}</span><br />
-          <em style={s.em}>{data.fragrance}</em>
+          <em style={s.em} data-edit-key="result.card.fragranceName">{data.fragrance}</em>
         </h1>
       </header>
 
@@ -87,35 +87,41 @@ export default function ResultClient({ sessionId, copy = {} }) {
         </div>
         <div style={s.cardRight}>
           <div style={s.metaRow}>
-            <div><div className="meta">House</div><div style={s.metaVal}>{data.house || '—'}</div></div>
-            <div><div className="meta">Family</div><div style={s.metaVal}>{data.family || '—'}</div></div>
+            <div>
+              <div className="meta" data-edit-key="result.card.metaLabel">House</div>
+              <div style={s.metaVal} data-edit-key="result.card.metaValue">{data.house || '—'}</div>
+            </div>
+            <div>
+              <div className="meta" data-edit-key="result.card.metaLabel">Family</div>
+              <div style={s.metaVal} data-edit-key="result.card.metaValue">{data.family || '—'}</div>
+            </div>
           </div>
 
           {data.notes?.length > 0 && (
             <div style={{ marginTop: 28 }}>
-              <div className="meta">Key notes</div>
+              <div className="meta" data-edit-key="result.card.notesLabel">Key notes</div>
               <ul style={s.notes}>
                 {data.notes.map((n, i) => (
-                  <li key={i} style={s.note}>{n}</li>
+                  <li key={i} style={s.note} data-edit-key="result.card.note">{n}</li>
                 ))}
               </ul>
             </div>
           )}
 
-          <p style={s.blurb}>{data.blurb}</p>
+          <p style={s.blurb} data-edit-key="result.card.blurb">{data.blurb}</p>
 
           {/* Why this match — top 3 axes where the user vector and perfume DNA agree */}
           {data.reasons?.length > 0 && (
             <div style={{ marginTop: 28 }}>
-              <div className="meta">Why this match</div>
+              <div className="meta" data-edit-key="result.card.reasonsLabel">Why this match</div>
               <ul style={s.reasonList}>
                 {data.reasons.map((r, i) => (
                   <li key={i} style={s.reasonRow}>
-                    <span style={s.reasonParam}>{r.param}</span>
+                    <span style={s.reasonParam} data-edit-key="result.card.reasonParam">{r.param}</span>
                     <span style={s.reasonBar}>
                       <ReasonBar user={r.user} perfume={r.perfume} />
                     </span>
-                    <span style={s.reasonNum}>
+                    <span style={s.reasonNum} data-edit-key="result.card.reasonNum">
                       you {fmt(r.user)} · perfume {fmt(r.perfume)}
                     </span>
                   </li>
@@ -141,17 +147,17 @@ export default function ResultClient({ sessionId, copy = {} }) {
           <div style={s.altGrid}>
             {data.alternatives.map((alt, i) => (
               <article key={i} style={s.altCard}>
-                <div className="meta">#{i + 2} · distance {alt.distance}</div>
-                <h4 style={s.altTitle}>{alt.fragrance}</h4>
-                <div style={{ color: 'var(--grey-2)', fontSize: 13, marginTop: 4 }}>
+                <div className="meta" data-edit-key="result.alt.meta">#{i + 2} · distance {alt.distance}</div>
+                <h4 style={s.altTitle} data-edit-key="result.alt.title">{alt.fragrance}</h4>
+                <div style={{ color: 'var(--grey-2)', fontSize: 13, marginTop: 4 }} data-edit-key="result.alt.subMeta">
                   {[alt.house, alt.family].filter(Boolean).join(' · ')}
                 </div>
                 {alt.notes?.length > 0 && (
                   <ul style={{ ...s.notes, marginTop: 14 }}>
-                    {alt.notes.slice(0, 4).map((n, j) => <li key={j} style={s.note}>{n}</li>)}
+                    {alt.notes.slice(0, 4).map((n, j) => <li key={j} style={s.note} data-edit-key="result.alt.note">{n}</li>)}
                   </ul>
                 )}
-                <p style={{ marginTop: 16, color: 'var(--grey-2)', fontSize: 13.5, lineHeight: 1.7 }}>
+                <p style={{ marginTop: 16, color: 'var(--grey-2)', fontSize: 13.5, lineHeight: 1.7 }} data-edit-key="result.alt.blurb">
                   {alt.blurb}
                 </p>
               </article>
@@ -161,8 +167,8 @@ export default function ResultClient({ sessionId, copy = {} }) {
       )}
 
       <div style={s.disclaimer}>
-        <span className="meta">Beta · Disclosure</span>
-        <p style={{ marginTop: 10, color: 'var(--grey-2)', fontSize: 13.5, lineHeight: 1.7 }}>
+        <span className="meta" data-edit-key="result.disclaimer.eyebrow">Beta · Disclosure</span>
+        <p style={{ marginTop: 10, color: 'var(--grey-2)', fontSize: 13.5, lineHeight: 1.7 }} data-edit-key="result.disclaimer.body">
           ผลลัพธ์นี้เป็นคำแนะนำเบื้องต้นจากระบบของเรา ในเวอร์ชัน beta คำตอบมีจำนวนจำกัด —
           เราจะอัปเดต logic อย่างต่อเนื่องเมื่อเก็บข้อมูลและความเห็นจากผู้ใช้มากขึ้น
         </p>
