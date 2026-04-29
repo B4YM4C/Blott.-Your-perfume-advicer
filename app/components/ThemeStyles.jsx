@@ -1,15 +1,15 @@
-import { themeToCssVars } from '@/lib/theme';
+import { buildEditorCss } from '@/lib/theme';
 
 /**
  * Server component that emits a `<style>` tag inside <head> overriding
- * the brand CSS variables based on the saved theme. Renders nothing if
- * the theme is empty / falsy.
+ * the brand CSS variables (theme) AND any per-element style overrides
+ * (styles[edit-key]). Renders nothing if both are empty.
  *
- * The override targets `:root` exactly like globals.css so cascade order
- * is "globals.css defaults, then this rule". Place LATE in <head>.
+ * The override targets `:root` and `[data-edit-key="..."]` — placed late
+ * in <head> so it wins over globals.css and inline component styles.
  */
-export default function ThemeStyles({ theme }) {
-  const css = themeToCssVars(theme || {});
+export default function ThemeStyles({ theme, styles }) {
+  const css = buildEditorCss({ theme: theme || {}, styles: styles || {} });
   if (!css) return null;
   return (
     <style id="blot-theme-overrides" dangerouslySetInnerHTML={{ __html: css }} />

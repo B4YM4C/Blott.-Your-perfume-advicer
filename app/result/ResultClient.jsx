@@ -57,12 +57,12 @@ export default function ResultClient({ sessionId, copy = {} }) {
   if (data.special) {
     return (
       <div className="container-narrow" style={s.specialWrap}>
-        <span className="meta">{c.specialEyebrow}</span>
+        <span className="meta" data-edit-key="result.specialEyebrow">{c.specialEyebrow}</span>
         <h1 style={s.specialH1}>{data.fragrance}</h1>
         <p style={s.specialBlurb}>{data.blurb}</p>
         <div style={s.actions}>
-          <Link href="/quiz" className="btn">{c.actionAgain}</Link>
-          <Link href="/" className="btn ghost">{c.actionHome}</Link>
+          <Link href="/quiz" className="btn" data-edit-key="result.actions.again">{c.actionAgain}</Link>
+          <Link href="/" className="btn ghost" data-edit-key="result.actions.home">{c.actionHome}</Link>
         </div>
       </div>
     );
@@ -72,9 +72,9 @@ export default function ResultClient({ sessionId, copy = {} }) {
   return (
     <div className="container" style={s.wrap}>
       <header style={s.header}>
-        <span className="meta">{c.eyebrowPrefix}{data.pattern}</span>
+        <span className="meta" data-edit-key="result.eyebrowPrefix">{c.eyebrowPrefix}{data.pattern}</span>
         <h1 style={s.h1}>
-          {c.titleLine1}<br />
+          <span data-edit-key="result.titleLine1">{c.titleLine1}</span><br />
           <em style={s.em}>{data.fragrance}</em>
         </h1>
       </header>
@@ -125,8 +125,8 @@ export default function ResultClient({ sessionId, copy = {} }) {
           )}
 
           <div style={s.actions}>
-            <Link href="/quiz" className="btn">{c.actionAgain}</Link>
-            <Link href="/" className="btn ghost">{c.actionHome}</Link>
+            <Link href="/quiz" className="btn" data-edit-key="result.actions.again">{c.actionAgain}</Link>
+            <Link href="/" className="btn ghost" data-edit-key="result.actions.home">{c.actionHome}</Link>
           </div>
         </div>
       </article>
@@ -135,8 +135,8 @@ export default function ResultClient({ sessionId, copy = {} }) {
       {data.alternatives?.length > 0 && (
         <section style={{ marginTop: 56 }}>
           <div style={{ textAlign: 'center', marginBottom: 24 }}>
-            <span className="meta">{c.altsEyebrow}</span>
-            <h3 style={s.altHead}>{c.altsTitle}</h3>
+            <span className="meta" data-edit-key="result.alternatives.eyebrow">{c.altsEyebrow}</span>
+            <h3 style={s.altHead} data-edit-key="result.alternatives.title">{c.altsTitle}</h3>
           </div>
           <div style={s.altGrid}>
             {data.alternatives.map((alt, i) => (

@@ -19,7 +19,8 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const override = await db.getCopy().catch(() => ({}));
   const merged   = mergeWithDefaults(override);
-  const theme    = merged?.theme || {};
+  const theme    = merged?.theme  || {};
+  const styles   = merged?.styles || {};
 
   return (
     <html lang="th">
@@ -31,7 +32,7 @@ export default async function RootLayout({ children }) {
           rel="stylesheet"
         />
         {/* Theme overrides — emitted late so they win over globals.css */}
-        <ThemeStyles theme={theme} />
+        <ThemeStyles theme={theme} styles={styles} />
       </head>
       <body>
         <Header />

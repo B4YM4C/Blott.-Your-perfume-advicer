@@ -158,8 +158,8 @@ export default function QuizClient({ questions = [], copy = {} }) {
 
         {stage === STAGE.SUBMITTING && (
           <div style={{ textAlign: 'center', padding: '120px 0' }}>
-            <p className="meta">{c.computing?.eyebrow}</p>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 32, marginTop: 12 }}>
+            <p className="meta" data-edit-key="quiz.computing.eyebrow">{c.computing?.eyebrow}</p>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 32, marginTop: 12 }} data-edit-key="quiz.computing.title">
               {c.computing?.title}
             </h2>
           </div>
@@ -174,9 +174,13 @@ export default function QuizClient({ questions = [], copy = {} }) {
 function UsernameStep({ copy = {}, username, setUsername, onContinue }) {
   return (
     <div style={s.stepBox}>
-      <span className="meta">{copy.eyebrow}</span>
-      <h1 style={s.h1}>{copy.titleA}<br /><em style={s.em}>{copy.titleB}</em></h1>
-      <p style={s.body}>{copy.body}</p>
+      <span className="meta" data-edit-key="quiz.username.eyebrow">{copy.eyebrow}</span>
+      <h1 style={s.h1}>
+        <span data-edit-key="quiz.username.titleA">{copy.titleA}</span>
+        <br />
+        <em style={s.em} data-edit-key="quiz.username.titleB">{copy.titleB}</em>
+      </h1>
+      <p style={s.body} data-edit-key="quiz.username.body">{copy.body}</p>
       <div style={{ marginTop: 32 }}>
         <input
           type="text"
@@ -190,7 +194,7 @@ function UsernameStep({ copy = {}, username, setUsername, onContinue }) {
         />
       </div>
       <div style={{ marginTop: 28, display: 'flex', gap: 12, alignItems: 'center' }}>
-        <button className="btn btn-lg" onClick={onContinue} disabled={!username.trim()}>
+        <button className="btn btn-lg" onClick={onContinue} disabled={!username.trim()} data-edit-key="quiz.username.cta">
           {copy.cta}
         </button>
         <span style={{ fontSize: 12, color: 'var(--grey-3)' }}>
@@ -280,9 +284,13 @@ function QuestionStep({ question, current, total, selected, onSelect, onConfirm,
 function EmailStep({ copy = {}, email, setEmail, onSubmit, onSkip, onBack, error }) {
   return (
     <div style={s.stepBox}>
-      <span className="meta">{copy.eyebrow}</span>
-      <h2 style={s.h1}>{copy.titleA}<br /><em style={s.em}>{copy.titleB}</em></h2>
-      <p style={s.body}>{copy.body}</p>
+      <span className="meta" data-edit-key="quiz.email.eyebrow">{copy.eyebrow}</span>
+      <h2 style={s.h1}>
+        <span data-edit-key="quiz.email.titleA">{copy.titleA}</span>
+        <br />
+        <em style={s.em} data-edit-key="quiz.email.titleB">{copy.titleB}</em>
+      </h2>
+      <p style={s.body} data-edit-key="quiz.email.body">{copy.body}</p>
 
       <div style={{ marginTop: 32 }}>
         <input
@@ -298,10 +306,10 @@ function EmailStep({ copy = {}, email, setEmail, onSubmit, onSkip, onBack, error
       {error && <p style={{ color: '#b00020', fontSize: 13, marginTop: 12 }}>{error}</p>}
 
       <div style={{ marginTop: 28, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-        <button className="btn btn-lg" onClick={onSubmit} disabled={!email.trim()}>
+        <button className="btn btn-lg" onClick={onSubmit} disabled={!email.trim()} data-edit-key="quiz.email.ctaSubmit">
           {copy.ctaSubmit}
         </button>
-        <button className="btn ghost btn-lg" onClick={onSkip}>
+        <button className="btn ghost btn-lg" onClick={onSkip} data-edit-key="quiz.email.ctaSkip">
           {copy.ctaSkip}
         </button>
       </div>

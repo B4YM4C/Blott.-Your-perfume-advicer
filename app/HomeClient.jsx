@@ -62,12 +62,12 @@ export default function HomeClient({ copy }) {
         />
         <div className="container" style={{ textAlign: 'center', ...s.contentOver }}>
           <h1 style={s.h1}>
-            <em style={s.em}>{home?.title}</em>
+            <em style={s.em} data-edit-key="home.title">{home?.title}</em>
           </h1>
-          <p style={s.lead}>{home?.lead}</p>
+          <p style={s.lead} data-edit-key="home.lead">{home?.lead}</p>
           <div style={s.ctas}>
-            <Link href="/quiz" className="btn btn-lg">{home?.ctaPrimary}</Link>
-            <Link href="#method" className="btn ghost btn-lg">{home?.ctaSecondary}</Link>
+            <Link href="/quiz" className="btn btn-lg" data-edit-key="home.ctaPrimary">{home?.ctaPrimary}</Link>
+            <Link href="#method" className="btn ghost btn-lg" data-edit-key="home.ctaSecondary">{home?.ctaSecondary}</Link>
           </div>
         </div>
       </section>
@@ -85,8 +85,8 @@ export default function HomeClient({ copy }) {
         />
         <div className="container" style={s.contentOver}>
           <div style={s.sectionHead}>
-            <span className="meta">{method?.eyebrow}</span>
-            <h2 style={s.h2}>{method?.title}</h2>
+            <span className="meta" data-edit-key="method.eyebrow">{method?.eyebrow}</span>
+            <h2 style={s.h2} data-edit-key="method.title">{method?.title}</h2>
           </div>
           <div style={s.steps}>
             {steps.map((step, i) => (
@@ -98,7 +98,7 @@ export default function HomeClient({ copy }) {
             ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: 56 }}>
-            <Link href="/quiz" className="btn btn-lg">{method?.cta}</Link>
+            <Link href="/quiz" className="btn btn-lg" data-edit-key="method.cta">{method?.cta}</Link>
           </div>
         </div>
       </section>
@@ -115,11 +115,11 @@ export default function HomeClient({ copy }) {
           aria-hidden="true"
         />
         <div className="container-narrow" style={{ textAlign: 'center', ...s.contentOver }}>
-          <span className="meta">{about?.eyebrow}</span>
-          <h2 style={s.h2}>{about?.title}</h2>
-          <p style={s.lead}>{about?.lead}</p>
+          <span className="meta" data-edit-key="about.eyebrow">{about?.eyebrow}</span>
+          <h2 style={s.h2} data-edit-key="about.title">{about?.title}</h2>
+          <p style={s.lead} data-edit-key="about.lead">{about?.lead}</p>
           <div style={{ marginTop: 28 }}>
-            <Link href="/quiz" className="btn btn-lg">{about?.cta}</Link>
+            <Link href="/quiz" className="btn btn-lg" data-edit-key="about.cta">{about?.cta}</Link>
           </div>
         </div>
       </section>
