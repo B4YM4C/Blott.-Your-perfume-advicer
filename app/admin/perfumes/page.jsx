@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { db } from '@/lib/db';
 import { ui } from '../_ui';
+import PerfumesIO from './PerfumesIO';
 
 export const dynamic = 'force-dynamic';
 
@@ -9,7 +10,7 @@ export default async function PerfumesList() {
 
   return (
     <div>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 28 }}>
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 18, gap: 16, flexWrap: 'wrap' }}>
         <div>
           <span className="meta">Library</span>
           <h1 style={ui.h1}>Perfumes</h1>
@@ -19,6 +20,9 @@ export default async function PerfumesList() {
         </div>
         <Link href="/admin/perfumes/new" className="btn">+ Add perfume</Link>
       </header>
+
+      {/* CSV Export / Import — fill in answer-keys (เฉลย) outside the app and bulk-load. */}
+      <PerfumesIO />
 
       <div style={table}>
         <div style={{ ...row, ...rowHead }}>
