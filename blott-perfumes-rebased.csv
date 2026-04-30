@@ -1,0 +1,168 @@
+﻿id,fragrance,house,family,notes,blurb,image,Masculine,Maturity,Freshness,Sweetness,Intensity,Formality,Time,Modern,Sexy,Luxury,Playful
+p_acqua_di_parma_colonia,Acqua di Parma Colonia,Acqua di Parma,Citrus Aromatic,Bergamot; Lemon; Sweet Orange; Lavender; Rosemary; Damask Rose; Sandalwood; Vetiver,classic Italian colonia — citrus-rose สดสุภาพ เป็นดังไอหนุ่มอิตาลีที่เธอรัก,/bottles/acqua-di-parma.png,2,7,8,-3,4,7,5,2,4,7,-2
+p_acqua_di_parma_merto_di_panaria,Acqua di Parma Merto di panaria,Acqua di Parma,Citrus Aromatic,Mandarin; Bergamot; Lentisk; Myrtle; Pink Pepper; Cedar; Patchouli; White Musk,,/bottles/acqua-di-parma.png,7,8,-3,0,9,8,-6,5,7,9,-3
+p_acqua_di_parma_fico_di_amari,Acqua di Parma Fico di amari,Acqua di Parma,Citrus Floral,Bergamot; Lemon; Fig; Cyclamen; Cedarwood,,/bottles/acqua-di-parma.png,5,8,1,4,9,8,-5,5,7,9,-2
+p_acqua_di_parma_fico_pandoro_di_silicio,Acqua di Parma Fico pandoro di silicio,Acqua di Parma,Citrus Aromatic,Bergamot; Fig Leaves; Pink Pepper; Cedar; Musk,,/bottles/acqua-di-parma.png,0,0,0,0,0,0,0,0,0,0,0
+p_amouage_reflection_man,Amouage Reflection Man,Amouage,Floral Woody Musk,Pink Pepper; Rosemary; Petitgrain; Neroli; Jasmine; Orris; Sandalwood; Cedar; Amber,,/bottles/amouage-1.png,4,7,4,0,7,8,-1,6,6,9,-1
+p_ariana_grande_cloud,Ariana Grande Cloud,Ariana Grande,Floral Gourmand,Lavender Blossom; Pear; Bergamot; Coconut; Praline; Vanilla Orchid; Cashmere Wood; Musk,,/bottles/ariana-grande.png,-7,-1,1,8,5,2,-1,7,4,4,6
+p_azzaro_wanted,Azzaro Wanted,Azzaro,Aromatic Spicy,Lemon; Cardamom; Vetiver; Tonka Bean; Cedar; Amber,,/bottles/azzaro.png,7,4,4,2,6,4,-1,6,6,4,1
+p_burberry_her_edp,Burberry Her EDP,Burberry,Floral Fruity Gourmand,Strawberry; Blackberry; Raspberry; Violet; Jasmine; Vanilla; Musk,,/bottles/burberry-1.png,-7,1,4,6,5,4,2,6,4,6,5
+p_burberry_mr_burberry,Burberry Mr. Burberry,Burberry,Aromatic Fougère,Grapefruit; Cardamom; Tarragon; Birch Leaf; Nutmeg; Vetiver; Guaiac Wood; Cedar,,/bottles/burberry-1.png,6,4,5,-1,4,6,3,5,3,5,-1
+p_bvlgari_aqva_pour_homme,Bvlgari Aqva Pour Homme,Bvlgari,Aquatic Aromatic,Petitgrain; Mandarin; Posidonia; Clary Sage; Santolina; Mineral Amber,,/bottles/bvlgari.png,6,4,8,-3,4,5,5,5,4,6,-1
+p_bvlgari_pour_homme,Bvlgari Pour homme,Bvlgari,Floral Woody Musk,Bergamot; Darjeeling Tea; Pepper; Pomelo; Rosewood; Iris; Musk; Cedar,,/bottles/bvlgari.png,0,0,0,0,0,0,0,0,0,0,0
+p_bvlgari_glacia_essense,Bvlgari Glacia essense,Bvlgari,Aquatic Aromatic,Frozen Mint; Aldehydes; Bergamot; Cedar; Mineral Amber; Musk,,/bottles/bvlgari.png,0,0,0,0,0,0,0,0,0,0,0
+p_byredo_blibiotique,Byredo Blibiotique,Byredo,Floral Spicy,Peach; Plum; Violet; Peony; Patchouli; Vanilla; Leather,,/bottles/byredo.png,0,0,0,0,0,0,0,0,0,0,0
+p_byredo_alto_astrals,Byredo Alto astrals,Byredo,Floral Woody,Saffron; Cardamom; Iris; Suede; Sandalwood; Musk,,/bottles/byredo.png,0,0,0,0,0,0,0,0,0,0,0
+p_byredo_bal_d_afrique,Byredo Bal d'Afrique,Byredo,Citrus Floral,Bergamot; Lemon; Neroli; Marigold; Violet; Jasmine; Cedar; Vetiver; Musk,,/bottles/byredo.png,1,5,6,1,5,6,2,7,6,8,1
+p_byredo_black_saffron,Byredo Black Saffron,Byredo,Woody Spicy,Saffron; Black Pepper; Pomegranate; Juniper Berry; Raspberry; Leather; Vetiver; Cashmere Wood,,/bottles/byredo.png,1,7,0,3,7,7,-3,7,7,8,-1
+p_byredo_blanche,Byredo Blanche,Byredo,Floral Musk,Aldehydes; Pink Pepper; Rose; Peony; Sandalwood; White Musk,,/bottles/byredo.png,-3,4,6,0,5,7,4,8,5,8,0
+p_byredo_gypsy_water,Byredo Gypsy Water,Byredo,Woody Aromatic,Bergamot; Lemon; Pepper; Juniper; Pine Needles; Incense; Sandalwood; Vanilla; Amber,,/bottles/byredo.png,2,4,5,3,5,5,1,7,5,8,1
+p_byredo_mojave_ghost,Byredo Mojave Ghost,Byredo,Woody Floral Musk,Ambrette; Jamaican Nesberry; Magnolia; Sandalwood; Cedar; Chantilly Musk; Amber,,/bottles/byredo.png,0,6,4,2,5,6,1,8,6,8,0
+p_calvin_klein_ck_one,Calvin Klein CK One,Calvin Klein,Citrus Aromatic,Bergamot; Lemon; Cardamom; Pineapple; Green Tea; Jasmine; Violet; Rose; Musk; Cedar,,/bottles/calvin-klein-1.png,0,1,8,-3,3,3,6,3,2,3,3
+p_calvin_klein_ck_be,Calvin Klein CK be,Calvin Klein,Aromatic Floral,Mandarin; Bergamot; Lavender; Eucalyptus; Juniper; Magnolia; Peach; Sandalwood; Musk; Vanilla,,/bottles/calvin-klein-1.png,6,6,5,-2,4,6,3,2,3,4,-1
+p_calvin_klein_ck_all,Calvin Klein CK all,Calvin Klein,Citrus Aromatic,Bergamot; Mandarin; Fig Leaf; Cedar; White Woods; Musk,,/bottles/calvin-klein-1.png,-5,5,1,5,7,5,-3,5,7,6,0
+p_bleu_de_chanel,Bleu de Chanel,Chanel,Woody Aromatic,Grapefruit; Lemon; Mint; Pink Pepper; Ginger; Iso E Super; Cedar; Sandalwood; Labdanum,,/bottles/chanel-bleu-de-chanel.png,6,5,4,1,6,7,0,6,5,7,-2
+p_chanel_allure_homme_sport,Chanel Allure homme sport,Chanel,Aromatic Aquatic,Mandarin; Aldehydes; Sea Notes; Pepper; Neroli; Cedar; White Musk; Tonka Bean,,/bottles/chanel-bleu-de-chanel.png,6,4,6,-3,5,6,3,6,3,6,-2
+p_chanel_allure_homme_edition_blanche,Chanel Allure homme edition blanche,Chanel,Citrus Vanilla,Lemon; Bergamot; Cedar; Vanilla; Sandalwood; Vetiver; Musk,,/bottles/chanel-bleu-de-chanel.png,5,7,1,3,6,8,-3,5,6,8,-2
+p_chanel_allure_sensuelle,Chanel Allure Sensuelle,Chanel,Floral Oriental,Mandarin; Bergamot; Pepper; Bulgarian Rose; Iris; Jasmine; Vanilla; Patchouli; Vetiver; Amber,,/bottles/chanel-coco-mademoiselle.png,-4,7,0,4,6,6,-4,4,7,8,-1
+p_chanel_chance_eau_tendre,Chanel Chance Eau Tendre,Chanel,Floral Fruity,Grapefruit; Quince; Hyacinth; Jasmine; Iris; White Musk; Amber; Cedar,,/bottles/chanel-chance.png,-6,1,7,3,4,4,5,5,4,7,4
+p_chanel_coco_mademoiselle_edp,Chanel Coco Mademoiselle EDP,Chanel,Chypre Floral,Orange; Bergamot; Mandarin; Rose; Jasmine; Litchi; Patchouli; Vetiver; Vanilla; White Musk,,/bottles/chanel-coco-mademoiselle.png,-6,5,3,4,6,6,-1,4,6,8,0
+p_chanel_no_5_edp,Chanel No. 5 EDP,Chanel,Floral Aldehyde,Aldehydes; Neroli; Ylang-Ylang; Bergamot; Iris; May Rose; Jasmine; Sandalwood; Vetiver; Vanilla; Amber; Musk,,/bottles/chanel-no5.png,-7,8,2,0,7,8,-1,-2,6,9,-3
+p_creed_aventus,Creed Aventus,Creed,Chypre Fruity,Pineapple; Bergamot; Apple; Black Currant; Birch; Patchouli; Rose; Jasmine; Musk; Oakmoss; Ambergris; Vanilla,,/bottles/creed-aventus.png,7,7,4,3,7,7,0,5,7,9,0
+p_creed_aventus_for_her,Creed Aventus For Her,Creed,Chypre Fruity Floral,Egyptian Musk; Pink Pepper; Apple; Bergamot; Bulgarian Rose; Lily of the Valley; Sandalwood; Cassis,,/bottles/creed-aventus.png,-4,6,4,3,6,7,1,6,6,9,0
+p_creed_green_irish_tweed,Creed Green Irish Tweed,Creed,Aromatic Fougère,Lemon Verbena; Iris; Violet Leaves; Sandalwood; Ambergris,,/bottles/creed-aventus.png,6,8,6,-2,5,8,4,2,5,9,-2
+p_creed_milisime_imperial,Creed Milisime imperial,Creed,Aquatic Citrus,Mandarin; Bergamot; Sicilian Lemon; Sea Salt; Iris; Musk; Sandalwood,,/bottles/creed-aventus.png,5,7,5,0,6,8,1,5,6,9,-1
+p_creed_silver_mountain_water,Creed Silver Mountain Water,Creed,Citrus Aromatic,Bergamot; Mandarin; Green Tea; Black Currant; Galbanum; Petitgrain; Sandalwood; Musk,,/bottles/creed-aventus.png,4,6,9,-3,4,7,6,6,4,9,0
+p_davidoff_cool_water,Davidoff Cool Water,Davidoff,Aromatic Aquatic,Mint; Green Notes; Lavender; Coriander; Rosemary; Geranium; Neroli; Sandalwood; Cedar; Tobacco; Amber; Musk,,/bottles/davidoff.png,7,5,8,-3,4,5,5,1,3,3,-1
+p_dior_homme_2020,Dior Homme (2020),Dior,Powdery Iris,Bergamot; Atlas Cedar; Iris; Vetiver; Patchouli; White Musk,,/bottles/dior-sauvage.png,4,6,4,0,5,7,1,7,5,7,-2
+p_dior_homme_intense_2011,Dior Homme Intense (2011),Dior,Powdery Floral,Lavender; Iris; Ambrette; Pear; Vetiver; Cedar; Vanilla,,/bottles/dior-sauvage.png,4,8,1,2,6,8,-3,4,6,8,-3
+p_dior_j_adore_edp,Dior J'adore EDP,Dior,White Floral,Pear; Melon; Magnolia; Peach; Mandarin; Bergamot; Jasmine; Lily of the Valley; Tuberose; Rose; Plum; Cedar; Musk; Vanilla; Blackberry,,/bottles/dior-jadore.png,-7,5,3,2,6,7,0,4,6,8,-1
+p_dior_sauvage_edt,Dior Sauvage EDT,Dior,Aromatic Fougère,Bergamot; Sichuan Pepper; Lavender; Pink Pepper; Vetiver; Patchouli; Geranium; Elemi; Ambroxan; Cedar; Labdanum,,/bottles/dior-sauvage.png,8,2,4,-2,7,4,1,6,4,2,1
+p_dior_sauvage_elixir,Dior Sauvage Elixir,Dior,Spicy Aromatic,Cinnamon; Nutmeg; Cardamom; Grapefruit; Lavender; Licorice; Sandalwood; Patchouli; Amber; Haitian Vetiver,,/bottles/dior-sauvage.png,8,6,-3,4,9,5,-6,6,7,6,-2
+p_miss_dior_blooming_bouquet,Miss Dior Blooming Bouquet,Dior,Floral Fruity,Sicilian Mandarin; Calabrian Bergamot; Damask Rose; Peony; Apricot; White Musk,,/bottles/dior-miss-dior.png,-7,2,6,3,4,5,5,6,4,7,3
+p_miss_dior_edp_2017,Miss Dior EDP (2017),Dior,Chypre Floral,Grapefruit; Mandarin; Pink Pepper; Damask Rose; Lily of the Valley; Iris; Patchouli; Sandalwood; Musk,,/bottles/dior-miss-dior.png,-6,4,4,3,6,6,0,6,6,7,1
+p_gris_dior,Gris dior,Dior,Chypre Floral,Bergamot; Mandarin; Lemon; Tunisian Rose; Centifolia Rose; Patchouli; Iris; Musk,,/bottles/dior-sauvage.png,0,0,0,0,0,0,0,0,0,0,0
+p_dior_lucky,Dior Lucky,Dior,Floral,Lily of the Valley; Damask Rose; Patchouli; White Musk,,/bottles/dior-sauvage.png,0,0,0,0,0,0,0,0,0,0,0
+p_dior_rouge_trafalgar,Dior Rouge Trafalgar,Dior,Floral Fruity,Strawberry; Raspberry; Cherry; Black Currant; Pink Pepper; Iranian Galbanum; Sicilian Bergamot,,/bottles/dior-sauvage.png,0,0,0,0,0,0,0,0,0,0,0
+p_dior_sakura,Dior Sakura,Dior,Floral Powdery,Sicilian Bergamot; Cherry Blossom; Damask Rose; White Musk,,/bottles/dior-sauvage.png,0,0,0,0,0,0,0,0,0,0,0
+p_diptyque_do_son,Diptyque Do Son,Diptyque,White Floral,Tuberose; Orange Blossom; Iris; Pink Pepper; Rose; Jasmine; White Musk; Benzoin,,/bottles/diptyque.png,-4,5,5,1,5,6,4,7,5,8,1
+p_diptyque_opheon,Diptyque Opheon,Diptyque,Woody Floral,Juniper Berries; Atlas Cedar; Tonka Bean; Jasmine; Violet; Powdery Notes,,/bottles/diptyque.png,-3,6,3,2,6,7,-1,7,7,8,-1
+p_diptyque_fleur_de_peau,Diptyque Fleur de peau,Diptyque,Musk Floral,Aldehydes; Pink Pepper; Iris; Ambrette; Damask Rose; Musk,,/bottles/diptyque.png,0,5,2,6,5,6,0,7,6,8,1
+p_diptyque_eau_rose,Diptyque Eau Rose,Diptyque,Floral,Bulgarian Rose; Turkish Rose; Bergamot; Litchi; Honey; Musk; Cedar,,/bottles/diptyque.png,-3,5,5,1,4,6,3,6,5,8,1
+p_diptyque_l_ombre_dans_l_eau,Diptyque L'Ombre dans l'Eau,Diptyque,Green Floral,Bulgarian Rose; Black Currant Leaves; Rosewood,,/bottles/diptyque.png,-2,5,7,1,5,6,4,6,5,8,1
+p_diptyque_philosykos,Diptyque Philosykos,Diptyque,Green Woody,Fig Leaves; Fig; Coconut; White Cedar,,/bottles/diptyque.png,0,5,6,2,5,6,3,7,5,8,1
+p_diptyque_tam_dao,Diptyque Tam Dao,Diptyque,Woody,Sandalwood; Cedar; Cypress; Rosewood; Spices; Myrtle,,/bottles/diptyque.png,1,7,1,1,5,7,-1,6,5,8,-2
+p_armani_acqua_di_gio,Armani Acqua di Gio,Giorgio Armani,Aquatic Aromatic,Lime; Lemon; Bergamot; Jasmine; Cyclamen; Hedione; Persimmon; White Musk; Cedar; Patchouli,,/bottles/armani-acqua-di-gio.png,6,4,8,-3,5,5,5,4,4,5,-1
+p_armani_acqua_di_gio_profumo,Armani Acqua di Gio Profumo,Giorgio Armani,Aquatic Woody,Bergamot; Marine Notes; Geranium; Sage; Rosemary; Patchouli; Incense,,/bottles/armani-acqua-di-gio-profumo.png,7,6,5,-3,6,7,-1,5,5,7,-2
+p_armani_code,Armani Code,Giorgio Armani,Oriental Spicy,Lemon; Bergamot; Star Anise; Olive Blossom; Guaiac Wood; Tonka Bean; Tobacco; Leather,,/bottles/armani-stronger-with-you.png,7,6,0,4,6,5,-5,4,7,6,-1
+p_armani_stronger_with_you,Armani Stronger With You,Giorgio Armani,Aromatic Fougère,Pink Pepper; Cardamom; Sage; Lavender; Violet Leaves; Chestnut; Vanilla,,/bottles/armani-stronger-with-you.png,6,3,1,7,6,3,-4,6,6,5,2
+p_armani_si,Armani Sì,Giorgio Armani,Chypre Fruity Floral,Black Currant; Mandarin; Bergamot; Freesia; May Rose; Vanilla; Patchouli; Musk; Woody Notes,,/bottles/armani-si.png,-6,6,1,5,6,6,-2,5,7,7,0
+p_givenchy_gentleman_edp,Givenchy Gentleman EDP,Givenchy,Floral Iris,Lavender; Cardamom; Black Pepper; Pear; Iris; Patchouli; Vanilla; Leather; Cinnamon,,/bottles/givenchy-gentleman.png,5,6,2,3,6,6,-2,7,5,6,0
+p_givenchy_l_interdit_edp,Givenchy L'Interdit EDP,Givenchy,Floral,Orange Blossom; Tuberose; Jasmine; Patchouli; Vetiver; Ambroxan,,/bottles/givenchy-linterdit.png,-5,6,1,2,7,7,-3,6,7,7,-1
+p_glossier_you,Glossier You,Glossier,Floral Musk,Pink Pepper; Iris; Ambrox; Ambrette; White Musk,,/bottles/glossier.png,-3,4,3,1,4,5,0,8,6,6,2
+p_light_blue_for_men,Light blue For men,Dolce & Gabana,Citrus Aromatic,Frozen Grapefruit; Sicilian Mandarin; Juniper; Bergamot; Rosemary; Pepper; Rosewood; Musk; Oakmoss; Incense,,/bottles/dolce-gabana.png,-7,3,4,1,5,6,3,5,5,7,1
+p_light_blue_for_her,Light blue For Her,Dolce & Gabana,Citrus Floral,Sicilian Lemon; Granny Smith Apple; Bellflower; Bamboo; Jasmine; White Rose; Cedar; Amber; Musk,,/bottles/dolce-gabana.png,-7,0,3,6,5,4,2,6,5,6,5
+p_the_one,The one,Dolce & Gabana,Oriental Floral,Bergamot; Mandarin; Litchi; Peach; Madonna Lily; Plum; Jasmine; Muguet; Vanilla; Amber; Musk,,/bottles/dolce-gabana.png,0,0,0,0,0,0,0,0,0,0,0
+p_hermes_terre_d_hermes,Hermès Terre d'Hermès,Hermès,Woody Spicy,Grapefruit; Orange; Pepper; Geranium; Pelargonium; Cedar; Patchouli; Vetiver; Benzoin; Flint,,/bottles/hermes-terre-dhermes.png,7,7,4,-3,6,7,0,4,5,8,-2
+p_hermes_twilly_d_hermes,Hermès Twilly d'Hermès,Hermès,Floral Spicy,Ginger; Tuberose; Sandalwood; Bulgarian Rose,,/bottles/hermes-twilly.png,-5,2,4,2,5,5,3,7,5,7,4
+p_hermes_un_jardin_sur_le_nil,Hermès Un Jardin sur le Nil,Hermès,Green Aquatic,Green Mango; Tomato; Carrot; Lotus; Hyacinth; Calamus; Cinnamon; Incense; Musk,,/bottles/hermes-jardin-sur-le-nil.png,-1,5,8,0,3,5,6,5,3,7,2
+p_hugo_boss_bottled,Hugo Boss Bottled,Hugo Boss,Aromatic Fruity,Apple; Plum; Lemon; Bergamot; Mandarin; Geranium; Cinnamon; Cloves; Vetiver; Sandalwood; Cedar,,/bottles/hugo-boss.png,6,6,2,2,5,7,1,3,3,4,-1
+p_hugo_boss_bottled_night,Hugo Boss Bottled Night,Hugo Boss,Woody Aromatic,Lavender; Birch; African Violet; Cardamom; Sandalwood,,/bottles/hugo-boss.png,7,6,1,0,5,7,-3,4,4,4,-2
+p_issey_miyake_l_eau_d_issey_pour_femme,Issey Miyake L'Eau d'Issey Pour Femme,Issey Miyake,Floral Aquatic,Lotus; Cyclamen; Freesia; Rose; Carnation; Lily; Peony; Tuberose; Sandalwood; Cedar; Musk,,/bottles/issey-miyake.png,-5,4,8,-1,4,5,5,4,4,6,1
+p_issey_miyake_l_eau_d_issey_pour_homme,Issey Miyake L'Eau d'Issey Pour Homme,Issey Miyake,Aquatic Woody,Yuzu; Bergamot; Tarragon; Lily of the Valley; Cypress; Sandalwood; Cedar; Tobacco,,/bottles/issey-miyake.png,5,5,8,-3,4,6,5,4,3,5,-1
+p_jpg_le_male_elixir,JPG Le Male Elixir,Jean Paul Gaultier,Amber Spicy,Lavender; Honey; Vanilla; Tonka Bean; Tobacco; Benzoin,,/bottles/jean-paul-gaultier.png,7,7,-4,8,9,3,-7,5,8,6,0
+p_jpg_le_male_le_parfum,JPG Le Male Le Parfum,Jean Paul Gaultier,Amber Spicy,Lavender; Cardamom; Cinnamon; Tonka Bean; Vanilla,,/bottles/jean-paul-gaultier.png,6,6,-2,7,8,4,-6,5,8,6,0
+p_jpg_ultra_male,JPG Ultra Male,Jean Paul Gaultier,Amber Fougère,Lavender; Mint; Bergamot; Pear; Cinnamon; Vanilla; Amber; Tonka Bean,,/bottles/jean-paul-gaultier.png,6,4,1,8,7,2,-5,5,7,5,2
+p_jean_paul_gaultier_le_male,Jean Paul Gaultier Le Male,Jean Paul Gaultier,Aromatic Fougère,Mint; Lavender; Bergamot; Cardamom; Cinnamon; Tonka Bean; Vanilla,,/bottles/jean-paul-gaultier.png,6,5,0,6,7,3,-4,3,7,5,1
+p_jo_malone_blackberry_bay,Jo Malone Blackberry & Bay,Jo Malone London,Fruity Aromatic,Blackberry; Bay Leaves; Grapefruit; Cedarwood,,/bottles/jo-malone.png,-3,3,6,2,4,6,4,6,4,7,2
+p_jo_malone_english_pear_freesia,Jo Malone English Pear & Freesia,Jo Malone London,Fruity Floral,Pear; Melon; Freesia; Rose; Patchouli; Amber,,/bottles/jo-malone.png,-5,3,5,3,4,6,2,6,4,7,2
+p_jo_malone_earlgrey_cucumber,Jo Malone Earlgrey & Cucumber,Jo Malone London,Citrus Aromatic,Bergamot; Earl Grey Tea; Cucumber; Beeswax,,/bottles/jo-malone.png,1,4,8,-2,4,6,5,6,4,7,1
+p_jo_malone_myrrh_tonka,Jo Malone Myrrh & Tonka,Jo Malone London,Amber Vanilla,Lavender; Tonka Bean; Myrrh; Vanilla; Almond,,/bottles/jo-malone.png,0,6,-2,7,6,6,-4,6,6,8,1
+p_jo_malone_oud_bergamot,Jo Malone Oud & Bergamot,Jo Malone London,Woody Spicy,Bergamot; Cedar; Oud,,/bottles/jo-malone.png,3,6,4,0,6,7,-1,7,6,8,-1
+p_jo_malone_peony_blush_suede,Jo Malone Peony & Blush Suede,Jo Malone London,Floral,Peony; Red Apple; Damask Rose; Jasmine; Carnation; Suede,,/bottles/jo-malone.png,-6,4,4,3,4,6,2,6,5,7,2
+p_jo_malone_english_oak_and_hazelnut,Jo Malone English Oak and Hazelnut,Jo Malone London,Woody Nutty,English Oak; Hazelnut; Cedarwood; Vetiver,,/bottles/jo-malone.png,-1,7,-1,4,7,7,-4,6,7,8,0
+p_jo_malone_wood_sage_sea_salt,Jo Malone Wood Sage & Sea Salt,Jo Malone London,Aromatic Aquatic,Sea Salt; Ambrette; Sage; Driftwood; Grapefruit,,/bottles/jo-malone.png,1,4,7,-1,4,6,4,7,4,7,0
+p_jo_malone_nectarine_honeysuckle,Jo Malone Nectarine & Honeysuckle,Jo Malone London,Fruity Floral,Nectarine; Peach; Cassis; Acacia Honey; Vetiver; Bergamot,,/bottles/jo-malone.png,0,0,0,0,0,0,0,0,0,0,0
+p_kayali_yum_pistachio_gelato_33,Kayali Yum Pistachio Gelato 33,Kayali,Gourmand,Pistachio; Caramel; Vanilla; Pink Pepper; Damask Rose; Mandarin,,/bottles/kayali.png,-3,2,0,9,6,3,-1,8,6,5,5
+p_kilian_smoking_hot,Kilian Smoking hot,Killian,Smoky Spicy,Black Pepper; Tobacco; Smoke; Leather; Vetiver,,/bottles/kilian-paris.png,-7,6,3,3,5,6,2,3,4,6,2
+p_kilian_black_phantom,Kilian Black phantom,Killian,Gourmand Spicy,Caribbean Rum; Sugarcane; Coffee; Bitter Almond; Vanilla; Patchouli; Cedar,,/bottles/kilian-paris.png,-4,2,8,0,4,4,6,5,3,5,2
+p_kilian_angels_share,Kilian Angels' Share,Killian,Gourmand,Cognac; Cinnamon; Tonka Bean; Praline; Oak; Vanilla; Sandalwood,,/bottles/kilian-paris.png,2,6,-3,8,8,6,-6,6,8,9,1
+p_kilian_apple_brandy,Kilian Apple brandy,Killian,Spicy Apple,Apple; Cedar; Apple Brandy; Sweet Spices,,/bottles/kilian-paris.png,-3,5,0,8,7,5,-3,7,8,9,3
+p_lacoste_l_12_12_blanc,Lacoste L.12.12 Blanc,Lacoste,Aromatic Floral,Grapefruit; Rosemary; Cardamom; Tuberose; Ylang-Ylang; Vetiver; Suede; Cedar,,/bottles/lacoste.png,6,2,7,-2,4,5,4,5,3,3,0
+p_le_labo_another_13,Le Labo Another 13,Le Labo,Animalic Musk,Ambrette Seed; Ambrox; Iso E Super; Helvetolide; Musk; Moss,,/bottles/le-labo.png,1,5,5,1,5,6,1,9,6,8,0
+p_le_labo_bergamote_22,Le Labo Bergamote 22,Le Labo,Citrus,Bergamot; Grapefruit; Petitgrain; Vetiver; Amber; Musk; Orange Blossom,,/bottles/le-labo.png,2,5,8,-2,5,7,6,7,5,8,0
+p_le_labo_santal_33,Le Labo Santal 33,Le Labo,Woody,Sandalwood; Cedar; Cardamom; Iris; Violet; Leather; Ambrox; Papyrus,,/bottles/le-labo.png,2,6,1,1,7,6,-1,8,6,8,0
+p_le_labo_the_matcha_26,Le Labo Thé Matcha 26,Le Labo,Green Tea Powdery,Matcha; Fig; Bitter Orange; Vetiver; Iris; Cedar; Bourbon Vanilla; Musk,,/bottles/le-labo.png,0,5,7,1,5,7,5,8,5,8,1
+p_mfk_724,MFK 724,Maison Francis Kurkdjian,Floral Musk,Bergamot; Aldehydes; Mock Orange; Jasmine; Sweet Pea; Cedar; Sandalwood; Musk,,/bottles/maison-francis-kurkdjian.png,0,5,7,0,5,7,3,9,5,8,0
+p_mfk_amyris_homme,MFK Amyris Homme,Maison Francis Kurkdjian,Woody Aromatic,Mandarin; Rosemary; Iris; Tonka Bean; Amyris Wood; Vanilla,,/bottles/maison-francis-kurkdjian.png,5,7,3,2,5,7,0,7,6,9,-2
+p_mfk_aqua_universalis_forte,MFK Aqua Universalis Forte,Maison Francis Kurkdjian,Citrus Floral Musk,Sicilian Bergamot; Calabrian Lemon; Lily of the Valley; Mock Orange; White Musk; Sweet Woods,,/bottles/maison-francis-kurkdjian.png,1,4,9,-3,4,7,6,8,4,8,0
+p_mfk_baccarat_rouge_540,MFK Baccarat Rouge 540,Maison Francis Kurkdjian,Amber Floral,Saffron; Jasmine; Cedar; Amberwood; Fir Resin; Ambergris,,/bottles/maison-francis-kurkdjian.png,0,6,2,5,7,7,-3,8,8,9,0
+p_mfk_gentle_fluidity,MFK Gentle Fluidity,Maison Francis Kurkdjian,Spicy Floral Musk,Juniper; Coriander; Nutmeg; Musk; Vanilla; Amber Woods,,/bottles/maison-francis-kurkdjian.png,2,6,3,4,6,7,-1,8,6,8,0
+p_mfk_oud_satin_mood,MFK Oud Satin Mood,Maison Francis Kurkdjian,Floral Oriental,Bulgarian Rose; Violet; Oud; Vanilla; Benzoin,,/bottles/maison-francis-kurkdjian.png,0,7,-2,6,8,7,-6,6,8,9,-1
+p_margiela_replica_at_the_barber_s,Margiela Replica At the Barber's,Maison Margiela,Aromatic,Lavender; Tonka Bean; Vetiver; Geranium; Pepper; Lemon,,/bottles/maison-margiela-replica.png,5,7,4,2,5,7,1,5,5,7,-1
+p_margiela_replica_beach_walk,Margiela Replica Beach Walk,Maison Margiela,Aquatic Aromatic,Bergamot; Lemon; Pink Pepper; Coconut; Ylang-Ylang; Cedar; Musk,,/bottles/maison-margiela-replica.png,-2,3,6,4,5,4,5,7,5,7,4
+p_margiela_replica_by_the_fireplace,Margiela Replica By the Fireplace,Maison Margiela,Smoky Gourmand,Pink Pepper; Orange; Clove; Chestnut; Guaiac Wood; Juniper; Cashmeran; Vanilla; Peru Balsam,,/bottles/maison-margiela-replica.png,1,6,-3,5,6,5,-5,7,5,7,1
+p_margiela_replica_coffee_break,Margiela Replica Coffee Break,Maison Margiela,Gourmand,Coffee; Vanilla; Caramel; Cardamom; Heliotrope; Milk; Tonka Bean,,/bottles/maison-margiela-replica.png,0,4,-1,6,5,4,-2,7,5,7,3
+p_margiela_replica_jazz_club,Margiela Replica Jazz Club,Maison Margiela,Aromatic Spicy,Pink Pepper; Neroli; Rum; Tobacco; Vetiver; Vanilla; Tonka Bean; Styrax,,/bottles/maison-margiela-replica.png,4,7,-3,5,6,5,-7,6,7,7,0
+p_margiela_replica_lazy_sunday_morning,Margiela Replica Lazy Sunday Morning,Maison Margiela,Floral Soft,Aldehydes; Lily of the Valley; Pear; Iris; White Musk; Indian Sambac Jasmine,,/bottles/maison-margiela-replica.png,-3,4,7,0,5,6,4,7,4,7,1
+p_margiela_replica_on_a_date,Margiela Replica On a Date,Maison Margiela,Floral Spicy,Pink Pepper; Saffron; Bergamot; Bulgarian Rose; Patchouli; Cedar,,/bottles/maison-margiela-replica.png,1,6,3,3,6,6,-3,7,7,7,1
+p_margiela_replica_matcha_meditation,Margiela Replica Matcha Meditation,Maison Margiela,Green Spicy,Matcha Tea; Bergamot; Coriander; White Lotus; Vanilla; Vetiver,,/bottles/maison-margiela-replica.png,-3,1,7,3,4,4,6,7,4,7,5
+p_marc_jacobs_daisy,Marc Jacobs Daisy,Marc Jacobs,Floral Fruity,Strawberry; Violet Leaves; Pink Grapefruit; Gardenia; Violet; Jasmine; Musk; Vanilla; White Woods,,/bottles/marc-jacobs.png,-7,-2,6,4,4,3,5,5,3,5,6
+p_montblanc_explorer,Montblanc Explorer,Montblanc,Woody Spicy,Bergamot; Pink Pepper; Clary Sage; Vetiver; Patchouli; Leather Accord; Cocoa; Akigalawood,,/bottles/montblanc-explorer.png,7,4,4,1,6,5,0,6,4,5,0
+p_montblanc_legend,Montblanc Legend,Montblanc,Aromatic Fougère,Lavender; Bergamot; Pineapple; Apple; Verbena; Coumarin; Tonka Bean; Sandalwood; Oakmoss,,/bottles/montblanc-legend.png,7,4,5,0,4,6,3,4,3,3,-1
+p_montblanc_star_walker,Montblanc Star walker,Montblanc,Aromatic Spicy,Bergamot; Black Pepper; Sandalwood; Tonka Bean,,/bottles/montblanc-star-walker.png,-4,6,1,2,6,6,-2,6,8,7,-1
+p_narciso_rodriguez_for_her_edp,Narciso Rodriguez For Her EDP,Narciso Rodriguez,Floral Musk,Damask Rose; Honey Flower; Peach; Amber; Patchouli; Vanilla; Vetiver; Musk,,/bottles/narciso-rodriguez.png,6,9,-6,1,9,6,-8,5,7,8,-3
+p_paco_rabanne_1_million,Paco Rabanne 1 Million,Paco Rabanne,Spicy Leather,Grapefruit; Mint; Blood Mandarin; Cinnamon; Damask Rose; Leather; Amber; Patchouli; Indian Wood,,/bottles/paco-rabanne.png,7,4,0,6,7,2,-4,5,6,4,2
+p_paco_rabanne_invictus,Paco Rabanne Invictus,Paco Rabanne,Aquatic Woody,Sea Notes; Grapefruit; Mandarin; Bay Leaf; Jasmine; Patchouli; Guaiac Wood; Oakmoss; Ambergris,,/bottles/paco-rabanne.png,7,1,7,1,5,3,4,7,5,3,2
+p_paco_rabanne_lady_million,Paco Rabanne Lady Million,Paco Rabanne,Floral Woody Musk,Neroli; Bitter Orange; Raspberry; Jasmine; Orange Blossom; Gardenia; Patchouli; Honey; Amber,,/bottles/paco-rabanne.png,-6,3,1,7,7,4,-4,5,6,5,3
+p_paco_rabanne_olympea,Paco Rabanne Olympea,Paco Rabanne,Floral Salty,Green Mandarin; Water Jasmine; Verbena; Salt; Vanilla; Cashmere Wood; Sandalwood; Ambergris,,/bottles/paco-rabanne.png,-5,4,2,6,7,4,-3,7,8,6,1
+p_paco_rabanne_phantom,Paco Rabanne Phantom,Paco Rabanne,Aromatic Woody,Lemon; Lavender; Apple; Vetiver; Patchouli,,/bottles/paco-rabanne.png,6,2,5,3,5,4,1,8,4,4,3
+p_parfums_de_marly_delina,Parfums de Marly Delina,Parfums de Marly,Floral,Litchi; Bergamot; Rhubarb; Turkish Rose; Peony; Lily of the Valley; Cedar; Cashmere Wood; Vanilla; Musk,,/bottles/parfums-de-marly-delina.png,-7,5,4,5,7,7,0,7,7,8,2
+p_parfums_de_marly_greenley,Parfums de Marly Greenley,Parfums de Marly,Aromatic Mint,Mint; Birch; Galbanum; Apple; Black Pepper; Magnolia; Vanilla; Sandalwood; Patchouli; Vetiver; Amber; Musk,,/bottles/parfums-de-marly-greenley.png,6,5,7,2,6,6,3,7,5,8,1
+p_parfums_de_marly_layton,Parfums de Marly Layton,Parfums de Marly,Spicy Aromatic,Apple; Bergamot; Lavender; Mate; Cardamom; Geranium; Jasmine; Violet; Sandalwood; Vanilla; Guaiac Wood; Patchouli; Musk,,/bottles/parfums-de-marly-layton.png,4,6,2,6,8,6,-4,7,7,8,1
+p_parfums_de_marly_oriana,Parfums de Marly Oriana,Parfums de Marly,Floral Fruity,Bergamot; Litchi; Black Currant; Raspberry; Jasmine; Heliotrope; Peony; Iris; Cashmere Wood; Patchouli; Vanilla; Musk,,/bottles/parfums-de-marly-oriana.png,-6,4,2,7,7,5,-2,8,7,8,4
+p_prada_lhomme,Prada L’Homme,Prada,Floral Iris,Iris; Neroli; Cardamom; Pepper; Geranium; Sandalwood; Cedar; Patchouli; Amber,,/bottles/prada-lhomme.png,1,6,1,6,7,6,-3,7,7,8,1
+p_prada_luna_rosso,Prada Luna Rosso,Prada,Aromatic Aquatic,Lavender; Bitter Orange; Spearmint; Sage; Ambrette; Ambroxan; Galaxolide,,/bottles/prada-luna-rosso.png,-2,5,3,2,5,5,0,9,7,6,1
+p_prada_paradigme,Prada Paradigme,Prada,Floral Woody,Bergamot; Pink Pepper; Iris; Jasmine; Cedar; Patchouli; Amber,,/bottles/prada-paradigme.png,-3,4,0,8,6,4,-2,8,7,6,2
+p_prada_candy,Prada Candy,Prada,Gourmand,Caramel; Musk; Benzoin; Vanilla,,/bottles/prada-candy.png,-6,4,-3,9,8,5,-4,5,7,7,3
+p_prada_paradoxe,Prada Paradoxe,Prada,Floral Musk,Bergamot; Neroli; Jasmine; White Amber; Bourbon Vanilla; Musk,,/bottles/prada-paradoxe.png,-5,4,4,2,5,6,1,8,6,7,1
+p_ralph_lauren_polo_blue,Ralph Lauren Polo Blue,Ralph Lauren,Aromatic Aquatic,Cucumber; Mandarin; Basil; Sage; Geranium; Tobacco; Patchouli; Suede; White Musk,,/bottles/ralph-lauren.png,7,4,8,-2,5,5,5,4,3,4,0
+p_ralph_lauren_polo_red,Ralph Lauren Polo Red,Ralph Lauren,Spicy Woody,Italian Lemon; Cranberry; Grapefruit; Saffron; Sage; Lavender; Coffee; Amberwood; Redwood,,/bottles/ralph-lauren.png,5,5,8,1,7,7,3,7,6,9,0
+p_ralph_lauren_polo_rush,Ralph Lauren Polo Rush,Ralph Lauren,Aromatic Fougère,Saffron; Cinnamon; Olibanum; Cedar; Coumarin,,/bottles/ralph-lauren.png,5,8,-2,6,8,7,-6,4,8,9,0
+p_ralph_lauren_polo_black,Ralph Lauren Polo Black,Ralph Lauren,Woody Aromatic,Iced Mango; Lemon; Sage; Patchouli; Tonka Bean,,/bottles/ralph-lauren.png,0,0,0,0,0,0,0,0,0,0,0
+p_mith_blue_wood,MITH Blue wood,MITH,Woody Aromatic,Sea Salt; Bergamot; Cypress; Cedar; Vetiver; Musk,,/bottles/mith.png,-1,3,8,-1,4,5,6,7,4,6,2
+p_mith_silver_sparkle,MITH Silver sparkle,MITH,Floral Powdery,Aldehydes; Pear; Iris; Heliotrope; White Musk; Sandalwood,,/bottles/mith.png,-3,1,1,9,5,2,0,8,5,4,6
+p_mith_horizon,MITH Horizon,MITH,Aromatic Aquatic,Sea Notes; Bergamot; Mineral Salt; Driftwood; Ambroxan; Musk,,/bottles/mith.png,-3,1,2,8,5,2,1,8,5,4,6
+p_mith_nude,MITH NUDE,MITH,Skin Musk,Iris; Ambrette; White Tea; Cashmere Wood; Skin Musk,,/bottles/mith.png,-3,2,2,8,5,3,0,8,5,4,5
+p_mith_memories_of_the_wind,MITH Memories of the wind,MITH,Green Floral,Galbanum; Bergamot; Lily of the Valley; Hedione; Cedar; White Musk,,/bottles/mith.png,0,0,0,0,0,0,0,0,0,0,0
+p_mith_mystery_for_him,MITH Mystery for him,MITH,Woody Spicy,Black Pepper; Cardamom; Leather; Patchouli; Cedar; Tonka Bean,,/bottles/mith.png,0,0,0,0,0,0,0,0,0,0,0
+p_mith_crystal_flower,MITH Crystal flower,MITH,Floral,Pink Pepper; Peony; Damask Rose; Magnolia; White Musk,,/bottles/mith.png,0,0,0,0,0,0,0,0,0,0,0
+p_tamburins_chamo,Tamburins Chamo,Tamburins,Floral Tea,Chamomile; White Tea; Iris; Cashmere Wood; Musk,,/bottles/tamburins.png,-3,3,5,1,4,5,3,8,5,7,2
+p_tamburins_rosie,Tamburins Rosie,Tamburins,Floral,Damask Rose; Pink Pepper; Litchi; Ylang-Ylang; White Musk,,/bottles/tamburins.png,-4,5,3,2,5,6,1,8,6,7,1
+p_tom_ford_bitter_peach,Tom Ford Bitter Peach,Tom Ford,Fruity Gourmand,Peach; Blood Orange; Davana; Cardamom; Heliotrope; Rum; Patchouli; Vanilla; Tonka Bean; Sandalwood; Benzoin,,/bottles/tom-ford.png,-2,5,0,8,8,5,-4,7,8,8,3
+p_tom_ford_fucking_fabulous,Tom Ford Fucking Fabulous,Tom Ford,Spicy Leather,Almond; Clary Sage; Lavender; Iris; Tonka Bean; Leather; Vanilla,,/bottles/tom-ford.png,3,7,-3,6,8,7,-5,5,8,9,0
+p_tom_ford_lost_cherry,Tom Ford Lost Cherry,Tom Ford,Fruity Gourmand,Black Cherry; Bitter Almond; Roasted Tonka; Turkish Rose; Jasmine Sambac; Peru Balsam; Sandalwood; Vetiver; Cedar,,/bottles/tom-ford.png,-2,5,-2,8,8,5,-5,6,8,8,2
+p_tom_ford_ombre_leather,Tom Ford Ombré Leather,Tom Ford,Leather,Cardamom; Leather; Jasmine; Patchouli; Amber; Moss,,/bottles/tom-ford.png,4,6,0,1,7,7,-3,6,7,8,-2
+p_tom_ford_oud_wood,Tom Ford Oud Wood,Tom Ford,Woody Oud,Oud; Sandalwood; Rosewood; Cardamom; Sichuan Pepper; Vetiver; Tonka Bean; Amber,,/bottles/tom-ford.png,4,7,1,1,6,8,-2,6,6,9,-2
+p_tom_ford_soleil_blanc,Tom Ford Soleil Blanc,Tom Ford,Solar Floral,Bergamot; Cardamom; Pink Pepper; Pistachio; Tuberose; Ylang-Ylang; Coconut; Tonka Bean; Amber; Benzoin,,/bottles/tom-ford.png,-1,4,4,6,6,5,4,7,6,8,3
+p_tom_ford_tobacco_vanille,Tom Ford Tobacco Vanille,Tom Ford,Spicy Tobacco,Tobacco; Vanilla; Cocoa; Tonka Bean; Tobacco Blossom; Dried Fruits; Spices,,/bottles/tom-ford.png,4,7,-5,8,9,6,-7,4,7,9,0
+p_scene_studio_matcha_101,Scene Studio Matcha 101,Scene studio,Green Tea,Matcha; Bergamot; Vetiver; Cedar; White Musk,,/bottles/scene-studio.png,-3,4,-3,9,7,4,-3,8,8,7,3
+p_scene_studio_morning_person,Scene Studio Morning Person,Scene studio,Citrus Aromatic,Bergamot; Mandarin; Petitgrain; Mint; Ambroxan; White Musk,,/bottles/scene-studio.png,0,0,0,0,0,0,0,0,0,0,0
+p_versace_eros,Versace Eros,Versace,Aromatic Fougère,Mint; Lemon; Green Apple; Tonka Bean; Geranium; Ambroxan; Madagascar Vanilla; Atlas Cedar; Vetiver; Oakmoss,,/bottles/versace.png,8,3,3,6,8,2,-3,5,8,4,1
+p_butterfly_thai_perfume_agarwood_benzoin,Butterfly Thai Perfume - Agarwood & Benzoin,Buttefly Thai Perfume,Woody Oriental,Agarwood (Oud); Benzoin; Sandalwood; Damask Rose; Saffron,,/bottles/butterfly-perfume.png,7,5,1,5,7,4,-3,5,7,5,0
+p_butterfly_thai_perfume_bay_leaf,Butterfly Thai Perfume - Bay leaf,Buttefly Thai Perfume,Aromatic,Bay Leaf; Bergamot; Cedar; Vetiver; Musk,,/bottles/butterfly-perfume.png,0,0,0,0,0,0,0,0,0,0,0
+p_versace_pour_homme_dylan_blue,Versace Pour Homme Dylan Blue,Versace,Aromatic Fougère,Calabrian Bergamot; Grapefruit; Aquatic Notes; Black Pepper; Patchouli; Ambroxan; Incense; Musk; Tonka Bean; Saffron,,/bottles/versace.png,6,3,6,-1,5,5,2,6,4,4,-1
+p_lush_american_cream,LUSH American cream,LUSH,Sweet Vanilla,Strawberry; Vanilla; Sandalwood; Cream,,/bottles/lush.png,0,0,0,0,0,0,0,0,0,0,0
+p_lush_dirty,LUSH Dirty,LUSH,Aromatic Fresh,Spearmint; Tarragon; Sandalwood; Lavender,,/bottles/lush.png,0,0,0,0,0,0,0,0,0,0,0
+p_viktor_rolf_flowerbomb,Viktor & Rolf Flowerbomb,Viktor & Rolf,Floral Oriental,Tea; Bergamot; Sambac Jasmine; Orchid; Freesia; Centifolia Rose; Patchouli; Vanilla; Musk,,/bottles/viktor-rolf.png,-7,4,0,7,8,5,-3,5,7,7,2
+p_w_dressroom_april_cotton_dress,W.DRESSROOM April Cotton Dress,W.DRESSROOM,Floral Musk,Powder; Cotton Accord; Iris; White Musk,,/bottles/w-dressroom.png,-3,2,6,1,4,5,4,7,4,6,2
+p_summerstuff_marine_kitsch,Summerstuff.marine kitsch,Summerstuff.marine,Fruity Gourmand,Peach; Strawberry; Vanilla; Caramel; White Musk,,/bottles/summer-stuff-marine.png,0,5,5,5,7,6,1,7,6,9,2
+p_summerstuff_marine_the_boogie_night,Summerstuff.marine The boogie night,Summerstuff.marine,Amber Vanilla,Cinnamon; Honey; Vanilla; Tonka Bean; Patchouli; Amber,,/bottles/summer-stuff-marine.png,4,7,-2,7,8,6,-5,6,7,9,1
+p_summerstuff_marine_over_the_sun,Summerstuff.marine Over the sun,Summerstuff.marine,Solar Floral,Coconut; Tiare Flower; Ylang-Ylang; Tonka Bean; Sandalwood; Amber,,/bottles/summer-stuff-marine.png,-5,3,-1,7,7,3,-5,6,8,6,2
+p_summerstuff_marine_marie,Summerstuff.marine Marie,Summerstuff.marine,Floral,Pink Pepper; Peony; Rose; White Musk; Cedar,,/bottles/summer-stuff-marine.png,0,0,0,0,0,0,0,0,0,0,0
+p_summerstuff_marine_miro,Summerstuff.marine Miro,Summerstuff.marine,Woody Floral,Bergamot; Iris; Cashmere Wood; Vetiver; Musk,,/bottles/summer-stuff-marine.png,0,0,0,0,0,0,0,0,0,0,0
+p_summerstuff_marine_bubble_bliss,Summerstuff.marine Bubble bliss,Summerstuff.marine,Floral Fruity,Pear; Litchi; Peach; Magnolia; White Musk,,/bottles/summer-stuff-marine.png,0,0,0,0,0,0,0,0,0,0,0
+p_ysl_la_nuit_de_l_homme,YSL La Nuit de l'Homme,Yves Saint Laurent,Spicy Aromatic,Cardamom; Bergamot; Lavender; Cedar; Vetiver; Caraway; Tonka Bean,,/bottles/ysl-la-nuit-de-l-homme.png,7,5,-1,4,6,5,-6,4,8,6,-1
+p_ysl_libre_edp,YSL Libre EDP,Yves Saint Laurent,Floral Lavender,Mandarin; Lavender; Black Currant; Orange Blossom; Jasmine; Vanilla; Cedar; Ambergris; Musk,,/bottles/ysl-libre-edp.png,-3,4,4,4,6,5,0,7,6,7,1
+p_ysl_myslf,YSL MYSLF,Yves Saint Laurent,Woody Floral,Bergamot; Orange Blossom; Patchouli; Ambrofix; Cedar,,/bottles/ysl-myslf.png,4,3,4,0,5,5,1,8,4,5,0
+p_ysl_y_eau_de_parfum,YSL Y Eau de Parfum,Yves Saint Laurent,Aromatic,Apple; Ginger; Sage; Geranium; Juniper; Olibanum; Vetiver; Cedar; Tonka Bean; Amber,,/bottles/ysl-y-eau-de-parfum.png,5,1,4,-1,5,4,1,7,4,4,0
