@@ -9,7 +9,7 @@ export const runtime = 'nodejs';
  * POST /api/admin/upload — multipart/form-data with field "file"
  *
  * Storage backend (auto-detected, in priority order):
- *   1. Vercel Blob — when BLOB_READ_WRITE_TOKEN is set in env
+ *   1. Vercel Blob — when BLOTT_READ_WRITE_TOKEN is set in env
  *      Uses @vercel/blob's put() and returns the public CDN URL.
  *   2. Local disk — fallback for `npm run dev` ONLY.
  *      Writes to public/uploads/<timestamp>-<safe-name>
@@ -37,7 +37,8 @@ export async function POST(req) {
       process.env.AWS_LAMBDA_FUNCTION_NAME ||
       (process.env.APP_MODE || '').toLowerCase() === 'production';
 
-    const hasBlobToken = !!process.env.BLOB_READ_WRITE_TOKEN;
+    const blobToken = process.env.BLOTT_READ_WRITE_TOKEN;
+    const hasBlobToken = !!blobToken;
 
     // ---------- Backend 1: Vercel Blob ----------
     if (hasBlobToken) {
@@ -47,6 +48,7 @@ export async function POST(req) {
           access: 'public',
           contentType: file.type || 'application/octet-stream',
           addRandomSuffix: false,
+          token: blobToken,
         });
         return NextResponse.json({
           ok: true,
@@ -58,7 +60,7 @@ export async function POST(req) {
         if (/Cannot find package/.test(e.message)) {
           return NextResponse.json({
             ok: false,
-            error: 'BLOB_READ_WRITE_TOKEN is set but @vercel/blob is not installed. Run `npm install @vercel/blob` and redeploy.',
+            error: 'BLOTT_READ_WRITE_TOKEN is set but @vercel/blob is not installed. Run `npm install @vercel/blob` and redeploy.',
             backend: 'vercel-blob',
           }, { status: 500 });
         }
@@ -78,10 +80,10 @@ export async function POST(req) {
         error:
           'File uploads are not configured for this deploy. ' +
           'Connect a Vercel Blob store (Project → Storage → Connect Store → Blob), ' +
-          'then redeploy. The BLOB_READ_WRITE_TOKEN env var will be auto-injected. ' +
+          'then redeploy. The BLOTT_READ_WRITE_TOKEN env var must be set with the token from your Public Blob store. ' +
           'Until then, paste a hosted image URL into the field instead.',
         backend: 'none',
-        hint: 'BLOB_READ_WRITE_TOKEN is missing in this environment.',
+        hint: 'BLOTT_READ_WRITE_TOKEN is missing in this environment.',
       }, { status: 503 });
     }
 

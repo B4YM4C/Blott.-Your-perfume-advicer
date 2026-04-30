@@ -98,21 +98,24 @@ Development checked):
 | `EMAIL_PROVIDER`        | `stub` for now (replace later with sendgrid etc.) |
 | `EMAIL_FROM`            | `hello@blott.app` (or whatever sender you own)   |
 
-Leave `BLOB_READ_WRITE_TOKEN` blank for now — we add it in step 5.
+Leave `BLOTT_READ_WRITE_TOKEN` blank for now — we add it in step 5.
 
 ---
 
 ## 5. Add Vercel Blob storage
 
 1. In the project, go to **Storage → Connect Store → Blob → Create**.
-2. Name it `blott-uploads`. Vercel automatically:
-   - Creates the store
-   - Injects `BLOB_READ_WRITE_TOKEN` into the project's env vars
-   - Connects it to all environments
-3. Trigger a redeploy (Settings → Deployments → Redeploy latest).
+2. Choose **Public** access (Private stores cannot serve images to site visitors).
+3. Name it `blott-uploads` (or similar). Vercel will create the store and
+   generate a read/write token.
+4. Copy that token, then go to **Settings → Environment Variables** and add:
+   - Name: `BLOTT_READ_WRITE_TOKEN`
+   - Value: the token you just copied
+   - Apply to all environments (Production / Preview / Development)
+5. Trigger a redeploy (Settings → Deployments → Redeploy latest).
 
-The `/api/admin/upload` route detects `BLOB_READ_WRITE_TOKEN` automatically and
-switches from disk writes to `@vercel/blob.put()`.
+The `/api/admin/upload` route detects `BLOTT_READ_WRITE_TOKEN` automatically and
+switches from disk writes to `@vercel/blob.put()` (passing the token explicitly).
 
 ---
 
