@@ -3,6 +3,13 @@
 import { useEffect, useState } from 'react';
 
 const CONSENT_KEY = 'blott_consent';
+const DEFAULT_COPY = {
+  label: 'PDPA · Cookie Consent',
+  title: 'ก่อนเริ่มค้นหากลิ่น',
+  body: 'Blot. ใช้ cookie เพื่อจดจำคำตอบของคุณและปรับประสบการณ์ให้เหมาะสม เราเคารพ PDPA ของประเทศไทย — คุณเลือกยอมรับหรือปฏิเสธได้ตลอดเวลา หากปฏิเสธ quiz ยังใช้งานได้ แต่เราจะไม่บันทึกพฤติกรรมของคุณ',
+  reject: 'Reject',
+  accept: 'Accept',
+};
 
 /**
  * ConsentBanner — PDPA-compliant call-for-consent.
@@ -14,9 +21,10 @@ const CONSENT_KEY = 'blott_consent';
  *
  * Complies with Thailand PDPA B.E. 2562 (Personal Data Protection Act).
  */
-export default function ConsentBanner() {
+export default function ConsentBanner({ copy = {} }) {
   const [visible, setVisible] = useState(false);
   const [choice, setChoice] = useState(null);
+  const c = { ...DEFAULT_COPY, ...(copy.consent || {}) };
 
   useEffect(() => {
     try {
@@ -44,18 +52,14 @@ export default function ConsentBanner() {
   if (!visible) return null;
 
   return (
-    <div role="dialog" aria-label="Cookie consent" style={styles.wrap}>
-      <div style={styles.card}>
-        <div style={styles.label}>PDPA · Cookie Consent</div>
-        <h4 style={styles.title}>ก่อนเริ่มค้นหากลิ่น</h4>
-        <p style={styles.body}>
-          Blot. ใช้ cookie เพื่อจดจำคำตอบของคุณและปรับประสบการณ์ให้เหมาะสม
-          เราเคารพ <strong>PDPA</strong> ของประเทศไทย — คุณเลือกยอมรับหรือปฏิเสธได้ตลอดเวลา
-          หากปฏิเสธ quiz ยังใช้งานได้ แต่เราจะไม่บันทึกพฤติกรรมของคุณ
-        </p>
-        <div style={styles.actions}>
-          <button className="btn ghost btn-sm" onClick={() => decide('rejected')}>Reject</button>
-          <button className="btn btn-sm" onClick={() => decide('accepted')}>Accept</button>
+    <div className="consent-wrap" role="dialog" aria-label="Cookie consent" style={styles.wrap}>
+      <div className="consent-card" style={styles.card}>
+        <div style={styles.label} data-edit-key="consent.label">{c.label}</div>
+        <h4 style={styles.title} data-edit-key="consent.title">{c.title}</h4>
+        <p style={styles.body} data-edit-key="consent.body">{c.body}</p>
+        <div className="consent-actions" style={styles.actions}>
+          <button className="btn ghost btn-sm" onClick={() => decide('rejected')} data-edit-key="consent.reject">{c.reject}</button>
+          <button className="btn btn-sm" onClick={() => decide('accepted')} data-edit-key="consent.accept">{c.accept}</button>
         </div>
       </div>
     </div>

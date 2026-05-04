@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Blot. — Project Infographic & Business Requirements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#0a0a0a;
+    --paper:#ffffff;
+    --offwhite:#f7f7f4;
+    --line:#e6e3dc;
+    --muted:#79756e;
+    --soft:#ece9e2;
+    --accent:#c9b27b;
+    --mint:#cfe1d5;
+    --rose:#e7d1cf;
+    --blue:#d8e0ea;
+    --mono:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --sans:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --serif:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing:border-box; }
+  html, body { margin:0; background:var(--offwhite); color:var(--ink); }
+  body { font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  .page { max-width:1180px; margin:0 auto; padding:44px 26px 110px; }
+  .meta {
+    font-family:var(--mono); font-size:10px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--muted);
+  }
+  .hero {
+    min-height:470px; display:grid; grid-template-columns:1.15fr .85fr;
+    border:1px solid var(--line); background:var(--paper);
+  }
+  .hero-copy { padding:54px; display:flex; flex-direction:column; justify-content:space-between; }
+  .hero h1 {
+    font-family:var(--serif); font-size:82px;
+    font-weight:700; line-height:.96; letter-spacing:0; margin:34px 0 24px;
+  }
+  .hero h1 em { font-style:normal; font-weight:500; }
+  .hero p { max-width:620px; margin:0; color:#3f3b35; font-size:16px; }
+  .hero-panel {
+    background:var(--ink); color:var(--paper); padding:38px; display:flex;
+    flex-direction:column; justify-content:space-between; min-height:100%;
+  }
+  .hero-panel .meta { color:#bbb; }
+  .url-box { border:1px solid rgba(255,255,255,.18); padding:18px; margin-top:20px; }
+  .url-box strong { display:block; font-size:18px; margin-top:8px; word-break:break-word; }
+  .hero-diagram { display:grid; gap:10px; margin-top:28px; }
+  .hero-step {
+    border:1px solid rgba(255,255,255,.18); padding:14px 16px;
+    display:grid; grid-template-columns:40px 1fr; gap:12px; align-items:center;
+  }
+  .hero-step span:first-child {
+    width:34px; height:34px; border-radius:50%; background:var(--paper); color:var(--ink);
+    display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px;
+  }
+  .hero-step b { display:block; font-size:14px; }
+  .hero-step small { color:#bbb; }
+
+  section { margin-top:34px; }
+  .section-head {
+    display:flex; justify-content:space-between; gap:20px; align-items:end;
+    margin:54px 0 18px;
+  }
+  h2 {
+    font-family:var(--serif); font-size:48px;
+    font-weight:700; line-height:1; letter-spacing:0; margin:0;
+  }
+  h3 {
+    font-family:var(--serif); font-size:25px; font-weight:700;
+    margin:0 0 8px; letter-spacing:0;
+  }
+  p { color:#4b4740; margin:8px 0 0; }
+  code {
+    font-family:var(--mono); font-size:.92em; background:var(--soft);
+    border:1px solid var(--line); padding:1px 6px;
+  }
+
+  .stats {
+    display:grid; grid-template-columns:repeat(6,1fr); gap:1px;
+    border:1px solid var(--line); background:var(--line);
+  }
+  .stat {
+    background:var(--paper); padding:22px 18px; min-height:126px;
+  }
+  .stat strong {
+    display:block; font-family:var(--serif); font-size:48px; line-height:1;
+    font-weight:700; margin:14px 0 4px;
+  }
+  .stat small { color:var(--muted); }
+
+  .flow {
+    display:grid; grid-template-columns:repeat(5,1fr); gap:12px;
+  }
+  .flow-card {
+    background:var(--paper); border:1px solid var(--line); padding:22px;
+    position:relative; min-height:210px;
+  }
+  .flow-card:not(:last-child)::after {
+    content:""; position:absolute; top:50%; right:-12px; width:12px; height:1px; background:var(--ink);
+  }
+  .badge {
+    width:38px; height:38px; border-radius:50%; background:var(--ink); color:var(--paper);
+    display:flex; align-items:center; justify-content:center; font-family:var(--mono);
+    font-size:11px; margin-bottom:24px;
+  }
+  .chips { display:flex; gap:7px; flex-wrap:wrap; margin-top:14px; }
+  .chip {
+    font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    border:1px solid var(--line); background:var(--offwhite); padding:5px 8px;
+  }
+
+  .split { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .panel {
+    background:var(--paper); border:1px solid var(--line); padding:28px;
+  }
+  .panel.fill { background:var(--ink); color:var(--paper); }
+  .panel.fill p, .panel.fill li { color:#d4d4d4; }
+  .panel.fill .meta { color:#bbb; }
+  .panel.tint-a { background:var(--mint); }
+  .panel.tint-b { background:var(--rose); }
+  .panel.tint-c { background:var(--blue); }
+  .panel.tint-d { background:#eee2bd; }
+
+  .table {
+    display:grid; border:1px solid var(--line); background:var(--paper);
+  }
+  .row {
+    display:grid; grid-template-columns:74px 1.2fr 96px 96px;
+    border-top:1px solid var(--line);
+  }
+  .row:first-child { border-top:0; background:var(--soft); }
+  .cell { padding:12px 14px; border-left:1px solid var(--line); font-size:13px; }
+  .cell:first-child { border-left:0; }
+  .row:first-child .cell {
+    font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  }
+
+  .pipeline {
+    display:grid; grid-template-columns:1.1fr .9fr; gap:18px;
+  }
+  .bars { display:grid; gap:10px; margin-top:16px; }
+  .bar { display:grid; grid-template-columns:120px 1fr 48px; gap:12px; align-items:center; font-size:13px; }
+  .track { height:8px; background:var(--soft); position:relative; overflow:hidden; }
+  .track span { display:block; height:100%; background:var(--ink); }
+
+  .data-map {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+  }
+  .data-card {
+    background:var(--paper); border:1px solid var(--line); padding:20px; min-height:180px;
+  }
+  .data-card .icon {
+    width:42px; height:42px; border:1px solid var(--ink); display:grid; place-items:center;
+    font-family:var(--mono); margin-bottom:18px;
+  }
+  .mini-list { list-style:none; padding:0; margin:14px 0 0; display:grid; gap:6px; }
+  .mini-list li { color:#4b4740; font-size:13px; border-top:1px solid var(--line); padding-top:6px; }
+
+  .br-grid {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
+  }
+  .br-card {
+    border:1px solid var(--line); background:var(--paper); padding:24px; min-height:230px;
+  }
+  .br-card strong {
+    display:block; font-family:var(--serif); font-size:54px; line-height:1; font-weight:700;
+    margin:16px 0 8px;
+  }
+  .br-card ol { margin:12px 0 0; padding-left:18px; }
+  .br-card li { font-size:13px; color:#4b4740; margin:4px 0; }
+
+  .ops-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+  .ops-card { background:var(--paper); border:1px solid var(--line); padding:22px; }
+  .command {
+    background:var(--ink); color:var(--paper); padding:14px 16px; font-family:var(--mono);
+    font-size:12px; overflow:auto; margin-top:12px;
+  }
+  .tech-grid {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+  }
+  .tech-card {
+    background:var(--paper); border:1px solid var(--line); padding:20px; min-height:170px;
+  }
+  .tech-card strong { display:block; font-size:21px; margin:12px 0 8px; }
+  .file-map {
+    display:grid; grid-template-columns:.9fr 1.1fr; gap:18px;
+  }
+  .file-tree {
+    background:var(--ink); color:var(--paper); padding:24px; overflow:auto;
+    font-family:var(--mono); font-size:13px; line-height:1.75;
+  }
+  .file-tree .dim { color:#a8a8a8; }
+  .module-grid {
+    display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+  }
+  .module {
+    background:var(--paper); border:1px solid var(--line); padding:18px;
+  }
+  .db-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
+  }
+  .db-table {
+    background:var(--paper); border:1px solid var(--line); padding:18px; min-height:210px;
+  }
+  .db-table h3 { font-size:20px; }
+  .db-table ul { margin:12px 0 0; padding:0; list-style:none; }
+  .db-table li {
+    border-top:1px solid var(--line); padding:7px 0; font-size:12.5px; color:#4b4740;
+  }
+  .system-flow {
+    display:grid; grid-template-columns:repeat(6,1fr); gap:10px;
+  }
+  .sys-node {
+    background:var(--paper); border:1px solid var(--line); padding:18px; min-height:156px;
+    position:relative;
+  }
+  .sys-node:not(:last-child)::after {
+    content:""; position:absolute; right:-10px; top:50%; width:10px; height:1px; background:var(--ink);
+  }
+  .sys-node b { display:block; margin:12px 0 6px; }
+  .config-table {
+    display:grid; border:1px solid var(--line); background:var(--paper);
+  }
+  .config-row {
+    display:grid; grid-template-columns:220px 1fr 170px;
+    border-top:1px solid var(--line);
+  }
+  .config-row:first-child { border-top:0; background:var(--soft); }
+  .config-cell { padding:12px 14px; border-left:1px solid var(--line); font-size:13px; }
+  .config-cell:first-child { border-left:0; }
+  .config-row:first-child .config-cell {
+    font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  }
+  .api-row {
+    display:grid; grid-template-columns:110px 330px 1fr;
+    border-top:1px solid var(--line);
+  }
+  .api-row:first-child { border-top:0; background:var(--soft); }
+  .api-cell { padding:12px 14px; border-left:1px solid var(--line); font-size:13px; }
+  .api-cell:first-child { border-left:0; }
+  .api-row:first-child .api-cell {
+    font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  }
+
+  .footer-note {
+    margin-top:52px; background:var(--ink); color:var(--paper); padding:30px;
+    display:flex; justify-content:space-between; gap:24px; align-items:center;
+  }
+  .footer-note p { color:#d4d4d4; max-width:700px; margin:0; }
+
+  @media (max-width: 980px) {
+    .hero, .split, .pipeline { grid-template-columns:1fr; }
+    .stats { grid-template-columns:repeat(3,1fr); }
+    .flow { grid-template-columns:1fr; }
+    .flow-card:not(:last-child)::after { display:none; }
+    .data-map, .br-grid, .ops-grid, .tech-grid, .db-grid, .system-flow { grid-template-columns:1fr 1fr; }
+    .file-map { grid-template-columns:1fr; }
+  }
+  @media (max-width: 620px) {
+    .page { padding:18px 14px 70px; }
+    .hero-copy, .hero-panel { padding:28px 22px; }
+    .hero h1 { font-size:52px; }
+    h2 { font-size:36px; }
+    .stats, .data-map, .br-grid, .ops-grid, .tech-grid, .db-grid, .system-flow, .module-grid { grid-template-columns:1fr; }
+    .section-head { display:block; }
+    .row, .config-row, .api-row { grid-template-columns:1fr; }
+    .cell { border-left:0; border-top:1px solid var(--line); }
+    .cell:first-child { border-top:0; }
+    .config-cell { border-left:0; border-top:1px solid var(--line); }
+    .config-cell:first-child { border-top:0; }
+    .api-cell { border-left:0; border-top:1px solid var(--line); }
+    .api-cell:first-child { border-top:0; }
+    .sys-node:not(:last-child)::after { display:none; }
+    .footer-note { display:block; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <div class="hero-copy">
+      <div>
+        <div class="meta">Project infographic · 2026-05-02</div>
+        <h1>Blot.<br><em>Project Map</em></h1>
+        <p>เอกสารภาพรวมแบบ infographic สำหรับอธิบายโปรเจค Blot. ให้เข้าใจเร็ว: เว็บทำอะไร, logic ทำงานอย่างไร, data อยู่ตรงไหน, admin ใช้ทำอะไร, deploy/CI เป็นยังไง และแปลงออกมาเป็น Business Requirement ได้กี่ข้อ</p>
+      </div>
+      <div class="url-box" style="background:var(--offwhite); border-color:var(--line)">
+        <div class="meta">Live beta URL</div>
+        <strong>https://tryblott.vercel.app</strong>
+      </div>
+    </div>
+
+    <aside class="hero-panel">
+      <div>
+        <div class="meta">One sentence</div>
+        <p style="color:#ddd; font-size:18px; margin-top:14px">Perfume quiz ที่เปลี่ยนคำตอบของผู้ใช้เป็น scent vector แล้วหา perfume DNA ที่ใกล้ที่สุด</p>
+      </div>
+      <div class="hero-diagram">
+        <div class="hero-step"><span>01</span><div><b>Ask</b><small>Budget, age, outfit, mood, place, music</small></div></div>
+        <div class="hero-step"><span>02</span><div><b>Score</b><small>Selected choices become weighted params</small></div></div>
+        <div class="hero-step"><span>03</span><div><b>Match</b><small>Closest perfume DNA wins</small></div></div>
+        <div class="hero-step"><span>04</span><div><b>Explain</b><small>Result, notes, reasons, alternatives</small></div></div>
+      </div>
+    </aside>
+  </header>
+
+  <section>
+    <div class="stats">
+      <div class="stat"><div class="meta">Questions</div><strong>6</strong><small>current quiz steps</small></div>
+      <div class="stat"><div class="meta">Choices</div><strong>55</strong><small>total answer choices</small></div>
+      <div class="stat"><div class="meta">Perfumes</div><strong>167</strong><small>library records</small></div>
+      <div class="stat"><div class="meta">Axes</div><strong>14</strong><small>10 core + 4 meta</small></div>
+      <div class="stat"><div class="meta">BR Count</div><strong>36</strong><small>formal requirements</small></div>
+      <div class="stat"><div class="meta">Admin</div><strong>1</strong><small>back-office suite</small></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>00 · Spec Overview</h2>
+      <div class="meta">Adapted from project-spec.html</div>
+    </div>
+    <div class="data-map">
+      <div class="data-card">
+        <div class="icon">U</div>
+        <h3>Web User</h3>
+        <p>เข้ามาตอบ quiz แบบไม่สมัครสมาชิก ใช้ display name นามแฝง และเลือกกรอก email หรือ skip หลังจบได้</p>
+        <ul class="mini-list"><li>Anonymous handle</li><li>Consent-aware tracking</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">A</div>
+        <h3>Web Admin</h3>
+        <p>จัดการคำถาม, choices, รูป, scoring, perfume library, copy/theme และ session/result review ผ่าน back-office</p>
+        <ul class="mini-list"><li><code>/admin</code></li><li>Basic Auth protected</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">DB</div>
+        <h3>Database</h3>
+        <p>เก็บ users, sessions, answers, results, questions, choices, perfumes, params, events และ consent log</p>
+        <ul class="mini-list"><li><code>session_id</code> links flow</li><li>SQL in production</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">@</div>
+        <h3>Email</h3>
+        <p>สเปกกำหนด optional email handoff หลัง result โดย beta ใช้ stub และ production ควรต่อ Resend/SendGrid</p>
+        <ul class="mini-list"><li>Optional user input</li><li>No signup dependency</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">P</div>
+        <h3>PDPA</h3>
+        <p>Consent banner คุมการ track, เก็บ audit trail และไม่ทำ cross-site tracking หรือ device fingerprinting</p>
+        <ul class="mini-list"><li><code>/api/consent</code></li><li><code>/api/tracking</code></li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">UI</div>
+        <h3>App Chrome</h3>
+        <p>Header, hamburger menu, footer, responsive layout และ result page ต้องคง brand tone เดียวกับ desktop</p>
+        <ul class="mini-list"><li>Mobile/tablet optimized</li><li>Inter across document</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">API</div>
+        <h3>Route Layer</h3>
+        <p>Next.js route handlers เป็นเส้นกลางระหว่าง browser, admin, quiz engine, DB adapter และ upload/email/tracking</p>
+        <ul class="mini-list"><li><code>app/api/*</code></li><li>Public + admin endpoints</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">V</div>
+        <h3>Vercel</h3>
+        <p>Production hosting, serverless API runtime, environment variables และ domain assignment อยู่บน Vercel</p>
+        <ul class="mini-list"><li><code>tryblott.vercel.app</code></li><li>Production deploy target</li></ul>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:18px">
+      <div class="meta">Architecture line</div>
+      <h3>Browser + Consent + Cookie → Next.js Pages/API → Quiz Engine → DB Adapter → SQL/Mock + Email/Tracking</h3>
+      <p>นี่คือภาพรวมจาก <code>docs/project-spec.html</code> ที่ถูกปรับให้ตรงกับระบบปัจจุบัน: public quiz และ admin ใช้ codebase เดียวกัน, data สดจาก DB/admin, local mode ใช้ in-memory mock, production mode ใช้ SQL.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>01 · User Flow</h2>
+      <div class="meta">Public experience</div>
+    </div>
+    <div class="flow">
+      <div class="flow-card">
+        <div class="badge">A</div>
+        <h3>Landing</h3>
+        <p>ผู้ใช้เข้าหน้าแรก เจอ brand, CTA, method และเข้า quiz</p>
+        <div class="chips"><span class="chip">/</span><span class="chip">Responsive</span></div>
+      </div>
+      <div class="flow-card">
+        <div class="badge">B</div>
+        <h3>Name</h3>
+        <p>เก็บ display name แบบไม่ต้องสมัครสมาชิก เพื่อทำ result ให้ personal</p>
+        <div class="chips"><span class="chip">No account</span></div>
+      </div>
+      <div class="flow-card">
+        <div class="badge">C</div>
+        <h3>Quiz</h3>
+        <p>ตอบคำถาม 6 ข้อ มีทั้ง single-select และ multi-select พร้อมรูป outfit</p>
+        <div class="chips"><span class="chip">Q1-Q6</span><span class="chip">55 choices</span></div>
+      </div>
+      <div class="flow-card">
+        <div class="badge">D</div>
+        <h3>Submit</h3>
+        <p>API validate ทุกคำตอบ สร้าง session และคำนวณ scent vector</p>
+        <div class="chips"><span class="chip">/api/quiz/submit</span></div>
+      </div>
+      <div class="flow-card">
+        <div class="badge">E</div>
+        <h3>Result</h3>
+        <p>แสดงน้ำหอมที่ match ที่สุด พร้อม notes, family, reasons, alternatives</p>
+        <div class="chips"><span class="chip">No pattern code</span></div>
+      </div>
+    </div>
+    <div class="split" style="margin-top:18px">
+      <div class="panel">
+        <div class="meta">Project-spec stages</div>
+        <h3>สิ่งที่ต้องเกิดใน public flow</h3>
+        <ul class="mini-list">
+          <li>Landing มี CTA ชัด, loading/animation เฉพาะ desktop ได้, mobile/tablet ลดน้ำหนัก visual</li>
+          <li>Consent banner มาก่อน tracking และต้องจำ decision ใน local/client state</li>
+          <li>Quiz มี progress, back, auto-scroll กลับไปหัวคำถามหลังตอบ</li>
+          <li>Email เป็น optional handoff เพราะ beta user สามารถ skip ได้</li>
+          <li>Result แสดง recommendation โดยไม่โชว์ internal pattern code ให้ client เห็น</li>
+        </ul>
+      </div>
+      <div class="panel fill">
+        <div class="meta">UX contract</div>
+        <h3>Header → Quiz → Result → Footer</h3>
+        <p>ทุกจุดต้อง responsive: desktop คง editorial feel, mobile/tablet ซ่อนวิดีโอ section แรก, ใช้ hamburger menu, และ footer ต้อง balance ไม่ลากยาวเป็นเสาเดียวเกินไป.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>02 · Quiz Logic</h2>
+      <div class="meta">How answer becomes perfume</div>
+    </div>
+    <div class="pipeline">
+      <div class="panel">
+        <h3>Scoring pipeline</h3>
+        <div class="flow" style="grid-template-columns:1fr; gap:10px; margin-top:18px">
+          <div class="hero-step" style="border-color:var(--line); color:var(--ink)"><span style="background:var(--ink); color:var(--paper)">1</span><div><b>Validate</b><small style="color:var(--muted)">question exists, choice exists, multi-select rules pass</small></div></div>
+          <div class="hero-step" style="border-color:var(--line); color:var(--ink)"><span style="background:var(--ink); color:var(--paper)">2</span><div><b>Build internal pattern</b><small style="color:var(--muted)">kept for admin/logs, hidden from public client</small></div></div>
+          <div class="hero-step" style="border-color:var(--line); color:var(--ink)"><span style="background:var(--ink); color:var(--paper)">3</span><div><b>Sum choice scores</b><small style="color:var(--muted)">each selected choice adds to user vector</small></div></div>
+          <div class="hero-step" style="border-color:var(--line); color:var(--ink)"><span style="background:var(--ink); color:var(--paper)">4</span><div><b>Clamp vector</b><small style="color:var(--muted)">all values stay inside -10 to +10</small></div></div>
+          <div class="hero-step" style="border-color:var(--line); color:var(--ink)"><span style="background:var(--ink); color:var(--paper)">5</span><div><b>Match perfume DNA</b><small style="color:var(--muted)">lowest weighted distance becomes winner</small></div></div>
+        </div>
+      </div>
+      <div class="panel fill">
+        <div class="meta">Distance model</div>
+        <h3 style="margin-top:12px">Core vs Meta</h3>
+        <p>Core axes มีน้ำหนักเต็ม ส่วน meta axes ใช้ weight ต่ำกว่าเพื่อให้เป็นบุคลิกเสริม ไม่ override กลิ่นหลักมากเกินไป</p>
+        <div class="bars">
+          <div class="bar"><span>Core axes</span><div class="track"><span style="width:100%"></span></div><b>1.0</b></div>
+          <div class="bar"><span>Meta axes</span><div class="track"><span style="width:50%"></span></div><b>0.5</b></div>
+          <div class="bar"><span>Clamp</span><div class="track"><span style="width:100%"></span></div><b>-10/+10</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="split" style="margin-top:18px">
+      <div class="panel">
+        <div class="meta">Current engine</div>
+        <h3>Weighted vector matching</h3>
+        <p>ระบบปัจจุบันให้คะแนนแต่ละ choice ลง 14 axes แล้วเทียบกับ perfume DNA ของทุกขวด โดย Q3-Q6 เป็น multi-select จึงควรคุม score ต่อ choice ให้อ่อนลง เพื่อไม่ให้คำถามหนึ่งข้อ overpower ผลลัพธ์ทั้งหมด.</p>
+        <ul class="mini-list">
+          <li>Core params ใช้เป็นกลิ่น/บุคลิกหลักของ match</li>
+          <li>Meta params เป็น context เสริม เช่น budget/rich/occasion</li>
+          <li>Easter egg ตรวจเงื่อนไขพิเศษก่อนส่งผลปกติ</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="meta">Legacy from project-spec</div>
+        <h3>Pattern mapping is internal</h3>
+        <p>สเปกเดิมใช้ <code>buildPattern()</code> แล้ว match แบบ Exact → Wildcard <code>*</code> → Default. ในเวอร์ชันปัจจุบัน pattern ยังมีประโยชน์กับ admin/debug/session history แต่ไม่ใช่สิ่งที่ client ควรเห็นบน result page.</p>
+        <ul class="mini-list">
+          <li>Example: <code>1A2B3C4D5A</code></li>
+          <li>Wildcard mapping เก็บเป็น backward-compatible concept</li>
+          <li>Public payload ต้องซ่อน pattern code หลังคำว่า result/copy ทั้งหมด</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>03 · Current Quiz Data</h2>
+      <div class="meta">6 questions · 55 choices</div>
+    </div>
+    <div class="table">
+      <div class="row"><div class="cell">Order</div><div class="cell">Question</div><div class="cell">Type</div><div class="cell">Choices</div></div>
+      <div class="row"><div class="cell">Q1</div><div class="cell">งบประมาณของคุณ</div><div class="cell">Single</div><div class="cell">4</div></div>
+      <div class="row"><div class="cell">Q2</div><div class="cell">ช่วงอายุของคุณ</div><div class="cell">Single</div><div class="cell">5</div></div>
+      <div class="row"><div class="cell">Q3</div><div class="cell">ลักษณะการแต่งตัวของคุณ</div><div class="cell">Multi</div><div class="cell">16</div></div>
+      <div class="row"><div class="cell">Q4</div><div class="cell">คุณอยากให้ตัวเองดูเป็นคนยังไง</div><div class="cell">Multi</div><div class="cell">10</div></div>
+      <div class="row"><div class="cell">Q5</div><div class="cell">สถานที่ที่คุณชอบไป</div><div class="cell">Multi</div><div class="cell">12</div></div>
+      <div class="row"><div class="cell">Q6</div><div class="cell">เเนวเพลงที่ชอบฟัง</div><div class="cell">Multi</div><div class="cell">8</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>04 · Data Map</h2>
+      <div class="meta">What data exists</div>
+    </div>
+    <div class="data-map">
+      <div class="data-card">
+        <div class="icon">Q</div>
+        <h3>Questions</h3>
+        <p>คำถาม, subtitle, single/multi mode, choice labels, outfit images</p>
+        <ul class="mini-list"><li><code>data/questions.json</code></li><li>Admin editable</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">P</div>
+        <h3>Params</h3>
+        <p>แกน scoring ทั้ง core/meta, meta weight, clamp range</p>
+        <ul class="mini-list"><li>10 core axes</li><li>4 meta axes</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">D</div>
+        <h3>Perfume DNA</h3>
+        <p>น้ำหอม 167 ขวด พร้อม notes, family, blurb, image, DNA vector</p>
+        <ul class="mini-list"><li>CSV export/import</li><li>Replace/upsert mode</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">R</div>
+        <h3>Results</h3>
+        <p>session result, perfume match, alternatives, reasons, internal pattern</p>
+        <ul class="mini-list"><li>Pattern hidden from client</li><li>Admin review</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">C</div>
+        <h3>Copy/Theme</h3>
+        <p>ข้อความหน้า home, quiz, result และ theme overrides</p>
+        <ul class="mini-list"><li><code>site_copy</code></li><li>Visual editor</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">E</div>
+        <h3>Easter Eggs</h3>
+        <p>กฎพิเศษที่ override normal matching เมื่อคำตอบเข้าเงื่อนไข</p>
+        <ul class="mini-list"><li>Priority based</li><li>Wildcard supported</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">A</div>
+        <h3>Analytics</h3>
+        <p>tracking events และ consent log สำหรับดูพฤติกรรมแบบ PDPA-aware</p>
+        <ul class="mini-list"><li>accepted/rejected</li><li>no PII payload by design</li></ul>
+      </div>
+      <div class="data-card">
+        <div class="icon">S</div>
+        <h3>Sessions</h3>
+        <p>ผู้ใช้, session, answers, completed timestamp และ result lookup</p>
+        <ul class="mini-list"><li><code>users</code></li><li><code>sessions</code></li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>05 · Technology & Operations</h2>
+      <div class="meta">Stack, admin, checks, deploy</div>
+    </div>
+    <div class="tech-grid" style="margin-bottom:18px">
+      <div class="tech-card">
+        <div class="meta">Frontend</div>
+        <strong>Next.js 14 + React 18</strong>
+        <p>App Router, server components for page data, client components for quiz/result interactions.</p>
+      </div>
+      <div class="tech-card">
+        <div class="meta">Backend</div>
+        <strong>API Routes</strong>
+        <p>Route handlers under <code>app/api</code> handle quiz submit, result, admin CRUD, CSV, consent, tracking.</p>
+      </div>
+      <div class="tech-card">
+        <div class="meta">Persistence</div>
+        <strong>Mock DB / SQL</strong>
+        <p><code>APP_MODE=local</code> uses JSON-seeded memory. <code>production</code> uses SQL adapter.</p>
+      </div>
+      <div class="tech-card">
+        <div class="meta">Deploy</div>
+        <strong>Vercel</strong>
+        <p>Production build runs on Vercel. Domain currently points to <code>tryblott.vercel.app</code>.</p>
+      </div>
+    </div>
+    <div class="ops-grid">
+      <div class="ops-card">
+        <div class="meta">Admin surface</div>
+        <h3>Back office</h3>
+        <p>แก้คำถาม, choices, scoring params, perfume library, easter eggs, copy/theme, sessions</p>
+        <div class="chips"><span class="chip">/admin</span><span class="chip">Basic Auth</span></div>
+      </div>
+      <div class="ops-card">
+        <div class="meta">Validation</div>
+        <h3>Current checks</h3>
+        <p>ตอนนี้เป็น manual CI ผ่าน command ก่อน deploy ยังไม่มี GitHub Actions ใน repo</p>
+        <div class="command">npm run smoke<br>npm run smoke:admin<br>npm run build</div>
+      </div>
+      <div class="ops-card">
+        <div class="meta">Deployment</div>
+        <h3>Vercel prod</h3>
+        <p>Build บน Vercel แล้ว assign latest production ไปที่ URL หลัก</p>
+        <div class="command">npx --yes vercel deploy --prod --yes</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>06 · Code & File Architecture</h2>
+      <div class="meta">Where code and assets live</div>
+    </div>
+    <div class="file-map">
+      <div class="file-tree">
+        Blott.-Your-perfume-advicer/<br>
+        <span class="dim">├─</span> app/ <span class="dim">Next.js pages, UI, API routes</span><br>
+        <span class="dim">│  ├─</span> page.jsx <span class="dim">home</span><br>
+        <span class="dim">│  ├─</span> quiz/ <span class="dim">quiz page + QuizClient</span><br>
+        <span class="dim">│  ├─</span> result/ <span class="dim">result page + ResultClient</span><br>
+        <span class="dim">│  ├─</span> admin/ <span class="dim">back-office screens</span><br>
+        <span class="dim">│  └─</span> api/ <span class="dim">public/admin route handlers</span><br>
+        <span class="dim">├─</span> lib/ <span class="dim">business logic + DB adapters</span><br>
+        <span class="dim">│  ├─</span> quizLogic.js<br>
+        <span class="dim">│  ├─</span> perfumeCsv.js<br>
+        <span class="dim">│  └─</span> db/ <span class="dim">mockDb + sqlDb switcher</span><br>
+        <span class="dim">├─</span> data/ <span class="dim">JSON seed/config files</span><br>
+        <span class="dim">├─</span> sql/ <span class="dim">Postgres/MySQL schema</span><br>
+        <span class="dim">├─</span> public/ <span class="dim">images, videos, audio, outfits</span><br>
+        <span class="dim">├─</span> scripts/ <span class="dim">seed/smoke/sync utilities</span><br>
+        <span class="dim">└─</span> docs/ <span class="dim">project docs</span>
+      </div>
+      <div class="module-grid">
+        <div class="module">
+          <div class="meta">UI layer</div>
+          <h3>Pages & Components</h3>
+          <p><code>app/HomeClient.jsx</code>, <code>app/quiz/QuizClient.jsx</code>, <code>app/result/ResultClient.jsx</code>, <code>app/components/*</code></p>
+        </div>
+        <div class="module">
+          <div class="meta">Logic layer</div>
+          <h3>Quiz Engine</h3>
+          <p><code>lib/quizLogic.js</code> validates answers, builds internal pattern, scores vector, checks easter eggs, ranks perfumes.</p>
+        </div>
+        <div class="module">
+          <div class="meta">Data layer</div>
+          <h3>DB Adapter</h3>
+          <p><code>lib/db/index.js</code> switches between <code>mockDb</code> and <code>sqlDb</code> using <code>APP_MODE</code>.</p>
+        </div>
+        <div class="module">
+          <div class="meta">Admin layer</div>
+          <h3>Content Tools</h3>
+          <p>Admin APIs write questions, params, perfumes, copy, easter eggs, and CSV import/export.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>07 · Database Structure</h2>
+      <div class="meta">Postgres / Neon schema view</div>
+    </div>
+    <div class="db-grid">
+      <div class="db-table">
+        <div class="meta">Identity</div>
+        <h3>users</h3>
+        <ul><li>id PK</li><li>username</li><li>email nullable</li><li>created_at</li></ul>
+      </div>
+      <div class="db-table">
+        <div class="meta">Quiz run</div>
+        <h3>sessions</h3>
+        <ul><li>id PK</li><li>user_id FK users</li><li>started_at</li><li>completed_at</li><li>user_agent/referrer</li></ul>
+      </div>
+      <div class="db-table">
+        <div class="meta">Question config</div>
+        <h3>questions</h3>
+        <ul><li>id PK</li><li>sort_order</li><li>title/subtitle/image</li><li>multi_select</li><li>deleted_at</li></ul>
+      </div>
+      <div class="db-table">
+        <div class="meta">Choice config</div>
+        <h3>choices</h3>
+        <ul><li>question_id FK</li><li>code + label</li><li>image/images JSONB</li><li>scores JSONB</li><li>unique question/code</li></ul>
+      </div>
+      <div class="db-table">
+        <div class="meta">Submitted answers</div>
+        <h3>answers</h3>
+        <ul><li>session_id FK</li><li>question_id FK</li><li>question_order</li><li>choice_code</li><li>answered_at</li></ul>
+      </div>
+      <div class="db-table">
+        <div class="meta">Result payload</div>
+        <h3>results</h3>
+        <ul><li>session_id unique FK</li><li>pattern internal only</li><li>fragrance/family/notes</li><li>distance/special</li><li>result_blob JSONB</li></ul>
+      </div>
+      <div class="db-table">
+        <div class="meta">Perfume library</div>
+        <h3>perfumes</h3>
+        <ul><li>id PK</li><li>fragrance/house/family</li><li>notes JSONB</li><li>blurb/image</li><li>dna JSONB</li></ul>
+      </div>
+      <div class="db-table">
+        <div class="meta">Scoring config</div>
+        <h3>params</h3>
+        <ul><li>id = current</li><li>meta_weight</li><li>clamp_min/max</li><li>core JSONB</li><li>meta JSONB</li></ul>
+      </div>
+      <div class="db-table">
+        <div class="meta">System config</div>
+        <h3>site / events</h3>
+        <ul><li>site_copy.data JSONB</li><li>easter_eggs constraints/result</li><li>tracking_events</li><li>consent_log</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>08 · System Flow</h2>
+      <div class="meta">How each system talks</div>
+    </div>
+    <div class="system-flow">
+      <div class="sys-node"><div class="badge">1</div><b>Browser</b><p>User opens home/quiz/result and interacts with React client components.</p></div>
+      <div class="sys-node"><div class="badge">2</div><b>Next Page</b><p>Server page reads copy/questions from DB before rendering.</p></div>
+      <div class="sys-node"><div class="badge">3</div><b>API Route</b><p>Submit/result/admin endpoints run validation and write/read data.</p></div>
+      <div class="sys-node"><div class="badge">4</div><b>DB Adapter</b><p><code>lib/db</code> chooses mock memory or SQL adapter by config.</p></div>
+      <div class="sys-node"><div class="badge">5</div><b>Database</b><p>Stores questions, choices, sessions, answers, results, perfumes, params.</p></div>
+      <div class="sys-node"><div class="badge">6</div><b>Vercel</b><p>Build, host, route serverless functions, assign production domain.</p></div>
+    </div>
+    <div class="split" style="margin-top:18px">
+      <div class="panel">
+        <div class="meta">Public quiz request</div>
+        <h3>Quiz submit sequence</h3>
+        <p><code>QuizClient</code> → <code>POST /api/quiz/submit</code> → validate → save user/session/answers → score vector → match perfume → save result → redirect to <code>/result?sid=...</code></p>
+      </div>
+      <div class="panel">
+        <div class="meta">Admin edit request</div>
+        <h3>Admin update sequence</h3>
+        <p><code>/admin</code> → Basic Auth middleware → <code>/api/admin/*</code> → SQL adapter → DB row update → public pages read latest config dynamically.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>09 · System Config</h2>
+      <div class="meta">Environment setup</div>
+    </div>
+    <div class="config-table">
+      <div class="config-row"><div class="config-cell">Variable</div><div class="config-cell">Purpose</div><div class="config-cell">Required When</div></div>
+      <div class="config-row"><div class="config-cell"><code>APP_MODE</code></div><div class="config-cell"><code>local</code> uses in-memory DB from JSON. <code>production</code> uses SQL.</div><div class="config-cell">All environments</div></div>
+      <div class="config-row"><div class="config-cell"><code>DATABASE_URL</code></div><div class="config-cell">Preferred SQL connection string for Neon/Postgres/Supabase/Vercel Postgres.</div><div class="config-cell">Production</div></div>
+      <div class="config-row"><div class="config-cell"><code>DB_DRIVER</code></div><div class="config-cell">Optional override: <code>postgres</code> or <code>mysql</code>.</div><div class="config-cell">Optional</div></div>
+      <div class="config-row"><div class="config-cell"><code>ADMIN_USER</code></div><div class="config-cell">Basic Auth username for admin pages and admin APIs.</div><div class="config-cell">Production admin</div></div>
+      <div class="config-row"><div class="config-cell"><code>ADMIN_PASS</code></div><div class="config-cell">Basic Auth password. If missing in production, admin fails closed with 503.</div><div class="config-cell">Production admin</div></div>
+      <div class="config-row"><div class="config-cell"><code>BLOTT_READ_WRITE_TOKEN</code></div><div class="config-cell">Vercel Blob token for image uploads. Without it, local disk fallback works only in dev.</div><div class="config-cell">Production uploads</div></div>
+      <div class="config-row"><div class="config-cell"><code>EMAIL_PROVIDER</code></div><div class="config-cell">Email mode. Current beta can run with <code>stub</code>.</div><div class="config-cell">Email feature</div></div>
+      <div class="config-row"><div class="config-cell"><code>TRACKING_ENABLED</code></div><div class="config-cell">Controls tracking behavior with PDPA-oriented consent flow.</div><div class="config-cell">Analytics</div></div>
+      <div class="config-row"><div class="config-cell"><code>COOKIE_NAME</code></div><div class="config-cell">Session/consent cookie naming convention.</div><div class="config-cell">Optional</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>10 · API Reference</h2>
+      <div class="meta">From project-spec + current routes</div>
+    </div>
+    <div class="config-table">
+      <div class="api-row"><div class="api-cell">Scope</div><div class="api-cell">Endpoint</div><div class="api-cell">Responsibility</div></div>
+      <div class="api-row"><div class="api-cell">Public</div><div class="api-cell"><code>GET /api/quiz/questions</code></div><div class="api-cell">Load active questions and choices for quiz rendering.</div></div>
+      <div class="api-row"><div class="api-cell">Public</div><div class="api-cell"><code>POST /api/quiz/submit</code></div><div class="api-cell">Validate answers, save session, run scoring, match perfume, persist result.</div></div>
+      <div class="api-row"><div class="api-cell">Public</div><div class="api-cell"><code>GET /api/quiz/result</code></div><div class="api-cell">Fetch computed result by session id without exposing internal pattern code.</div></div>
+      <div class="api-row"><div class="api-cell">Privacy</div><div class="api-cell"><code>POST /api/consent</code></div><div class="api-cell">Record accepted/rejected/withdrawn consent state for audit trail.</div></div>
+      <div class="api-row"><div class="api-cell">Privacy</div><div class="api-cell"><code>POST /api/tracking</code></div><div class="api-cell">Store allowed events such as page view, quiz start, answered, complete.</div></div>
+      <div class="api-row"><div class="api-cell">Beta Email</div><div class="api-cell"><code>POST /api/email</code></div><div class="api-cell">Optional result handoff; current beta can run as stub before provider integration.</div></div>
+      <div class="api-row"><div class="api-cell">Admin</div><div class="api-cell"><code>/api/admin/questions</code></div><div class="api-cell">GET/POST question sets; PUT/DELETE single question by id.</div></div>
+      <div class="api-row"><div class="api-cell">Admin</div><div class="api-cell"><code>/api/admin/params</code></div><div class="api-cell">Read/write current param axes, meta weight, clamp and scoring settings.</div></div>
+      <div class="api-row"><div class="api-cell">Admin</div><div class="api-cell"><code>/api/admin/perfumes</code></div><div class="api-cell">CRUD perfume library plus CSV import/export for bulk replacement.</div></div>
+      <div class="api-row"><div class="api-cell">Admin</div><div class="api-cell"><code>/api/admin/copy</code></div><div class="api-cell">Manage site copy and theme-like text/content overrides.</div></div>
+      <div class="api-row"><div class="api-cell">Admin</div><div class="api-cell"><code>/api/admin/easter-eggs</code></div><div class="api-cell">Manage special override rules before normal vector result is returned.</div></div>
+      <div class="api-row"><div class="api-cell">Admin</div><div class="api-cell"><code>/api/admin/upload</code></div><div class="api-cell">Upload or store admin assets; production prefers Blob token, local can use disk fallback.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>11 · Privacy & Tracking</h2>
+      <div class="meta">PDPA behavior from project-spec</div>
+    </div>
+    <div class="split">
+      <div class="panel tint-a">
+        <div class="meta">Collect only when needed</div>
+        <h3>Allowed data</h3>
+        <ul class="mini-list">
+          <li>Display name / username alias typed by user</li>
+          <li>Email only when user chooses to submit it</li>
+          <li>Quiz answers, internal pattern, scoring vector and result payload</li>
+          <li>Tracking events only after accepted consent</li>
+          <li>Referrer and user-agent for debugging/analytics context</li>
+        </ul>
+      </div>
+      <div class="panel fill">
+        <div class="meta">Explicitly out of scope</div>
+        <h3>Never collect</h3>
+        <ul class="mini-list">
+          <li>Real name, national ID, phone number or sensitive personal categories</li>
+          <li>GPS, precise location or aggressive IP geolocation</li>
+          <li>Device fingerprint, canvas hash or third-party cross-site tracking by default</li>
+          <li>Tracking payload when consent is rejected or withdrawn</li>
+        </ul>
+      </div>
+    </div>
+    <div class="system-flow" style="margin-top:18px">
+      <div class="sys-node"><div class="badge">1</div><b>First visit</b><p>Consent banner appears before optional tracking starts.</p></div>
+      <div class="sys-node"><div class="badge">2</div><b>Decision</b><p>User accepts or rejects; state is stored client-side.</p></div>
+      <div class="sys-node"><div class="badge">3</div><b>Audit</b><p><code>/api/consent</code> writes consent log with timestamp.</p></div>
+      <div class="sys-node"><div class="badge">4</div><b>Track</b><p>If accepted, allowed events go through <code>/api/tracking</code>.</p></div>
+      <div class="sys-node"><div class="badge">5</div><b>Suppress</b><p>If rejected, event calls are skipped or ignored.</p></div>
+      <div class="sys-node"><div class="badge">6</div><b>Withdraw</b><p>Privacy path can update state to withdrawn when implemented.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>12 · Header & Footer</h2>
+      <div class="meta">Global UI contract</div>
+    </div>
+    <div class="ops-grid">
+      <div class="ops-card">
+        <div class="meta">Header</div>
+        <h3>Navigation</h3>
+        <p>Desktop ใช้ sticky header พร้อม brand, quiz CTA และเมนูหลัก. Mobile/tablet ใช้ hamburger เพื่อลดความแน่นของแถบบน.</p>
+        <div class="chips"><span class="chip">Home</span><span class="chip">Quiz</span><span class="chip">Admin hidden</span></div>
+      </div>
+      <div class="ops-card">
+        <div class="meta">First section</div>
+        <h3>Responsive hero</h3>
+        <p>Desktop มีวิดีโอ/animation เป็น texture ได้ แต่ mobile/tablet ซ่อนวิดีโอ section แรกและเลื่อน content สำคัญขึ้นมา.</p>
+        <div class="chips"><span class="chip">Mobile first readability</span></div>
+      </div>
+      <div class="ops-card">
+        <div class="meta">Footer</div>
+        <h3>Balanced bottom</h3>
+        <p>Footer ต้องไม่ไหลยาวเป็นแนวดิ่งเกินไปบนมือถือ: จัดกลุ่ม discover/legal/contact ให้สแกนง่ายและคง PDPA/version note.</p>
+        <div class="chips"><span class="chip">PDPA</span><span class="chip">Contact</span><span class="chip">Brand</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>13 · Runbook</h2>
+      <div class="meta">Setup, verify, deploy</div>
+    </div>
+    <div class="ops-grid">
+      <div class="ops-card">
+        <div class="meta">Local development</div>
+        <h3>No DB mode</h3>
+        <p>ใช้ mock DB จาก JSON seed เพื่อแก้ UI/logic ได้เร็วโดยไม่ต้องต่อ production database.</p>
+        <div class="command">npm install<br>npm run dev</div>
+      </div>
+      <div class="ops-card">
+        <div class="meta">Pre-deploy checks</div>
+        <h3>Manual CI</h3>
+        <p>ตอนนี้เป็น command-based verification ก่อน deploy; ควรยกระดับเป็น GitHub Actions ภายหลัง.</p>
+        <div class="command">npm run smoke<br>npm run smoke:admin<br>npm run build</div>
+      </div>
+      <div class="ops-card">
+        <div class="meta">Production</div>
+        <h3>Vercel deploy</h3>
+        <p>ใช้ env ของ Vercel, SQL database, admin credentials และ Blob token สำหรับ upload asset ใน production.</p>
+        <div class="command">npx --yes vercel deploy --prod --yes</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>14 · Business Requirements</h2>
+      <div class="meta">36 formal requirements</div>
+    </div>
+    <div class="br-grid">
+      <div class="br-card tint-a">
+        <div class="meta">BR-001 - BR-008</div>
+        <strong>8</strong>
+        <h3>Public Product</h3>
+        <ol>
+          <li>Landing page</li>
+          <li>Responsive UI</li>
+          <li>No-account quiz</li>
+          <li>Name/email optional flow</li>
+          <li>Result page + sound</li>
+        </ol>
+      </div>
+      <div class="br-card tint-b">
+        <div class="meta">BR-009 - BR-024</div>
+        <strong>16</strong>
+        <h3>Quiz & Scoring</h3>
+        <ol>
+          <li>Configurable questions</li>
+          <li>Single/multi select</li>
+          <li>Validated answers</li>
+          <li>Vector scoring</li>
+          <li>Perfume DNA matching</li>
+          <li>Easter egg override</li>
+        </ol>
+      </div>
+      <div class="br-card tint-c">
+        <div class="meta">BR-025 - BR-033</div>
+        <strong>9</strong>
+        <h3>Data Management</h3>
+        <ol>
+          <li>Perfume library</li>
+          <li>Admin edits</li>
+          <li>CSV export/import</li>
+          <li>Thai text support</li>
+          <li>Session/result review</li>
+        </ol>
+      </div>
+      <div class="br-card tint-d">
+        <div class="meta">BR-034 - BR-036</div>
+        <strong>3</strong>
+        <h3>Security & Ops</h3>
+        <ol>
+          <li>Admin protection</li>
+          <li>Consent logging</li>
+          <li>Local dev without DB</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>15 · Recommended Next</h2>
+      <div class="meta">Priority upgrades</div>
+    </div>
+    <div class="split">
+      <div class="panel">
+        <h3>Technical</h3>
+        <ul class="mini-list">
+          <li>Add <code>robots.txt</code>, <code>sitemap.xml</code>, canonical metadata, structured data</li>
+          <li>Add GitHub Actions CI for smoke/admin/build</li>
+          <li>Add automated mobile browser tests for quiz and result</li>
+          <li>Add backup/restore runbook for production data</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Business</h3>
+        <ul class="mini-list">
+          <li>Use <code>docs/design-system-ci-colorway.html</code> as the design/CI/colorway reference for future UI changes</li>
+          <li>Move to paid custom domain when brand/SEO becomes priority</li>
+          <li>Add analytics dashboard for drop-off and most selected choices</li>
+          <li>Integrate real email provider when email result becomes production feature</li>
+          <li>Define admin roles if more than one person manages content</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-note">
+    <div>
+      <div class="meta" style="color:#bbb">Source document</div>
+      <p>Source material lives in <code>docs/project-spec.html</code> and <code>docs/project-overview-and-business-requirements.md</code>. This HTML is the infographic version for presentation and alignment.</p>
+    </div>
+    <div class="meta" style="color:#bbb">Blot. · One dip. One match.</div>
+  </div>
+</main>
+</body>
+</html>

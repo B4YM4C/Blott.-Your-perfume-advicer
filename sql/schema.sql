@@ -29,6 +29,9 @@ CREATE TABLE IF NOT EXISTS questions (
   title         VARCHAR(255) NOT NULL,
   subtitle      VARCHAR(255) NULL,
   image         VARCHAR(512) NULL,
+  copy          JSON         NOT NULL,
+  i18n          JSON         NOT NULL,
+  multi_select  TINYINT(1)   NOT NULL DEFAULT 0,
   created_at    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   deleted_at    DATETIME     NULL,
@@ -38,9 +41,12 @@ CREATE TABLE IF NOT EXISTS questions (
 CREATE TABLE IF NOT EXISTS choices (
   id            BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
   question_id   VARCHAR(32)  NOT NULL,
-  code          VARCHAR(2)   NOT NULL,    -- 'A' | 'B' | 'C' | 'D' | ...
+  code          VARCHAR(4)   NOT NULL,    -- 'A' | 'B' | 'C' | 'D' | ...
   label         VARCHAR(255) NOT NULL,
   image         VARCHAR(512) NULL,
+  images        JSON         NOT NULL,
+  scores        JSON         NOT NULL,
+  i18n          JSON         NOT NULL,
   CONSTRAINT fk_choices_question FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE,
   UNIQUE KEY uniq_question_code (question_id, code)
 );

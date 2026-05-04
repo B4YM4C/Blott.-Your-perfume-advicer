@@ -16,6 +16,29 @@ import { ui } from '../_ui';
 
 const SECTIONS = [
   {
+    id: 'navigation', label: 'Header — Menu & CTA',
+    fields: [
+      { path: 'navigation.cta.label', label: 'Header CTA label' },
+      { path: 'navigation.cta.href',  label: 'Header CTA link' },
+      { path: 'navigation.cta.key',   label: 'Header CTA puzzle key' },
+    ],
+    list: { path: 'navigation.items', label: 'Header menu items', maxItems: 10, fields: [
+      { path: 'key',   label: 'Key / puzzle trigger' },
+      { path: 'label', label: 'Menu label' },
+      { path: 'href',  label: 'Link href' },
+    ]},
+  },
+  {
+    id: 'navigation_ctas', label: 'Header — CTA Buttons',
+    fields: [],
+    list: { path: 'navigation.ctas', label: 'Header CTA buttons', maxItems: 6, fields: [
+      { path: 'key',     label: 'Key / puzzle trigger' },
+      { path: 'label',   label: 'Button label' },
+      { path: 'href',    label: 'Redirect link' },
+      { path: 'variant', label: 'Variant (solid/ghost)' },
+    ]},
+  },
+  {
     id: 'home', label: 'Home — Hero',
     fields: [
       { path: 'home.title',         label: 'Headline',     hint: 'The big italic line in the hero' },
@@ -44,6 +67,35 @@ const SECTIONS = [
       { path: 'about.lead',    label: 'Lead paragraph', long: true },
       { path: 'about.cta',     label: 'CTA button' },
     ],
+  },
+  {
+    id: 'home_sections', label: 'Home — Dynamic content boxes',
+    fields: [],
+    list: { path: 'home.sections', label: 'Content boxes / sections', maxItems: 12, fields: [
+      { path: 'id',       label: 'Section id' },
+      { path: 'variant',  label: 'Template variant' },
+      { path: 'enabled',  label: 'Enabled (true/false)' },
+      { path: 'eyebrow',  label: 'Eyebrow' },
+      { path: 'title',    label: 'Title', long: true },
+      { path: 'body',     label: 'Body', long: true },
+      { path: 'mediaUrl', label: 'Media URL' },
+      { path: 'ctaLabel', label: 'CTA label' },
+      { path: 'ctaHref',  label: 'CTA href' },
+    ]},
+  },
+  {
+    id: 'pages', label: 'CMS — Lightweight pages',
+    fields: [],
+    list: { path: 'pages', label: 'Dynamic pages', maxItems: 20, fields: [
+      { path: 'slug',     label: 'URL slug (example: friendly-scent)' },
+      { path: 'enabled',  label: 'Enabled (true/false)' },
+      { path: 'navLabel', label: 'Suggested menu label' },
+      { path: 'eyebrow',  label: 'Eyebrow' },
+      { path: 'title',    label: 'Title', long: true },
+      { path: 'body',     label: 'Body', long: true },
+      { path: 'ctaLabel', label: 'CTA label' },
+      { path: 'ctaHref',  label: 'CTA href' },
+    ]},
   },
   {
     id: 'quiz_username', label: 'Quiz — Username step',
@@ -92,6 +144,31 @@ const SECTIONS = [
       { path: 'result.alternatives.eyebrow', label: 'Alternatives — eyebrow' },
       { path: 'result.alternatives.title',   label: 'Alternatives — title' },
       { path: 'result.specialEyebrow', label: 'Easter egg — eyebrow' },
+      { path: 'result.disclaimer.eyebrow', label: 'Beta disclosure — eyebrow' },
+      { path: 'result.disclaimer.body', label: 'Beta disclosure — body', long: true },
+    ],
+  },
+  {
+    id: 'footer', label: 'Footer',
+    fields: [
+      { path: 'footer.tagline', label: 'Footer tagline' },
+      { path: 'footer.signature', label: 'Footer signature' },
+      { path: 'footer.bottom.copyright', label: 'Bottom copyright label' },
+      { path: 'footer.bottom.compliance', label: 'Bottom compliance text' },
+      { path: 'footer.bottom.tagline', label: 'Bottom tagline' },
+    ],
+    list: { path: 'footer.columns', label: 'Footer columns', maxItems: 6, fields: [
+      { path: 'title', label: 'Column title' },
+    ]},
+  },
+  {
+    id: 'consent', label: 'Consent banner',
+    fields: [
+      { path: 'consent.label', label: 'Consent eyebrow' },
+      { path: 'consent.title', label: 'Consent title' },
+      { path: 'consent.body', label: 'Consent body', long: true },
+      { path: 'consent.reject', label: 'Reject button' },
+      { path: 'consent.accept', label: 'Accept button' },
     ],
   },
 ];
@@ -240,6 +317,7 @@ function Field({ path, label, hint, long, value, defaultValue, onChange, onReset
 
 function ListEditor({ spec, value, defaults, onChange }) {
   const items = Array.isArray(value) ? value : [];
+  const [dragIndex, setDragIndex] = useState(null);
 
   function update(i, key, v) {
     const next = items.map((item, idx) => idx === i ? { ...item, [key]: v } : item);
@@ -261,6 +339,13 @@ function ListEditor({ spec, value, defaults, onChange }) {
     [next[i], next[j]] = [next[j], next[i]];
     onChange(next);
   }
+  function moveTo(from, to) {
+    if (from == null || to == null || from === to) return;
+    const next = [...items];
+    const [picked] = next.splice(from, 1);
+    next.splice(to, 0, picked);
+    onChange(next);
+  }
 
   return (
     <div style={{ marginTop: 18 }}>
@@ -271,9 +356,17 @@ function ListEditor({ spec, value, defaults, onChange }) {
         </button>
       </div>
       {items.map((item, i) => (
-        <div key={i} style={listCard}>
+        <div
+          key={i}
+          style={{ ...listCard, ...(dragIndex === i ? listCardDragging : {}) }}
+          draggable
+          onDragStart={() => setDragIndex(i)}
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={() => { moveTo(dragIndex, i); setDragIndex(null); }}
+          onDragEnd={() => setDragIndex(null)}
+        >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-            <span style={pathTag}>#{i + 1}</span>
+            <span style={pathTag}>↕ drag · #{i + 1}</span>
             <div style={{ display: 'flex', gap: 6 }}>
               <button type="button" onClick={() => move(i, -1)} style={miniBtn} disabled={i === 0}>↑</button>
               <button type="button" onClick={() => move(i, +1)} style={miniBtn} disabled={i === items.length - 1}>↓</button>
@@ -346,6 +439,10 @@ const resetBtn = {
 const listCard = {
   background: 'var(--offwhite)', border: '1px solid var(--grey-5)',
   borderRadius: 'var(--radius-sm)', padding: '14px 16px', marginBottom: 12,
+};
+const listCardDragging = {
+  borderColor: 'var(--ink)',
+  boxShadow: '0 12px 30px rgba(10,10,10,.12)',
 };
 const miniBtn = {
   fontFamily: 'var(--font-mono)', fontSize: 12,

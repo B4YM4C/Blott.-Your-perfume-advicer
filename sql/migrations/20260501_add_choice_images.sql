@@ -1,0 +1,2 @@
+ALTER TABLE choices
+  ADD COLUMN IF NOT EXISTS images JSONB NOT NULL DEFAULT '[]'::jsonb;

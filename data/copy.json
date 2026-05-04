@@ -12,16 +12,73 @@
     "fontSerif": "'Cormorant Garamond', Georgia, serif",
     "fontSans": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
     "fontMono": "'JetBrains Mono', ui-monospace, monospace",
-    "headlineScale": 1.0,
-    "bodyScale": 1.0
+    "headlineScale": 1,
+    "bodyScale": 1
   },
   "styles": {},
+  "navigation": {
+    "items": [
+      {
+        "key": "home",
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "key": "quiz",
+        "label": "Start Quiz",
+        "href": "/quiz"
+      },
+      {
+        "key": "about",
+        "label": "About",
+        "href": "/#about"
+      }
+    ],
+    "cta": {
+      "key": "header-primary",
+      "label": "Begin the dip →",
+      "href": "/quiz"
+    },
+    "ctas": [
+      {
+        "key": "header-primary",
+        "label": "Begin the dip →",
+        "href": "/quiz",
+        "variant": "solid",
+        "style": {}
+      }
+    ]
+  },
   "home": {
     "title": "Found in a few dips.",
     "lead": "ตอบคำถาม 5–10 ข้อ แล้วให้เราช่วยเลือกน้ำหอมที่ใช่สำหรับคุณ — ไม่ต้องสมัคร ไม่ต้องล็อกอิน แค่จุ่มกระดาษทดสอบกับเรา",
     "ctaPrimary": "Begin the dip →",
-    "ctaSecondary": "How it works"
+    "ctaSecondary": "How it works",
+    "sections": [
+      {
+        "id": "friendly",
+        "variant": "editorial-card",
+        "enabled": true,
+        "eyebrow": "Content box · Editable",
+        "title": "Your scent should feel like you.",
+        "body": "กล่อง content นี้เพิ่ม/ลด/เรียงลำดับได้จาก CMS เพื่อใช้กับ campaign หรือหน้า content ใหม่ในอนาคต",
+        "ctaLabel": "Start the quiz →",
+        "ctaHref": "/quiz"
+      }
+    ]
   },
+  "pages": [
+    {
+      "slug": "friendly-scent",
+      "enabled": false,
+      "navLabel": "Friendly Scent",
+      "eyebrow": "CMS Page",
+      "title": "A page built from the copy editor.",
+      "body": "เปิด enabled เป็น true แล้วเพิ่มเมนูใน Header ให้ชี้ไป /friendly-scent เพื่อใช้เป็นหน้า content ใหม่ได้ทันที",
+      "ctaLabel": "Start the quiz →",
+      "ctaHref": "/quiz"
+    }
+  ],
   "method": {
     "eyebrow": "Method · 01",
     "title": "Three steps. One match.",
@@ -92,6 +149,306 @@
       "eyebrow": "Also nearby",
       "title": "Two more strips that came close"
     },
-    "specialEyebrow": "Easter Egg · Special Result"
+    "specialEyebrow": "Easter Egg · Special Result",
+    "disclaimer": {
+      "eyebrow": "Beta · Disclosure",
+      "body": "ผลลัพธ์นี้เป็นคำแนะนำเบื้องต้นจากระบบของเรา ในเวอร์ชัน beta คำตอบมีจำนวนจำกัด — เราจะอัปเดต logic อย่างต่อเนื่องเมื่อเก็บข้อมูลและความเห็นจากผู้ใช้มากขึ้น"
+    }
+  },
+  "footer": {
+    "tagline": "Your perfume advisor.",
+    "signature": "One dip. One match.",
+    "columns": [
+      {
+        "title": "Discover",
+        "links": [
+          {
+            "label": "The Quiz",
+            "href": "/quiz"
+          },
+          {
+            "label": "About Blot.",
+            "href": "/#about"
+          },
+          {
+            "label": "Our Method",
+            "href": "/#method"
+          },
+          {
+            "label": "Journal",
+            "href": "/#journal"
+          }
+        ]
+      },
+      {
+        "title": "Legal",
+        "links": [
+          {
+            "label": "Privacy · PDPA",
+            "href": "/privacy"
+          },
+          {
+            "label": "Terms of Service",
+            "href": "/terms"
+          },
+          {
+            "label": "Cookie Policy",
+            "href": "/cookies"
+          }
+        ]
+      },
+      {
+        "title": "Contact",
+        "links": [
+          {
+            "label": "hello@blott.app",
+            "href": "mailto:hello@blott.app"
+          },
+          {
+            "label": "Press Kit",
+            "href": "/press"
+          },
+          {
+            "label": "Partners",
+            "href": "/partners"
+          }
+        ]
+      }
+    ],
+    "bottom": {
+      "copyright": "Blot.",
+      "compliance": "Made in Bangkok · Compliant with PDPA B.E. 2562",
+      "tagline": "One dip. One match."
+    }
+  },
+  "consent": {
+    "label": "PDPA · Cookie Consent",
+    "title": "ก่อนเริ่มค้นหากลิ่น",
+    "body": "Blot. ใช้ cookie เพื่อจดจำคำตอบของคุณและปรับประสบการณ์ให้เหมาะสม เราเคารพ PDPA ของประเทศไทย — คุณเลือกยอมรับหรือปฏิเสธได้ตลอดเวลา หากปฏิเสธ quiz ยังใช้งานได้ แต่เราจะไม่บันทึกพฤติกรรมของคุณ",
+    "reject": "Reject",
+    "accept": "Accept"
+  },
+  "i18n": {
+    "en": {
+      "navigation": {
+        "items": [
+          {
+            "key": "home",
+            "label": "Home",
+            "href": "/"
+          },
+          {
+            "key": "quiz",
+            "label": "Start Quiz",
+            "href": "/quiz"
+          },
+          {
+            "key": "about",
+            "label": "About",
+            "href": "/#about"
+          }
+        ],
+        "cta": {
+          "key": "header-primary",
+          "label": "Begin the dip ->",
+          "href": "/quiz"
+        },
+        "ctas": [
+          {
+            "key": "header-primary",
+            "label": "Begin the dip ->",
+            "href": "/quiz",
+            "variant": "solid",
+            "style": {}
+          }
+        ]
+      },
+      "home": {
+        "title": "Found in a few dips.",
+        "lead": "Answer a short quiz and let Blot. narrow your fragrance match. No signup, no login, just a few thoughtful dips.",
+        "ctaPrimary": "Begin the dip →",
+        "ctaSecondary": "How it works",
+        "sections": [
+          {
+            "id": "friendly",
+            "variant": "editorial-card",
+            "enabled": true,
+            "eyebrow": "Content box · Editable",
+            "title": "Your scent should feel like you.",
+            "body": "This content box can be added, removed, reordered, and edited from the CMS for campaigns or future pages.",
+            "ctaLabel": "Start the quiz ->",
+            "ctaHref": "/quiz"
+          }
+        ]
+      },
+      "pages": [
+        {
+          "slug": "friendly-scent",
+          "enabled": false,
+          "navLabel": "Friendly Scent",
+          "eyebrow": "CMS Page",
+          "title": "A page built from the copy editor.",
+          "body": "Turn enabled on and add a header menu item pointing to /friendly-scent to publish a lightweight content page.",
+          "ctaLabel": "Start the quiz →",
+          "ctaHref": "/quiz"
+        }
+      ],
+      "method": {
+        "eyebrow": "Method · 01",
+        "title": "Three steps. One match.",
+        "cta": "Start the quiz →",
+        "steps": [
+          {
+            "title": "Tell us about you",
+            "body": "Budget, age, outfit style, favourite places, and the small cues that shape your taste."
+          },
+          {
+            "title": "We dip the strips",
+            "body": "The system filters hundreds of fragrances through logic designed with real perfume thinking."
+          },
+          {
+            "title": "Meet your match",
+            "body": "Get your closest fragrance with notes, reasons, and nearby alternatives."
+          }
+        ]
+      },
+      "about": {
+        "eyebrow": "About · 02",
+        "title": "A blotter is where every scent story begins.",
+        "lead": "Blot. turns a perfume testing strip into a quiz. Everyone has a scent that fits; sometimes you just need someone to narrow the shelf down to one answer.",
+        "cta": "Find my match →"
+      },
+      "quiz": {
+        "username": {
+          "eyebrow": "Step · 00 / Greeting",
+          "titleA": "What should we",
+          "titleB": "call you?",
+          "body": "No account needed. Add the name you want us to use so the result feels personal.",
+          "placeholder": "e.g. Pim, Khun A, Voyager",
+          "cta": "Begin →",
+          "missing": "Enter a name to begin"
+        },
+        "email": {
+          "eyebrow": "Step · Final / Send Result",
+          "titleA": "Where shall we",
+          "titleB": "send your match?",
+          "body": "Enter your email to receive the fragrance match, reasons, and nearby alternatives.",
+          "placeholder": "you@example.com",
+          "ctaSubmit": "Send my match →",
+          "ctaSkip": "Skip · view on web",
+          "skipNote": {
+            "eyebrow": "Optional",
+            "body": "You can skip email and view the result on the website immediately."
+          },
+          "backLabel": "← Edit my answers"
+        },
+        "computing": {
+          "eyebrow": "Computing your match…",
+          "title": "Dipping the strips"
+        },
+        "empty": {
+          "eyebrow": "No questions configured",
+          "title": "The quiz isn't ready yet.",
+          "body": "Ask an admin to add questions in the back office first."
+        }
+      },
+      "result": {
+        "eyebrowPrefix": "Your Match",
+        "titleLine1": "The strip points to",
+        "actions": {
+          "again": "Take it again",
+          "home": "Back to home"
+        },
+        "alternatives": {
+          "eyebrow": "Also nearby",
+          "title": "Two more strips that came close"
+        },
+        "specialEyebrow": "Easter Egg · Special Result",
+        "disclaimer": {
+          "eyebrow": "Beta · Disclosure",
+          "body": "This result is an early recommendation from our beta system. The answer set is still limited, and we will keep improving the logic as we collect more user feedback and data."
+        }
+      },
+      "footer": {
+        "tagline": "Your perfume advisor.",
+        "signature": "One dip. One match.",
+        "columns": [
+          {
+            "title": "Discover",
+            "links": [
+              {
+                "label": "The Quiz",
+                "href": "/quiz"
+              },
+              {
+                "label": "About Blot.",
+                "href": "/#about"
+              },
+              {
+                "label": "Our Method",
+                "href": "/#method"
+              },
+              {
+                "label": "Journal",
+                "href": "/#journal"
+              }
+            ]
+          },
+          {
+            "title": "Legal",
+            "links": [
+              {
+                "label": "Privacy · PDPA",
+                "href": "/privacy"
+              },
+              {
+                "label": "Terms of Service",
+                "href": "/terms"
+              },
+              {
+                "label": "Cookie Policy",
+                "href": "/cookies"
+              }
+            ]
+          },
+          {
+            "title": "Contact",
+            "links": [
+              {
+                "label": "hello@blott.app",
+                "href": "mailto:hello@blott.app"
+              },
+              {
+                "label": "Press Kit",
+                "href": "/press"
+              },
+              {
+                "label": "Partners",
+                "href": "/partners"
+              }
+            ]
+          }
+        ],
+        "bottom": {
+          "copyright": "Blot.",
+          "compliance": "Made in Bangkok · Compliant with PDPA B.E. 2562",
+          "tagline": "One dip. One match."
+        }
+      },
+      "consent": {
+        "label": "PDPA · Cookie Consent",
+        "title": "Before we begin",
+        "body": "Blot. uses cookies to remember your answers and improve the experience. We respect Thailand PDPA, and you can accept or reject tracking at any time. If you reject it, the quiz still works, but behavioural tracking stays off.",
+        "reject": "Reject",
+        "accept": "Accept"
+      }
+    }
+  },
+  "i18nMeta": {
+    "en": {
+      "mode": "manual",
+      "updatedAt": "2026-05-04T14:38:48.785Z",
+      "note": "Manual English fields; no translation API is used."
+    }
   }
 }

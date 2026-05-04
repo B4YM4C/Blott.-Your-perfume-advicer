@@ -33,6 +33,12 @@ const TABS = [
   { id: 'result', label: 'Result', src: '/result?preview=1',   description: 'Result page (sample data)' },
 ];
 
+const DEVICES = [
+  { id: 'desktop', label: 'Desktop', width: '100%', minHeight: '70vh' },
+  { id: 'tablet',  label: 'Tablet',  width: 820,    minHeight: 900 },
+  { id: 'mobile',  label: 'Mobile',  width: 390,    minHeight: 780 },
+];
+
 const THEME_FIELDS = [
   { key: 'ink',      label: 'Ink (text)',         kind: 'color' },
   { key: 'paper',    label: 'Paper (background)', kind: 'color' },
@@ -66,6 +72,109 @@ const FONT_PRESETS = {
 
 const FONT_WEIGHTS = ['300', '400', '500', '600', '700'];
 
+const SECTION_TEMPLATES = [
+  {
+    id: 'editorial-card',
+    label: 'Editorial Card',
+    description: 'Card เรียบแบบ CI ปัจจุบัน เหมาะกับข้อความสั้น',
+    eyebrow: 'Editorial',
+    title: 'A refined scent note.',
+    body: 'Use this compact card for campaign copy, announcements, or a small story block.',
+    ctaLabel: 'Start the quiz ->',
+    ctaHref: '/quiz',
+  },
+  {
+    id: 'feature-banner',
+    label: 'Feature Banner',
+    description: 'Banner เต็มแถวสำหรับ headline สำคัญ',
+    eyebrow: 'Feature',
+    title: 'A bigger story across the full row.',
+    body: 'Use this when one message should anchor the section and feel more editorial.',
+    ctaLabel: 'Explore ->',
+    ctaHref: '/quiz',
+  },
+  {
+    id: 'quiet-note',
+    label: 'Quiet Note',
+    description: 'กล่องเส้นประ เบาๆ สำหรับ note หรือ hint',
+    eyebrow: 'Note',
+    title: 'A quiet little detail.',
+    body: 'A softer block for supporting information without overpowering the page.',
+    ctaLabel: 'Read more',
+    ctaHref: '/#about',
+  },
+  {
+    id: 'dark-cta',
+    label: 'Dark CTA',
+    description: 'แถบดำชัดสำหรับ call-to-action',
+    eyebrow: 'Ready',
+    title: 'Find your match now.',
+    body: 'A strong conversion block that keeps the black-and-white Blot. identity.',
+    ctaLabel: 'Begin the dip ->',
+    ctaHref: '/quiz',
+  },
+  {
+    id: 'quote-panel',
+    label: 'Quote Panel',
+    description: 'ข้อความ quote / testimonial',
+    eyebrow: 'Quote',
+    title: '“Your scent should feel like you.”',
+    body: 'Use this for a testimonial, brand belief, or a short sentence with attitude.',
+    ctaLabel: 'About Blot.',
+    ctaHref: '/#about',
+  },
+  {
+    id: 'compact-card',
+    label: 'Compact Card',
+    description: 'การ์ดเล็กไว้เพิ่มหลายใบใน grid',
+    eyebrow: 'Mini',
+    title: 'Small but useful.',
+    body: 'A dense card for lists, benefits, or small campaign details.',
+    ctaLabel: 'Open',
+    ctaHref: '/quiz',
+  },
+  {
+    id: 'split-copy',
+    label: 'Split Copy',
+    description: 'กล่องสองน้ำหนัก เหมาะกับหัวข้อ + อธิบาย',
+    eyebrow: 'Split',
+    title: 'One idea, two speeds.',
+    body: 'Use this for a section that needs a clear headline and a longer explanatory note.',
+    ctaLabel: 'Continue ->',
+    ctaHref: '/quiz',
+  },
+  {
+    id: 'metric-card',
+    label: 'Metric Card',
+    description: 'ตัวเลข/คำสั้นแบบ mono',
+    eyebrow: 'Signal',
+    title: '01',
+    body: 'A numbered proof point, metric, or short editorial signal.',
+    ctaLabel: 'See method',
+    ctaHref: '/#method',
+  },
+  {
+    id: 'soft-panel',
+    label: 'Soft Panel',
+    description: 'กล่องขาวไล่เฉดนุ่มๆ สำหรับคำอธิบาย',
+    eyebrow: 'Soft panel',
+    title: 'Clean, calm, readable.',
+    body: 'A gentle panel that keeps the page balanced when the surrounding layout is dense.',
+    ctaLabel: 'Learn more',
+    ctaHref: '/#about',
+  },
+  {
+    id: 'campaign-strip',
+    label: 'Campaign Strip',
+    description: 'แถบโปรโมตแนวนอน CTA อยู่ขวา',
+    eyebrow: 'Campaign',
+    title: 'Drop a campaign here.',
+    body: 'A horizontal strip for seasonal pushes, drops, quizzes, or event announcements.',
+    ctaLabel: 'Join now ->',
+    ctaHref: '/quiz',
+  },
+];
+
 // Maps each `data-edit-key` → which `copy.json` path holds its text. For
 // 99 % of keys the path is identical to the edit-key, so we only list the
 // exceptions here. Anything not listed falls through to identity mapping.
@@ -83,17 +192,26 @@ export default function SiteEditor({ initial, defaults }) {
   const [iframeReady, setIframeReady] = useState(false);
   const [picked, setPicked] = useState(null); // { key, computed }
   const [inspectorTab, setInspectorTab] = useState('element'); // element | theme
+  const [device, setDevice] = useState('desktop');
   const [reloadNonce, setReloadNonce] = useState(0);
+  const [trashHot, setTrashHot] = useState(false);
+  const [dragPayload, setDragPayload] = useState(null);
   const iframeRef = useRef(null);
+  const draftRef = useRef(draft);
 
   const tabDef = TABS.find((t) => t.id === tab) || TABS[0];
+  const deviceDef = DEVICES.find((d) => d.id === device) || DEVICES[0];
+
+  useEffect(() => {
+    draftRef.current = draft;
+  }, [draft]);
 
   // Set of every JSON-path that holds a STRING leaf in the merged copy —
   // used to tell text-keys (e.g. "home.title") from style-only keys
   // (e.g. "result.card.fragranceName" — the text is dynamic from the DB).
   const textKeySet = useMemo(() => {
     const set = new Set();
-    walkStrings(initial, '', (path) => {
+    walkStrings(draft, '', (path) => {
       if (path === '_note' || path.startsWith('theme.') || path === 'theme'
           || path.startsWith('styles.') || path === 'styles') return;
       set.add(path);
@@ -102,13 +220,13 @@ export default function SiteEditor({ initial, defaults }) {
     // target counts as a text-key too.
     for (const v of Object.values(TEXT_PATH_OVERRIDES)) set.add(v);
     return set;
-  }, [initial]);
+  }, [draft]);
 
   // ---- Live push to iframe whenever the draft changes -----------------
   useEffect(() => {
     if (!iframeReady) return;
-    pushPreview(iframeRef.current, draft);
-  }, [iframeReady, draft]);
+    pushPreview(iframeRef.current, draft, inspectorTab);
+  }, [iframeReady, draft, inspectorTab]);
 
   // ---- Listen for the iframe's ready handshake + click-pick ----------
   useEffect(() => {
@@ -118,10 +236,25 @@ export default function SiteEditor({ initial, defaults }) {
       if (!m || typeof m !== 'object') return;
       if (m.type === 'blot-preview-ready') {
         setIframeReady(true);
-        pushPreview(iframeRef.current, draft);
+        pushPreview(iframeRef.current, draft, inspectorTab);
       } else if (m.type === 'blot-pick' && m.key) {
         setPicked({ key: m.key, computed: m.computed || {} });
         setInspectorTab('element');
+      } else if (m.type === 'blot-structure-add' && m.path) {
+        const index = resolveListIndex(m.path, Number(m.index || 0), m.id);
+        if (m.mode === 'duplicate') duplicateListItem(m.path, index, 1);
+        else addListItem(m.path, templateForPath(m.path), m.where === 'before' ? index : index + 1);
+        setInspectorTab('structure');
+      } else if (m.type === 'blot-structure-add-template' && m.path) {
+        const index = resolveListIndex(m.path, Number(m.index || 0), m.id);
+        addListItem(m.path, sanitizeStructureItem(m.item || templateForPath(m.path)), m.where === 'before' ? index : index + 1);
+        setInspectorTab('structure');
+      } else if (m.type === 'blot-structure-remove' && m.path) {
+        removeListItem(m.path, Number(m.index || 0), m.id);
+        setInspectorTab('structure');
+      } else if (m.type === 'blot-structure-move' && m.path) {
+        moveListItem(m.path, Number(m.from), Number(m.to), m.fromId, m.toId);
+        setInspectorTab('structure');
       }
     }
     window.addEventListener('message', onMessage);
@@ -147,6 +280,72 @@ export default function SiteEditor({ initial, defaults }) {
   function setElementText(key, value) {
     const path = textPathFor(key);
     setDraft((prev) => writePath(prev, path, value));
+  }
+  function setPathValue(path, value) {
+    setDraft((prev) => writePath(prev, path, value));
+  }
+  function listAt(path) {
+    const v = readPath(draftRef.current, path);
+    return Array.isArray(v) ? v : [];
+  }
+  function setList(path, next) {
+    setPathValue(path, next);
+  }
+  function resolveListIndex(path, index, id) {
+    const items = listAt(path);
+    if (id != null && id !== '') {
+      const needle = String(id);
+      const found = items.findIndex((item, i) => String(stableItemId(item, i)) === needle);
+      if (found >= 0) return found;
+    }
+    if (!Number.isFinite(index)) return 0;
+    return Math.max(0, Math.min(index, Math.max(items.length - 1, 0)));
+  }
+  function addListItem(path, item, index = null) {
+    const items = listAt(path);
+    const next = [...items];
+    const target = index == null ? next.length : Math.max(0, Math.min(index, next.length));
+    next.splice(target, 0, sanitizeStructureItem(item));
+    setList(path, next);
+  }
+  function updateListItem(path, index, patch) {
+    setList(path, listAt(path).map((item, i) => i === index ? { ...item, ...patch } : item));
+  }
+  function updateListItemStyle(path, index, prop, value) {
+    setList(path, listAt(path).map((item, i) => {
+      if (i !== index) return item;
+      const style = { ...(item.style || {}) };
+      if (value === '') delete style[prop];
+      else style[prop] = value;
+      return { ...item, style };
+    }));
+  }
+  function removeListItem(path, index, id = null) {
+    const target = resolveListIndex(path, index, id);
+    setList(path, listAt(path).filter((_, i) => i !== target));
+  }
+  function moveListItem(path, from, to, fromId = null, toId = null) {
+    const items = listAt(path);
+    from = resolveListIndex(path, from, fromId);
+    to = resolveListIndex(path, to, toId);
+    if (from == null || to == null || from === to || from < 0 || to < 0 || from >= items.length || to >= items.length) return;
+    const next = [...items];
+    const [pickedItem] = next.splice(from, 1);
+    next.splice(to, 0, pickedItem);
+    setList(path, next);
+  }
+  function duplicateListItem(path, index, offset = 1, id = null) {
+    index = resolveListIndex(path, index, id);
+    const item = listAt(path)[index];
+    if (!item) return;
+    const next = { ...deepClone(item), id: item.id ? `${item.id}-copy` : undefined, key: item.key ? `${item.key}-copy` : undefined };
+    addListItem(path, next, index + offset);
+  }
+  function deleteDragPayload(payload = dragPayload) {
+    if (!payload?.path || payload.index == null || payload.type === 'template') return;
+    removeListItem(payload.path, payload.index, payload.id);
+    setDragPayload(null);
+    setTrashHot(false);
   }
   function resetElement(key) {
     setDraft((prev) => {
@@ -221,6 +420,18 @@ export default function SiteEditor({ initial, defaults }) {
           </p>
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+          <div style={deviceSwitch} aria-label="Preview device size">
+            {DEVICES.map((d) => (
+              <button
+                key={d.id}
+                type="button"
+                onClick={() => setDevice(d.id)}
+                style={{ ...deviceBtn, ...(device === d.id ? deviceBtnActive : {}) }}
+              >
+                {d.label}
+              </button>
+            ))}
+          </div>
           <label style={toggleWrap}>
             <input
               type="checkbox"
@@ -263,22 +474,25 @@ export default function SiteEditor({ initial, defaults }) {
       {/* ============== Split pane ============== */}
       <div style={{ ...split, gridTemplateColumns: editMode ? '1fr 380px' : '1fr' }}>
         {/* Live iframe (LEFT, large) */}
-        <div style={previewWrap}>
-          <div style={previewBar}>
-            <span style={previewBarText}>
-              {tabDef.src}
-              {!iframeReady && <span style={{ marginLeft: 10, color: 'var(--grey-3)' }}>· loading…</span>}
-              {pickedKey && <span style={{ marginLeft: 10, color: 'var(--grey-2)' }}>· selected: <code>{pickedKey}</code></span>}
-            </span>
-            <button type="button" onClick={reloadIframe} style={smallBtn}>↻ Reload</button>
+        <div style={previewCanvas}>
+          <div style={{ ...previewWrap, width: deviceDef.width, maxWidth: '100%' }}>
+            <div style={previewBar}>
+              <span style={previewBarText}>
+                {tabDef.src}
+                <span style={{ marginLeft: 10, color: 'var(--grey-3)' }}>· {deviceDef.label}</span>
+                {!iframeReady && <span style={{ marginLeft: 10, color: 'var(--grey-3)' }}>· loading…</span>}
+                {pickedKey && <span style={{ marginLeft: 10, color: 'var(--grey-2)' }}>· selected: <code>{pickedKey}</code></span>}
+              </span>
+              <button type="button" onClick={reloadIframe} style={smallBtn}>↻ Reload</button>
+            </div>
+            <iframe
+              ref={iframeRef}
+              key={`${tab}-${reloadNonce}`}
+              title={`Blot preview — ${tabDef.label}`}
+              src={tabDef.src}
+              style={{ ...iframe, minHeight: deviceDef.minHeight }}
+            />
           </div>
-          <iframe
-            ref={iframeRef}
-            key={`${tab}-${reloadNonce}`}
-            title={`Blot preview — ${tabDef.label}`}
-            src={tabDef.src}
-            style={iframe}
-          />
         </div>
 
         {/* Inspector (RIGHT) */}
@@ -299,6 +513,13 @@ export default function SiteEditor({ initial, defaults }) {
               >
                 Theme
               </button>
+              <button
+                type="button"
+                onClick={() => setInspectorTab('structure')}
+                style={{ ...inspectorTab_, ...(inspectorTab === 'structure' ? inspectorTabActive : {}) }}
+              >
+                Structure
+              </button>
             </div>
 
             {inspectorTab === 'element' ? (
@@ -317,12 +538,28 @@ export default function SiteEditor({ initial, defaults }) {
                   onResetElement={() => resetElement(pickedKey)}
                 />
               )
-            ) : (
+            ) : inspectorTab === 'theme' ? (
               <ThemePanel
                 theme={draft.theme || {}}
                 defaults={defaults.theme || {}}
                 onSet={setTheme}
                 onResetAll={resetTheme}
+              />
+            ) : (
+              <StructurePanel
+                draft={draft}
+                dragPayload={dragPayload}
+                trashHot={trashHot}
+                onDragStart={setDragPayload}
+                onDragEnd={() => { setDragPayload(null); setTrashHot(false); }}
+                onTrashHot={setTrashHot}
+                onDeleteDrag={deleteDragPayload}
+                onAdd={addListItem}
+                onUpdate={updateListItem}
+                onUpdateStyle={updateListItemStyle}
+                onRemove={removeListItem}
+                onMove={moveListItem}
+                onDuplicate={duplicateListItem}
               />
             )}
           </aside>
@@ -513,6 +750,479 @@ function ThemePanel({ theme, defaults, onSet, onResetAll }) {
   );
 }
 
+function StructurePanel({
+  draft,
+  dragPayload,
+  trashHot,
+  onDragStart,
+  onDragEnd,
+  onTrashHot,
+  onDeleteDrag,
+  onAdd,
+  onUpdate,
+  onUpdateStyle,
+  onRemove,
+  onMove,
+  onDuplicate,
+}) {
+  const navItems = Array.isArray(draft.navigation?.items) ? draft.navigation.items : [];
+  const navCtas = Array.isArray(draft.navigation?.ctas)
+    ? draft.navigation.ctas
+    : (draft.navigation?.cta ? [draft.navigation.cta] : []);
+  const steps = Array.isArray(draft.method?.steps) ? draft.method.steps : [];
+  const sections = Array.isArray(draft.home?.sections) ? draft.home.sections : [];
+  const pages = Array.isArray(draft.pages) ? draft.pages : [];
+  const footerColumns = Array.isArray(draft.footer?.columns) ? draft.footer.columns : [];
+
+  return (
+    <>
+      <div
+        style={{ ...trashZone, ...(trashHot ? trashZoneHot : {}) }}
+        onDragOver={(e) => { e.preventDefault(); onTrashHot(true); }}
+        onDragLeave={() => onTrashHot(false)}
+        onDrop={(e) => { e.preventDefault(); onDeleteDrag(dragPayload); }}
+      >
+        <span style={trashIcon}>⌫</span>
+        <strong>Drop here to delete</strong>
+        <small>ลาก menu / CTA / card / section มาวางเพื่อลบ</small>
+      </div>
+
+      <TemplateLibrary
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
+        onAdd={(template) => onAdd('home.sections', sectionFromTemplate(template), sections.length)}
+      />
+
+      <ListBlock
+        title="Header menu"
+        path="navigation.items"
+        items={navItems}
+        addLabel="+ menu"
+        template={newNavItem()}
+        fields={[
+          { key: 'label', label: 'Text' },
+          { key: 'href', label: 'Redirect link' },
+          { key: 'key', label: 'Puzzle key' },
+        ]}
+        styleFields
+        onDragStart={onDragStart}
+        dragPayload={dragPayload}
+        onDragEnd={onDragEnd}
+        onAdd={onAdd}
+        onUpdate={onUpdate}
+        onUpdateStyle={onUpdateStyle}
+        onRemove={onRemove}
+        onMove={onMove}
+        onDuplicate={onDuplicate}
+      />
+
+      <ListBlock
+        title="Header CTA buttons"
+        path="navigation.ctas"
+        items={navCtas}
+        addLabel="+ CTA"
+        template={newCta()}
+        fields={[
+          { key: 'label', label: 'Button text' },
+          { key: 'href', label: 'Redirect link' },
+          { key: 'key', label: 'Puzzle key' },
+          { key: 'variant', label: 'Variant', kind: 'select', options: ['solid', 'ghost'] },
+        ]}
+        styleFields
+        onDragStart={onDragStart}
+        dragPayload={dragPayload}
+        onDragEnd={onDragEnd}
+        onAdd={onAdd}
+        onUpdate={onUpdate}
+        onUpdateStyle={onUpdateStyle}
+        onRemove={onRemove}
+        onMove={onMove}
+        onDuplicate={onDuplicate}
+      />
+
+      <ListBlock
+        title="Method cards"
+        path="method.steps"
+        items={steps}
+        addLabel="+ card"
+        template={newStep()}
+        fields={[
+          { key: 'title', label: 'Title' },
+          { key: 'body', label: 'Body', kind: 'textarea' },
+        ]}
+        onDragStart={onDragStart}
+        dragPayload={dragPayload}
+        onDragEnd={onDragEnd}
+        onAdd={onAdd}
+        onUpdate={onUpdate}
+        onUpdateStyle={onUpdateStyle}
+        onRemove={onRemove}
+        onMove={onMove}
+        onDuplicate={onDuplicate}
+      />
+
+      <ListBlock
+        title="Content boxes / banners"
+        path="home.sections"
+        items={sections}
+        addLabel="+ banner / content box"
+        template={sectionFromTemplate(SECTION_TEMPLATES[0])}
+        fields={[
+          { key: 'id', label: 'ID' },
+          { key: 'variant', label: 'Variant', kind: 'select', options: SECTION_TEMPLATES.map((tpl) => tpl.id) },
+          { key: 'enabled', label: 'Enabled', kind: 'select', options: ['true', 'false'] },
+          { key: 'eyebrow', label: 'Eyebrow' },
+          { key: 'title', label: 'Title' },
+          { key: 'body', label: 'Body', kind: 'textarea' },
+          { key: 'mediaUrl', label: 'Media URL' },
+          { key: 'ctaLabel', label: 'CTA text' },
+          { key: 'ctaHref', label: 'CTA redirect' },
+        ]}
+        onDragStart={onDragStart}
+        dragPayload={dragPayload}
+        onDragEnd={onDragEnd}
+        onAdd={onAdd}
+        onUpdate={onUpdate}
+        onUpdateStyle={onUpdateStyle}
+        onRemove={onRemove}
+        onMove={onMove}
+        onDuplicate={onDuplicate}
+      />
+
+      <ListBlock
+        title="Dynamic pages"
+        path="pages"
+        items={pages}
+        addLabel="+ page"
+        template={newPage()}
+        fields={[
+          { key: 'slug', label: 'URL slug' },
+          { key: 'enabled', label: 'Enabled', kind: 'select', options: ['true', 'false'] },
+          { key: 'navLabel', label: 'Menu label' },
+          { key: 'eyebrow', label: 'Eyebrow' },
+          { key: 'title', label: 'Title' },
+          { key: 'body', label: 'Body', kind: 'textarea' },
+          { key: 'ctaLabel', label: 'CTA text' },
+          { key: 'ctaHref', label: 'CTA redirect' },
+        ]}
+        onDragStart={onDragStart}
+        dragPayload={dragPayload}
+        onDragEnd={onDragEnd}
+        onAdd={onAdd}
+        onUpdate={onUpdate}
+        onUpdateStyle={onUpdateStyle}
+        onRemove={onRemove}
+        onMove={onMove}
+        onDuplicate={onDuplicate}
+      />
+
+      <ListBlock
+        title="Footer columns"
+        path="footer.columns"
+        items={footerColumns}
+        addLabel="+ footer column"
+        template={newFooterColumn()}
+        fields={[
+          { key: 'title', label: 'Column title' },
+        ]}
+        onDragStart={onDragStart}
+        dragPayload={dragPayload}
+        onDragEnd={onDragEnd}
+        onAdd={onAdd}
+        onUpdate={onUpdate}
+        onUpdateStyle={onUpdateStyle}
+        onRemove={onRemove}
+        onMove={onMove}
+        onDuplicate={onDuplicate}
+      />
+    </>
+  );
+}
+
+function TemplateLibrary({ onDragStart, onDragEnd, onAdd }) {
+  return (
+    <Section title="Element library · 10 templates">
+      <p style={templateHelp}>
+        Drag ไปวางที่รายการ Content boxes หรือวางทับ content box ใน iframe เพื่อสร้าง block ใหม่
+      </p>
+      <div style={templateGrid}>
+        {SECTION_TEMPLATES.map((template) => {
+          const item = sectionFromTemplate(template);
+          return (
+            <button
+              key={template.id}
+              type="button"
+              draggable
+              onDragStart={(e) => {
+                const payload = { type: 'template', path: 'home.sections', item };
+                e.dataTransfer.effectAllowed = 'copy';
+                e.dataTransfer.setData('application/x-blot-template', JSON.stringify(payload));
+                e.dataTransfer.setData('text/plain', template.label);
+                onDragStart(payload);
+              }}
+              onDragEnd={onDragEnd}
+              onClick={() => onAdd(template)}
+              style={templateCard}
+            >
+              <strong>{template.label}</strong>
+              <span>{template.description}</span>
+            </button>
+          );
+        })}
+      </div>
+    </Section>
+  );
+}
+
+function ListBlock({
+  title,
+  path,
+  items,
+  addLabel,
+  template,
+  fields,
+  styleFields,
+  onDragStart,
+  dragPayload,
+  onDragEnd,
+  onAdd,
+  onUpdate,
+  onUpdateStyle,
+  onRemove,
+  onMove,
+  onDuplicate,
+}) {
+  return (
+    <Section title={`${title} · ${items.length}`}>
+      <button type="button" style={inlineAdd} onClick={() => onAdd(path, template, 0)}>
+        + Add at top
+      </button>
+      <div
+        style={{ display: 'grid', gap: 10, marginTop: 10 }}
+        onDragOver={(e) => {
+          if (dragPayload?.type === 'template' && dragPayload.path === path) e.preventDefault();
+        }}
+        onDrop={(e) => {
+          if (dragPayload?.type !== 'template' || dragPayload.path !== path) return;
+          e.preventDefault();
+          e.stopPropagation();
+          onAdd(path, dragPayload.item, items.length);
+          onDragEnd();
+        }}
+      >
+        {items.map((item, index) => (
+          <div
+            key={`${path}-${index}`}
+            draggable
+            onDragStart={(e) => {
+              const payload = { type: 'item', path, index, id: stableItemId(item, index) };
+              e.dataTransfer.effectAllowed = 'move';
+              e.dataTransfer.setData('text/plain', JSON.stringify(payload));
+              onDragStart(payload);
+            }}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (dragPayload?.type === 'template' && dragPayload.path === path) {
+                onAdd(path, dragPayload.item, index);
+              } else if (dragPayload?.path === path) {
+                onMove(path, dragPayload.index, index, dragPayload.id, stableItemId(item, index));
+              }
+              onDragEnd();
+            }}
+            onDragEnd={onDragEnd}
+            style={structureCard}
+          >
+            <div style={structureHead}>
+              <span style={dragHandle}>drag · #{index + 1}</span>
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                <button type="button" style={miniControl} onClick={() => onAdd(path, template, index)}>+ before</button>
+                <button type="button" style={miniControl} onClick={() => onAdd(path, template, index + 1)}>+ after</button>
+                <button type="button" style={miniControl} onClick={() => onDuplicate(path, index, 1)}>+ right</button>
+                <button type="button" style={miniControl} onClick={() => onRemove(path, index)}>Delete</button>
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gap: 8 }}>
+              {fields.map((field) => (
+                <FieldRow key={field.key} label={field.label}>
+                  <StructureInput
+                    field={field}
+                    value={item?.[field.key] ?? ''}
+                    onChange={(value) => onUpdate(path, index, { [field.key]: value })}
+                  />
+                </FieldRow>
+              ))}
+            </div>
+
+            {styleFields && (
+              <details style={{ marginTop: 8 }}>
+                <summary style={styleSummary}>Typography / button style</summary>
+                <FieldRow label="Font">
+                  <input
+                    type="text"
+                    value={item.style?.fontFamily || ''}
+                    onChange={(e) => onUpdateStyle(path, index, 'fontFamily', e.target.value)}
+                    style={{ ...textInput, flex: 1 }}
+                    placeholder="'Inter', sans-serif"
+                  />
+                </FieldRow>
+                <FieldRow label="Size / weight">
+                  <input
+                    type="text"
+                    value={item.style?.fontSize || ''}
+                    onChange={(e) => onUpdateStyle(path, index, 'fontSize', e.target.value)}
+                    style={{ ...textInput, width: 92 }}
+                    placeholder="12px"
+                  />
+                  <select
+                    value={item.style?.fontWeight || ''}
+                    onChange={(e) => onUpdateStyle(path, index, 'fontWeight', e.target.value)}
+                    style={{ ...textInput, width: 94 }}
+                  >
+                    <option value="">weight</option>
+                    {FONT_WEIGHTS.map((w) => <option key={w} value={w}>{w}</option>)}
+                  </select>
+                </FieldRow>
+                <FieldRow label="Spacing / case">
+                  <input
+                    type="text"
+                    value={item.style?.letterSpacing || ''}
+                    onChange={(e) => onUpdateStyle(path, index, 'letterSpacing', e.target.value)}
+                    style={{ ...textInput, width: 92 }}
+                    placeholder=".18em"
+                  />
+                  <select
+                    value={item.style?.textTransform || ''}
+                    onChange={(e) => onUpdateStyle(path, index, 'textTransform', e.target.value)}
+                    style={{ ...textInput, width: 130 }}
+                  >
+                    <option value="">case</option>
+                    <option value="none">none</option>
+                    <option value="uppercase">uppercase</option>
+                    <option value="capitalize">capitalize</option>
+                  </select>
+                </FieldRow>
+              </details>
+            )}
+
+            <button type="button" style={inlineAdd} onClick={() => onAdd(path, template, index + 1)}>
+              {addLabel} below
+            </button>
+          </div>
+        ))}
+        {items.length === 0 && (
+          <button type="button" style={emptyAdd} onClick={() => onAdd(path, template, 0)}>
+            {addLabel}
+          </button>
+        )}
+      </div>
+    </Section>
+  );
+}
+
+function StructureInput({ field, value, onChange }) {
+  if (field.kind === 'textarea') {
+    return (
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        rows={3}
+        style={{ ...textInput, flex: 1, resize: 'vertical' }}
+      />
+    );
+  }
+  if (field.kind === 'select') {
+    return (
+      <select value={String(value)} onChange={(e) => onChange(e.target.value)} style={{ ...textInput, flex: 1 }}>
+        {(field.options || []).map((option) => <option key={option} value={option}>{option}</option>)}
+      </select>
+    );
+  }
+  return (
+    <input
+      type="text"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      style={{ ...textInput, flex: 1 }}
+    />
+  );
+}
+
+function newNavItem() {
+  const id = `menu-${Date.now().toString(36)}`;
+  return { key: id, label: 'New menu', href: '/', style: {} };
+}
+function newCta() {
+  const id = `cta-${Date.now().toString(36)}`;
+  return { key: id, label: 'New CTA', href: '/quiz', variant: 'solid', style: {} };
+}
+function newStep() {
+  return { title: 'New card', body: 'Describe this step or content card.' };
+}
+function newSection() {
+  return sectionFromTemplate(SECTION_TEMPLATES[0]);
+}
+function newPage() {
+  const id = `page-${Date.now().toString(36)}`;
+  return {
+    slug: id,
+    enabled: false,
+    navLabel: 'New page',
+    eyebrow: 'CMS Page',
+    title: 'New page',
+    body: 'Write page content here.',
+    ctaLabel: 'Start the quiz →',
+    ctaHref: '/quiz',
+  };
+}
+function newFooterColumn() {
+  return {
+    title: 'New column',
+    links: [
+      { label: 'New link', href: '/' },
+    ],
+  };
+}
+function sectionFromTemplate(template = SECTION_TEMPLATES[0]) {
+  const id = `section-${template.id}-${Date.now().toString(36)}`;
+  return {
+    id,
+    variant: template.id,
+    enabled: true,
+    eyebrow: template.eyebrow || 'New section',
+    title: template.title || 'New content box',
+    body: template.body || 'Write the message for this section.',
+    mediaUrl: template.mediaUrl || '',
+    ctaLabel: template.ctaLabel || 'Open ->',
+    ctaHref: template.ctaHref || '/quiz',
+  };
+}
+function stableItemId(item, index = 0) {
+  if (!item || typeof item !== 'object') return index;
+  return item.id ?? item.key ?? item.slug ?? item.href ?? item.title ?? index;
+}
+function sanitizeStructureItem(item) {
+  const next = deepClone(item || {});
+  if (next.variant && !next.id) next.id = `section-${next.variant}-${Date.now().toString(36)}`;
+  return next;
+}
+function templateForPath(path) {
+  if (/^footer\.columns\.\d+\.links$/.test(path)) {
+    return { label: 'New link', href: '/' };
+  }
+  switch (path) {
+    case 'navigation.items': return newNavItem();
+    case 'navigation.ctas': return newCta();
+    case 'method.steps': return newStep();
+    case 'home.sections': return newSection();
+    case 'pages': return newPage();
+    case 'footer.columns': return newFooterColumn();
+    default: return {};
+  }
+}
+
 // =================================================================
 // Reusable bits
 // =================================================================
@@ -574,12 +1284,13 @@ function PresetChips({ presets, onPick }) {
 // Helpers
 // =================================================================
 
-function pushPreview(iframeEl, draft) {
+function pushPreview(iframeEl, draft, mode = 'element') {
   if (!iframeEl?.contentWindow) return;
   const textMap = collectTextOverrides(draft);
   iframeEl.contentWindow.postMessage(
     {
       type: 'blot-preview',
+      mode,
       theme:  draft.theme  || {},
       styles: draft.styles || {},
       text:   textMap,
@@ -748,6 +1459,134 @@ const smallBtn = {
   textTransform: 'uppercase', cursor: 'pointer',
 };
 const iframe = { width: '100%', flex: 1, minHeight: '70vh', border: 'none', background: 'var(--paper)' };
+const previewCanvas = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'stretch',
+  overflow: 'auto',
+  padding: 12,
+  background: 'linear-gradient(135deg, var(--offwhite), var(--paper))',
+  border: '1px solid var(--grey-5)',
+  borderRadius: 'var(--radius-md)',
+};
+
+const deviceSwitch = {
+  display: 'inline-flex',
+  padding: 4,
+  gap: 2,
+  border: '1px solid var(--grey-5)',
+  borderRadius: 'var(--radius-pill)',
+  background: 'var(--offwhite)',
+};
+const deviceBtn = {
+  padding: '6px 10px',
+  border: '1px solid transparent',
+  borderRadius: 'var(--radius-pill)',
+  background: 'transparent',
+  fontFamily: 'var(--font-mono)',
+  fontSize: 10,
+  letterSpacing: '.16em',
+  textTransform: 'uppercase',
+  cursor: 'pointer',
+};
+const deviceBtnActive = { background: 'var(--ink)', color: 'var(--paper)', borderColor: 'var(--ink)' };
+
+const trashZone = {
+  display: 'grid',
+  gap: 4,
+  placeItems: 'center',
+  textAlign: 'center',
+  padding: '18px 14px',
+  border: '1px dashed var(--grey-4)',
+  borderRadius: 'var(--radius-md)',
+  background: 'var(--offwhite)',
+  color: 'var(--grey-2)',
+};
+const trashZoneHot = {
+  borderColor: '#b91c1c',
+  background: '#fef2f2',
+  color: '#b91c1c',
+};
+const trashIcon = { fontSize: 24, lineHeight: 1 };
+const templateHelp = {
+  margin: '0 0 10px',
+  fontSize: 12,
+  color: 'var(--grey-2)',
+  lineHeight: 1.55,
+};
+const templateGrid = {
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  gap: 8,
+};
+const templateCard = {
+  display: 'grid',
+  gap: 4,
+  textAlign: 'left',
+  padding: 10,
+  border: '1px solid var(--grey-5)',
+  borderRadius: 'var(--radius-sm)',
+  background: 'var(--paper)',
+  cursor: 'grab',
+};
+
+const structureCard = {
+  padding: 12,
+  border: '1px solid var(--grey-5)',
+  borderRadius: 'var(--radius-sm)',
+  background: 'var(--offwhite)',
+};
+const structureHead = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  gap: 8,
+  alignItems: 'center',
+  marginBottom: 10,
+  flexWrap: 'wrap',
+};
+const dragHandle = {
+  fontFamily: 'var(--font-mono)',
+  fontSize: 10,
+  color: 'var(--grey-3)',
+  letterSpacing: '.16em',
+  textTransform: 'uppercase',
+  cursor: 'grab',
+};
+const miniControl = {
+  padding: '4px 7px',
+  border: '1px solid var(--grey-5)',
+  borderRadius: 'var(--radius-pill)',
+  background: 'var(--paper)',
+  fontFamily: 'var(--font-mono)',
+  fontSize: 9,
+  letterSpacing: '.08em',
+  textTransform: 'uppercase',
+  cursor: 'pointer',
+};
+const inlineAdd = {
+  marginTop: 8,
+  width: '100%',
+  padding: '7px 10px',
+  border: '1px dashed var(--grey-4)',
+  borderRadius: 'var(--radius-sm)',
+  background: 'var(--paper)',
+  color: 'var(--grey-2)',
+  cursor: 'pointer',
+  fontFamily: 'var(--font-mono)',
+  fontSize: 10,
+  letterSpacing: '.16em',
+  textTransform: 'uppercase',
+};
+const emptyAdd = { ...inlineAdd, marginTop: 0, minHeight: 54 };
+const styleSummary = {
+  cursor: 'pointer',
+  fontFamily: 'var(--font-mono)',
+  fontSize: 10,
+  letterSpacing: '.16em',
+  textTransform: 'uppercase',
+  color: 'var(--grey-2)',
+  margin: '8px 0',
+};
 
 const toggleWrap = {
   display: 'inline-flex', alignItems: 'center', gap: 6,

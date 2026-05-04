@@ -26,6 +26,7 @@ export default async function EasterEggsList() {
         <div style={{ ...row, ...rowHead }}>
           <div>On/Off</div>
           <div>Label</div>
+          <div>Type</div>
           <div>Constraints</div>
           <div>Result</div>
           <div></div>
@@ -48,8 +49,15 @@ export default async function EasterEggsList() {
                 priority {r.priority || 0}
               </div>
             </div>
+            <div>
+              <span style={chip}>{r.type === 'puzzle' ? 'Puzzle' : 'Quiz'}</span>
+            </div>
             <div style={{ fontSize: 12 }}>
-              {Object.entries(r.constraints || {}).map(([qid, code]) => {
+              {r.type === 'puzzle' ? (
+                <div>
+                  {(r.constraints?.triggers || []).slice(0, 4).map((t) => <div key={t}><span style={chip}>{t}</span></div>)}
+                </div>
+              ) : Object.entries(r.constraints || {}).map(([qid, code]) => {
                 const q = questions.find((q) => q.id === qid);
                 if (!code) return null;
                 const choice = q?.choices.find((c) => c.code === code);
@@ -77,7 +85,7 @@ const table = {
   borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-soft)', overflow: 'hidden',
 };
 const row = {
-  display: 'grid', gridTemplateColumns: '60px 1.5fr 2fr 1.5fr 80px',
+  display: 'grid', gridTemplateColumns: '60px 1.4fr 90px 2fr 1.5fr 80px',
   gap: 16, padding: '16px 22px', borderBottom: '1px solid var(--grey-5)', alignItems: 'center',
 };
 const rowHead = {

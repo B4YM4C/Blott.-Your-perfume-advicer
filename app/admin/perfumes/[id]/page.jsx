@@ -18,6 +18,7 @@ export default async function EditPerfumePage({ params }) {
       blurb: '',
       image: null,
       dna: {},
+      i18n: {},
     };
   }
 

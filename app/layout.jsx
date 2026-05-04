@@ -2,10 +2,13 @@ import './globals.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ConsentBanner from './components/ConsentBanner';
+import PuzzleEasterEggs from './components/PuzzleEasterEggs';
 import ThemeStyles from './components/ThemeStyles';
 import PreviewBridge from './components/PreviewBridge';
 import { db } from '@/lib/db';
 import { mergeWithDefaults } from '@/lib/copy';
+import { cookies } from 'next/headers';
+import { localeFromCookies, localizeCopy } from '@/lib/i18n';
 
 export const metadata = {
   title: 'Blot. — Your perfume advisor',
@@ -19,11 +22,13 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const override = await db.getCopy().catch(() => ({}));
   const merged   = mergeWithDefaults(override);
+  const locale   = localeFromCookies(cookies());
+  const copy     = localizeCopy(merged, locale);
   const theme    = merged?.theme  || {};
   const styles   = merged?.styles || {};
 
   return (
-    <html lang="th">
+    <html lang={locale}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -35,10 +40,11 @@ export default async function RootLayout({ children }) {
         <ThemeStyles theme={theme} styles={styles} />
       </head>
       <body>
-        <Header />
+        <Header copy={copy} locale={locale} />
         <main>{children}</main>
-        <Footer />
-        <ConsentBanner />
+        <Footer copy={copy} locale={locale} />
+        <PuzzleEasterEggs />
+        <ConsentBanner copy={copy} />
         {/* Inert unless ?preview=1 is in the URL (used by the visual editor) */}
         <PreviewBridge />
       </body>

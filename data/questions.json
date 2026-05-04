@@ -1,5 +1,5 @@
 {
-  "_note": "Edited via /admin/questions",
+  "_note": "Synced from production and recalibrated via scripts/recalibrate-quiz-and-perfumes.mjs",
   "questions": [
     {
       "id": "q1",
@@ -13,48 +13,64 @@
           "code": "A",
           "label": "100 – 1,000 บาท",
           "image": null,
+          "images": [],
           "scores": {
-            "Maturity": -2,
-            "Luxury": -3,
-            "Intensity": -1,
-            "Playful": 2,
-            "Modern": 2
+            "Rich": -3
+          },
+          "i18n": {
+            "en": {
+              "label": "THB 100 - 1,000"
+            }
           }
         },
         {
           "code": "B",
-          "label": "1,000 – 5,000 บาท",
+          "label": "1,000 – 3,000 บาท",
           "image": null,
+          "images": [],
           "scores": {
-            "Modern": 1,
-            "Playful": 1,
-            "Time": 0
+            "Rich": 0
+          },
+          "i18n": {
+            "en": {
+              "label": "THB 1,000 - 3,000"
+            }
           }
         },
         {
           "code": "C",
-          "label": "5,000 – 10,000 บาท",
+          "label": "3,000 – 5,000 บาท",
           "image": null,
+          "images": [],
           "scores": {
-            "Maturity": 2,
-            "Luxury": 2,
-            "Formality": 1,
-            "Modern": 1,
-            "Time": 0
+            "Rich": 5
+          },
+          "i18n": {
+            "en": {
+              "label": "THB 3,000 - 5,000"
+            }
           }
         },
         {
           "code": "D",
-          "label": "10,000 บาท ขึ้นไป",
+          "label": "รวยละดับออกช็อปพารากอน",
           "image": null,
+          "images": [],
           "scores": {
-            "Luxury": 5,
-            "Intensity": 2,
-            "Formality": 2,
-            "Maturity": 2
+            "Rich": 10
+          },
+          "i18n": {
+            "en": {
+              "label": "Paragon boutique budget"
+            }
           }
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "What is your budget?"
+        }
+      }
     },
     {
       "id": "q2",
@@ -66,53 +82,97 @@
       "choices": [
         {
           "code": "A",
-          "label": "10 – 19 ปี",
+          "label": "15 – 19 ปี",
           "image": null,
+          "images": [],
           "scores": {
             "Maturity": -5,
-            "Playful": 3,
             "Freshness": 2,
-            "Intensity": -1,
-            "Modern": 2
+            "Rich": -1,
+            "Modern": 2,
+            "Playful": 3
+          },
+          "i18n": {
+            "en": {
+              "label": "15 - 19 years old"
+            }
           }
         },
         {
           "code": "B",
-          "label": "20 – 29 ปี",
+          "label": "20 – 25 ปี",
           "image": null,
+          "images": [],
           "scores": {
-            "Maturity": 0,
-            "Modern": 2,
-            "Sexy": 1,
+            "Maturity": -2,
             "Freshness": 1,
-            "Playful": 1,
-            "Luxury": 1
+            "Modern": 2,
+            "Playful": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "20 - 25 years old"
+            }
           }
         },
         {
           "code": "C",
-          "label": "30 – 39 ปี",
+          "label": "26 – 30 ปี",
           "image": null,
+          "images": [],
           "scores": {
-            "Maturity": 2,
-            "Formality": 1,
-            "Luxury": 2
+            "Freshness": 1,
+            "Modern": 1,
+            "Sexy": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "26 - 30 years old"
+            }
           }
         },
         {
           "code": "D",
-          "label": "40 – 60 ปี",
+          "label": "30 – 35 ปี",
           "image": null,
+          "images": [],
           "scores": {
-            "Maturity": 4,
-            "Formality": 3,
-            "Sweetness": -1,
+            "Maturity": 2,
+            "Formality": 1,
+            "Sexy": 1,
+            "Luxury": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "30 - 35 years old"
+            }
+          }
+        },
+        {
+          "code": "E",
+          "label": "35 ++",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Maturity": 5,
+            "Intensity": 1,
+            "Formality": 2,
+            "Modern": -1,
             "Luxury": 2,
-            "Modern": 0,
-            "Intensity": 1
+            "Playful": -2
+          },
+          "i18n": {
+            "en": {
+              "label": "35+"
+            }
           }
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "What is your age range?"
+        }
+      }
     },
     {
       "id": "q3",
@@ -120,49 +180,349 @@
       "title": "ลักษณะการแต่งตัวของคุณ",
       "subtitle": "Your everyday style",
       "image": null,
-      "multiSelect": false,
+      "multiSelect": true,
       "choices": [
         {
           "code": "A",
-          "label": "Casual wear",
-          "image": null,
+          "label": "Casual",
+          "image": "/outfits/q3-01-casual-women.png",
+          "images": [
+            "/outfits/q3-01-casual-women.png",
+            "/outfits/q3-01-casual-men.png"
+          ],
           "scores": {
-            "Playful": 2,
-            "Modern": 1,
-            "Formality": -2
+            "Freshness": 1,
+            "Intensity": -1,
+            "Formality": -2,
+            "Rich": -1,
+            "Playful": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Casual"
+            }
           }
         },
         {
           "code": "B",
-          "label": "Street wear",
-          "image": null,
+          "label": "Sport",
+          "image": "/outfits/q3-02-sport-women.png",
+          "images": [
+            "/outfits/q3-02-sport-women.png",
+            "/outfits/q3-02-sport-men.png"
+          ],
           "scores": {
-            "Modern": 3,
             "Masculine": 1,
-            "Playful": 1
+            "Freshness": 2,
+            "Formality": -2,
+            "Time": 2,
+            "Sport": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Sport"
+            }
           }
         },
         {
           "code": "C",
-          "label": "Sport wear",
-          "image": null,
+          "label": "Street",
+          "image": "/outfits/q3-03-street-women.png",
+          "images": [
+            "/outfits/q3-03-street-women.png",
+            "/outfits/q3-03-street-men.png"
+          ],
           "scores": {
-            "Freshness": 3,
-            "Masculine": 2,
+            "Intensity": 1,
+            "Formality": -2,
+            "Sport": 1,
+            "Modern": 2,
             "Playful": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Street"
+            }
           }
         },
         {
           "code": "D",
-          "label": "Formal",
-          "image": null,
+          "label": "Hawaii",
+          "image": "/outfits/q3-04-hawaii-women.png",
+          "images": [
+            "/outfits/q3-04-hawaii-women.png",
+            "/outfits/q3-04-hawaii-men.png"
+          ],
           "scores": {
-            "Formality": 5,
+            "Freshness": 2,
+            "Formality": -2,
+            "Time": 2,
+            "Natural": 1,
+            "Playful": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Hawaii"
+            }
+          }
+        },
+        {
+          "code": "E",
+          "label": "Chill",
+          "image": "/outfits/q3-05-chill-women.png",
+          "images": [
+            "/outfits/q3-05-chill-women.png",
+            "/outfits/q3-05-chill-men.png"
+          ],
+          "scores": {
+            "Freshness": 1,
+            "Sweetness": 1,
+            "Intensity": -2,
+            "Formality": -2,
+            "Time": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Chill"
+            }
+          }
+        },
+        {
+          "code": "F",
+          "label": "Semi Formal",
+          "image": "/outfits/q3-06-semi-formal-women.png",
+          "images": [
+            "/outfits/q3-06-semi-formal-women.png",
+            "/outfits/q3-06-semi-formal-men.png"
+          ],
+          "scores": {
+            "Maturity": 1,
+            "Formality": 2,
+            "Rich": 1,
+            "Luxury": 1,
+            "Playful": -1
+          },
+          "i18n": {
+            "en": {
+              "label": "Semi Formal"
+            }
+          }
+        },
+        {
+          "code": "G",
+          "label": "Comfy",
+          "image": "/outfits/q3-07-comfy-women.png",
+          "images": [
+            "/outfits/q3-07-comfy-women.png",
+            "/outfits/q3-07-comfy-men.png"
+          ],
+          "scores": {
+            "Freshness": 1,
+            "Sweetness": 1,
+            "Intensity": -2,
+            "Formality": -2,
+            "Luxury": -1
+          },
+          "i18n": {
+            "en": {
+              "label": "Comfy"
+            }
+          }
+        },
+        {
+          "code": "H",
+          "label": "Tech Savvy",
+          "image": "/outfits/q3-08-tech-savvy-women.png",
+          "images": [
+            "/outfits/q3-08-tech-savvy-women.png",
+            "/outfits/q3-08-tech-savvy-men.png"
+          ],
+          "scores": {
+            "Masculine": 1,
+            "Intensity": 1,
+            "Formality": -1,
+            "Sport": 1,
+            "Modern": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Tech Savvy"
+            }
+          }
+        },
+        {
+          "code": "I",
+          "label": "Tee & Jean",
+          "image": "/outfits/q3-09-tee-jean-women.png",
+          "images": [
+            "/outfits/q3-09-tee-jean-women.png",
+            "/outfits/q3-09-tee-jean-men-v2.png"
+          ],
+          "scores": {
+            "Freshness": 1,
+            "Formality": -1,
+            "Time": 1,
+            "Modern": 1,
+            "Playful": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Tee & Jean"
+            }
+          }
+        },
+        {
+          "code": "J",
+          "label": "Easy Going",
+          "image": "/outfits/q3-10-easy-going-women.png",
+          "images": [
+            "/outfits/q3-10-easy-going-women.png",
+            "/outfits/q3-10-easy-going-men-v2.png"
+          ],
+          "scores": {
+            "Maturity": 1,
+            "Intensity": -1,
+            "Formality": -1,
+            "Modern": 1,
+            "Sexy": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Easy Going"
+            }
+          }
+        },
+        {
+          "code": "K",
+          "label": "Anime",
+          "image": "/outfits/q3-11-anime-women.png",
+          "images": [
+            "/outfits/q3-11-anime-women.png",
+            "/outfits/q3-11-anime-men-v2.png"
+          ],
+          "scores": {
+            "Maturity": -2,
+            "Sweetness": 1,
+            "Formality": -2,
+            "Modern": 1,
+            "Playful": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Anime"
+            }
+          }
+        },
+        {
+          "code": "L",
+          "label": "Cozy",
+          "image": "/outfits/q3-12-cozy-women.png",
+          "images": [
+            "/outfits/q3-12-cozy-women.png",
+            "/outfits/q3-12-cozy-men-v2.png"
+          ],
+          "scores": {
+            "Maturity": -1,
+            "Sweetness": 2,
+            "Intensity": -2,
+            "Formality": -2
+          },
+          "i18n": {
+            "en": {
+              "label": "Cozy"
+            }
+          }
+        },
+        {
+          "code": "M",
+          "label": "Formal",
+          "image": "/outfits/q3-13-formal-women.png",
+          "images": [
+            "/outfits/q3-13-formal-women.png",
+            "/outfits/q3-13-formal-men-v2.png"
+          ],
+          "scores": {
             "Maturity": 2,
-            "Luxury": 2
+            "Formality": 2,
+            "Rich": 1,
+            "Luxury": 2,
+            "Playful": -2
+          },
+          "i18n": {
+            "en": {
+              "label": "Formal"
+            }
+          }
+        },
+        {
+          "code": "N",
+          "label": "Cafe look",
+          "image": "/outfits/q3-14-cafe-look-women.png",
+          "images": [
+            "/outfits/q3-14-cafe-look-women.png",
+            "/outfits/q3-14-cafe-look-men-v2.png"
+          ],
+          "scores": {
+            "Freshness": 1,
+            "Sweetness": 2,
+            "Formality": -1,
+            "Modern": 1,
+            "Playful": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Cafe Look"
+            }
+          }
+        },
+        {
+          "code": "O",
+          "label": "Sleep wear",
+          "image": "/outfits/q3-15-sleep-wear-women.png",
+          "images": [
+            "/outfits/q3-15-sleep-wear-women.png",
+            "/outfits/q3-15-sleep-wear-men-v2.png"
+          ],
+          "scores": {
+            "Maturity": -1,
+            "Sweetness": 2,
+            "Intensity": -2,
+            "Formality": -2,
+            "Time": -2
+          },
+          "i18n": {
+            "en": {
+              "label": "Sleep Wear"
+            }
+          }
+        },
+        {
+          "code": "P",
+          "label": "Lounge wear",
+          "image": "/outfits/q3-16-lounge-wear-women.png",
+          "images": [
+            "/outfits/q3-16-lounge-wear-women.png",
+            "/outfits/q3-16-lounge-wear-men-v2.png"
+          ],
+          "scores": {
+            "Freshness": 1,
+            "Sweetness": 1,
+            "Intensity": -2,
+            "Formality": -2,
+            "Time": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Lounge Wear"
+            }
           }
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "Your everyday style"
+        }
+      }
     },
     {
       "id": "q4",
@@ -170,79 +530,184 @@
       "title": "คุณอยากให้ตัวเองดูเป็นคนยังไง",
       "subtitle": "How do you want to be perceived?",
       "image": null,
-      "multiSelect": false,
+      "multiSelect": true,
       "choices": [
         {
           "code": "A",
           "label": "เฟรนลี่ · Friendly",
           "image": null,
+          "images": [],
           "scores": {
-            "Sweetness": 2,
-            "Playful": 3,
-            "Freshness": 1
+            "Freshness": 1,
+            "Sweetness": 1,
+            "Playful": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Friendly"
+            }
           }
         },
         {
           "code": "B",
           "label": "ลึกลับน่าค้นหา · Mysterious",
           "image": null,
+          "images": [],
           "scores": {
-            "Intensity": 3,
-            "Sexy": 4,
-            "Time": -2
+            "Intensity": 2,
+            "Time": -2,
+            "Modern": 1,
+            "Sexy": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Mysterious"
+            }
           }
         },
         {
           "code": "C",
           "label": "อบอุ่น · Warm",
           "image": null,
+          "images": [],
           "scores": {
-            "Sweetness": 3,
             "Maturity": 1,
-            "Sexy": 1
+            "Sweetness": 2,
+            "Intensity": -1,
+            "Natural": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Warm"
+            }
           }
         },
         {
           "code": "D",
           "label": "เบียว · Cringe-cool",
           "image": null,
+          "images": [],
           "scores": {
-            "Playful": 5,
-            "Modern": -1,
-            "Maturity": -3
+            "Maturity": -2,
+            "Formality": -2,
+            "Modern": 1,
+            "Playful": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Cringe-cool"
+            }
           }
         },
         {
           "code": "E",
           "label": "เซ็กซี่ · Sexy",
           "image": null,
+          "images": [],
           "scores": {
-            "Sexy": 5,
-            "Intensity": 2,
-            "Sweetness": 1
+            "Sweetness": 1,
+            "Intensity": 1,
+            "Time": -1,
+            "Sexy": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Sexy"
+            }
           }
         },
         {
           "code": "F",
           "label": "หรูหรา · Luxurious",
           "image": null,
+          "images": [],
           "scores": {
-            "Luxury": 5,
-            "Formality": 3,
-            "Maturity": 2
+            "Maturity": 1,
+            "Formality": 2,
+            "Rich": 2,
+            "Luxury": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Luxurious"
+            }
           }
         },
         {
           "code": "G",
-          "label": "สดชื่น · Fresh",
+          "label": "สดใสเหลือล้น · Energetic",
           "image": null,
+          "images": [],
           "scores": {
-            "Freshness": 5,
-            "Time": 3,
-            "Modern": 1
+            "Freshness": 2,
+            "Intensity": 1,
+            "Time": 2,
+            "Sport": 1,
+            "Playful": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Energetic"
+            }
+          }
+        },
+        {
+          "code": "H",
+          "label": "ดูน่านับถือ · Mature",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Maturity": 2,
+            "Formality": 2,
+            "Luxury": 1,
+            "Playful": -1
+          },
+          "i18n": {
+            "en": {
+              "label": "Mature"
+            }
+          }
+        },
+        {
+          "code": "I",
+          "label": "ทันสมัย · Modern",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Freshness": 1,
+            "Modern": 2,
+            "Luxury": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Modern"
+            }
+          }
+        },
+        {
+          "code": "J",
+          "label": "เฟียส · Fierce",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Masculine": 1,
+            "Intensity": 2,
+            "Modern": 1,
+            "Sexy": 2,
+            "Playful": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Fierce"
+            }
           }
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "How do you want to be perceived?"
+        }
+      }
     },
     {
       "id": "q5",
@@ -250,108 +715,380 @@
       "title": "สถานที่ที่คุณชอบไป",
       "subtitle": "Your favourite place to be",
       "image": null,
-      "multiSelect": false,
+      "multiSelect": true,
       "choices": [
         {
           "code": "A",
           "label": "สถานที่เที่ยวกลางคืน",
           "image": null,
+          "images": [],
           "scores": {
-            "Sexy": 3,
             "Intensity": 2,
-            "Time": -5
+            "Formality": -1,
+            "Time": -2,
+            "Sexy": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Bar / Club"
+            }
           }
         },
         {
           "code": "B",
           "label": "ห้างสรรพสินค้า",
           "image": null,
+          "images": [],
           "scores": {
-            "Modern": 2,
             "Formality": 1,
-            "Time": 1
+            "Rich": 1,
+            "Modern": 1,
+            "Luxury": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Siam hangout"
+            }
           }
         },
         {
           "code": "C",
           "label": "สวนสาธารณะ",
           "image": null,
+          "images": [],
           "scores": {
-            "Freshness": 5,
-            "Time": 3,
-            "Playful": 1
+            "Freshness": 2,
+            "Time": 2,
+            "Sport": 1,
+            "Natural": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Park"
+            }
           }
         },
         {
           "code": "D",
           "label": "สปา",
           "image": null,
+          "images": [],
           "scores": {
-            "Maturity": 2,
-            "Luxury": 2,
-            "Sweetness": 1
+            "Maturity": 1,
+            "Sweetness": 1,
+            "Intensity": -2,
+            "Natural": 2,
+            "Luxury": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Spa"
+            }
           }
         },
         {
           "code": "E",
           "label": "ร้านกาแฟ",
           "image": null,
+          "images": [],
           "scores": {
-            "Modern": 2,
+            "Freshness": 1,
             "Sweetness": 1,
+            "Time": 1,
+            "Modern": 1,
             "Playful": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Cafe"
+            }
           }
         },
         {
           "code": "F",
           "label": "หาด · ทะเล",
           "image": null,
+          "images": [],
           "scores": {
-            "Freshness": 5,
-            "Time": 3,
-            "Playful": 2
+            "Freshness": 2,
+            "Formality": -2,
+            "Time": 2,
+            "Sport": 1,
+            "Natural": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Beach / Sea"
+            }
           }
         },
         {
           "code": "G",
           "label": "ภูเขา · ธรรมชาติ",
           "image": null,
+          "images": [],
           "scores": {
-            "Freshness": 3,
             "Maturity": 1,
+            "Freshness": 2,
+            "Sport": 1,
+            "Natural": 2,
             "Modern": -1
+          },
+          "i18n": {
+            "en": {
+              "label": "Mountains / Nature"
+            }
           }
         },
         {
           "code": "H",
           "label": "บาร์ · cocktail",
           "image": null,
+          "images": [],
           "scores": {
-            "Sexy": 3,
             "Intensity": 2,
-            "Luxury": 2
+            "Time": -2,
+            "Sexy": 2,
+            "Luxury": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Cocktail bar"
+            }
           }
         },
         {
           "code": "I",
           "label": "งานอีเวนต์ · ฮอลล์",
           "image": null,
+          "images": [],
           "scores": {
-            "Formality": 3,
-            "Luxury": 2,
-            "Modern": 1
+            "Formality": 2,
+            "Rich": 1,
+            "Modern": 1,
+            "Luxury": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Co-working space"
+            }
           }
         },
         {
           "code": "J",
           "label": "ไปเล่นการ์ด vangard",
           "image": null,
+          "images": [],
           "scores": {
-            "Playful": 3,
-            "Modern": -2
+            "Maturity": -1,
+            "Formality": -1,
+            "Modern": -1,
+            "Playful": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Cosplay event"
+            }
+          }
+        },
+        {
+          "code": "K",
+          "label": "ไปเล่นการ์ด Board game",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Maturity": -1,
+            "Sweetness": 1,
+            "Formality": -1,
+            "Playful": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "Board game cafe"
+            }
+          }
+        },
+        {
+          "code": "L",
+          "label": "โรงหนัง",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Intensity": 1,
+            "Time": -1,
+            "Modern": 1,
+            "Sexy": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Cinema"
+            }
           }
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "Your favourite place to be"
+        }
+      }
+    },
+    {
+      "id": "q0ZW17O",
+      "order": 6,
+      "title": "เเนวเพลงที่ชอบฟัง",
+      "subtitle": "Your playlist",
+      "image": null,
+      "multiSelect": true,
+      "choices": [
+        {
+          "code": "A",
+          "label": "ไม่ต้องยุ่ง !!!!",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Masculine": 1,
+            "Maturity": 1,
+            "Intensity": 2,
+            "Formality": -1,
+            "Modern": -1
+          },
+          "i18n": {
+            "en": {
+              "label": "Leave me alone !!!!"
+            }
+          }
+        },
+        {
+          "code": "B",
+          "label": "Young gu / Daimond MQT/ Thai Hiphop",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Masculine": 1,
+            "Intensity": 2,
+            "Time": -1,
+            "Modern": 2,
+            "Sexy": 1,
+            "Playful": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Younggu / Diamond MQT / Thai Hiphop"
+            }
+          }
+        },
+        {
+          "code": "C",
+          "label": "HYBS/WIM/PREP/Keshi/Joji เพลงที่ฟังไม่ออกเเต่เเอ๊คอะ ",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Sweetness": 1,
+            "Intensity": -1,
+            "Time": -1,
+            "Modern": 2,
+            "Sexy": 1,
+            "Luxury": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "HYBS / WIM / PREP / Keshi / Joji songs you cannot understand but can pose to"
+            }
+          }
+        },
+        {
+          "code": "D",
+          "label": "Three Man Down / Tilly Bird / Genelab main stream อยู่เเล้วเพื่อนนน",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Freshness": 1,
+            "Modern": 1,
+            "Playful": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Three Man Down / Tilly Birds / GeneLab mainstream, obviously"
+            }
+          }
+        },
+        {
+          "code": "E",
+          "label": "Thai Indie เพลงที่เขาเล่นกันตาม Cat expo อะ เธอออ",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Sweetness": 1,
+            "Natural": 1,
+            "Modern": 2,
+            "Playful": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "Thai indie like the songs people play at Cat Expo"
+            }
+          }
+        },
+        {
+          "code": "F",
+          "label": "สากลทั่วไป Justin / Taylor swift / Sabina เอสเปรสโซ่ คาปูชิโน๊ ",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Freshness": 1,
+            "Sweetness": 1,
+            "Modern": 1,
+            "Sexy": 1,
+            "Playful": 1
+          },
+          "i18n": {
+            "en": {
+              "label": "International pop: Justin / Taylor Swift / Sabrina, espresso-cappuccino energy"
+            }
+          }
+        },
+        {
+          "code": "G",
+          "label": "K ปง K ป๊อบ เเอสปง Aespa เเบล็คพง Blackpink",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Sweetness": 1,
+            "Intensity": 1,
+            "Modern": 2,
+            "Luxury": 1,
+            "Playful": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "K-pop energy: Aespa / Blackpink"
+            }
+          }
+        },
+        {
+          "code": "H",
+          "label": "J Pop เพลงอนิเมะ อิเซโนเซ นานี่โม นานี่โม!!!!",
+          "image": null,
+          "images": [],
+          "scores": {
+            "Maturity": -2,
+            "Sweetness": 1,
+            "Formality": -1,
+            "Modern": 1,
+            "Playful": 2
+          },
+          "i18n": {
+            "en": {
+              "label": "J-pop anime songs, dramatic chorus and all"
+            }
+          }
+        }
+      ],
+      "i18n": {
+        "en": {
+          "title": "Your playlist"
+        }
+      }
     }
   ]
 }

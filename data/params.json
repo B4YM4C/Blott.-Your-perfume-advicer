@@ -1,20 +1,82 @@
 {
-  "_note": "Configurable list of scoring axes. CORE axes get distance weight 1.0; META axes get weight = metaWeight (default 0.5). Admin can add/remove/rename axes — the names here must match the keys in choice.scores and perfume.dna.",
+  "_note": "Synced from production params. CORE axes get distance weight 1.0; META axes get weight = metaWeight.",
   "metaWeight": 0.5,
-  "clamp": { "min": -10, "max": 10 },
+  "clamp": {
+    "min": -10,
+    "max": 10
+  },
   "core": [
-    { "name": "Masculine", "label": "Masculine", "description": "+ มาส, − หวาน/ละมุน" },
-    { "name": "Maturity",  "label": "Maturity",  "description": "+ ผู้ใหญ่/นิ่ง, − เด็ก/วัยรุ่น" },
-    { "name": "Freshness", "label": "Freshness", "description": "+ สดชื่น, − หนัก/อบอุ่น" },
-    { "name": "Sweetness", "label": "Sweetness", "description": "+ หวาน, − แห้ง/ขม" },
-    { "name": "Intensity", "label": "Intensity", "description": "+ จัดจ้าน, − เบา" },
-    { "name": "Formality", "label": "Formality", "description": "+ ทางการ, − ลำลอง" },
-    { "name": "Time",      "label": "Time",      "description": "+ กลางวัน, − กลางคืน" }
+    {
+      "name": "Masculine",
+      "label": "Masculine",
+      "description": "+ masculine/ความเป็นชาย, - feminine/ความเป็นผู้หญิง"
+    },
+    {
+      "name": "Maturity",
+      "label": "Maturity",
+      "description": "+ ผู้ใหญ่/นิ่ง, − เด็ก/วัยรุ่น"
+    },
+    {
+      "name": "Freshness",
+      "label": "Freshness",
+      "description": "+ สดชื่น, − หนัก/อบอุ่น"
+    },
+    {
+      "name": "Sweetness",
+      "label": "Sweetness",
+      "description": "+ หวาน, − แห้ง/ขม"
+    },
+    {
+      "name": "Intensity",
+      "label": "Intensity",
+      "description": "+ จัดจ้าน, − เบา"
+    },
+    {
+      "name": "Formality",
+      "label": "Formality",
+      "description": "+ ทางการ, − ลำลอง"
+    },
+    {
+      "name": "Time",
+      "label": "Time",
+      "description": "+ กลางวัน, − กลางคืน"
+    },
+    {
+      "name": "Rich",
+      "label": "Rich",
+      "description": "+ เเพง ,- ราคาเข้าถึงได้"
+    },
+    {
+      "name": "Sport",
+      "label": "Sport",
+      "description": "+ สปอร์ต,- ชิลสบายๆ"
+    },
+    {
+      "name": "Natural",
+      "label": "Natural",
+      "description": "+ ธรรมชาติ,-หอมเเบบเเยกกลิ่นไม่ออก"
+    }
   ],
   "meta": [
-    { "name": "Modern",  "label": "Modern",  "description": "+ ทันสมัย, − คลาสสิก" },
-    { "name": "Sexy",    "label": "Sexy",    "description": "+ เซ็กซี่, − สุภาพ" },
-    { "name": "Luxury",  "label": "Luxury",  "description": "+ หรูหรา, − สบายๆ" },
-    { "name": "Playful", "label": "Playful", "description": "+ สนุกขี้เล่น, − จริงจัง" }
+    {
+      "name": "Modern",
+      "label": "Modern",
+      "description": "+ ทันสมัย, − คลาสสิก"
+    },
+    {
+      "name": "Sexy",
+      "label": "Sexy",
+      "description": "+ เซ็กซี่, − สุภาพ"
+    },
+    {
+      "name": "Luxury",
+      "label": "Luxury",
+      "description": "+ หรูหรา, − สบายๆ"
+    },
+    {
+      "name": "Playful",
+      "label": "Playful",
+      "description": "+ สนุกขี้เล่น, − จริงจัง"
+    }
   ]
 }

@@ -9,6 +9,11 @@ import {
   topReasons,
 } from '@/lib/quizLogic';
 
+function toPublicResult(result) {
+  const { pattern, ...publicResult } = result;
+  return publicResult;
+}
+
 export async function POST(req) {
   try {
     const body = await req.json();
@@ -76,7 +81,12 @@ export async function POST(req) {
       }
       if (email) await db.setUserEmail(user.id, email);
 
-      return NextResponse.json({ ok: true, sessionId: session.id, userId: user.id, pattern, result });
+      return NextResponse.json({
+        ok: true,
+        sessionId: session.id,
+        userId: user.id,
+        result: toPublicResult(result),
+      });
     }
 
     // Score → vector
@@ -129,7 +139,12 @@ export async function POST(req) {
       else if (email) await db.logEvent(session.id, 'email_submitted', {});
     }
 
-    return NextResponse.json({ ok: true, sessionId: session.id, userId: user.id, pattern, result });
+    return NextResponse.json({
+      ok: true,
+      sessionId: session.id,
+      userId: user.id,
+      result: toPublicResult(result),
+    });
   } catch (e) {
     return NextResponse.json({ ok: false, error: e.message }, { status: 500 });
   }

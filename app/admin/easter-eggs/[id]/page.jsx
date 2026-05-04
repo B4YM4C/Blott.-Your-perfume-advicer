@@ -11,6 +11,7 @@ export default async function EditEggPage({ params }) {
   if (!rule) {
     rule = {
       id: id === 'new' ? null : id,
+      type: 'quiz',
       label: '',
       enabled: true,
       priority: 100,

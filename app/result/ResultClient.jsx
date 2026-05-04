@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 export default function ResultClient({ sessionId, copy = {} }) {
@@ -14,9 +14,13 @@ export default function ResultClient({ sessionId, copy = {} }) {
     altsEyebrow: copy.alternatives?.eyebrow ?? 'Also nearby',
     altsTitle: copy.alternatives?.title ?? 'Two more strips that came close',
     specialEyebrow: copy.specialEyebrow ?? 'Easter Egg · Special Result',
+    disclosureEyebrow: copy.disclaimer?.eyebrow ?? 'Beta · Disclosure',
+    disclosureBody: copy.disclaimer?.body
+      ?? 'ผลลัพธ์นี้เป็นคำแนะนำเบื้องต้นจากระบบของเรา ในเวอร์ชัน beta คำตอบมีจำนวนจำกัด — เราจะอัปเดต logic อย่างต่อเนื่องเมื่อเก็บข้อมูลและความเห็นจากผู้ใช้มากขึ้น',
   };
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
+  const soundPlayedRef = useRef(false);
 
   useEffect(() => {
     // /result?preview=1 is used by the admin Site Editor iframe — show a
@@ -38,6 +42,32 @@ export default function ResultClient({ sessionId, copy = {} }) {
       .catch((e) => setError(e.message));
   }, [sessionId]);
 
+  useEffect(() => {
+    if (!data || soundPlayedRef.current) return;
+    const isPreview = typeof window !== 'undefined'
+      && new URLSearchParams(window.location.search).get('preview') === '1';
+    if (isPreview) return;
+
+    soundPlayedRef.current = true;
+    const audio = new Audio('/result-sound.mp3');
+    audio.volume = 0.7;
+    let cleanup = () => {};
+    const play = () => {
+      audio.play()
+        .then(cleanup)
+        .catch(() => {});
+    };
+    cleanup = () => {
+      window.removeEventListener('pointerdown', play);
+      window.removeEventListener('keydown', play);
+    };
+    audio.play().catch(() => {
+      window.addEventListener('pointerdown', play, { once: true });
+      window.addEventListener('keydown', play, { once: true });
+    });
+    return cleanup;
+  }, [data]);
+
   if (error) return (
     <div className="container-narrow" style={{ padding: '120px 24px', textAlign: 'center' }}>
       <span className="meta">Error</span>
@@ -56,7 +86,7 @@ export default function ResultClient({ sessionId, copy = {} }) {
   // ─── Special rule (เบียว + vangard) — short-circuit, no DNA ───
   if (data.special) {
     return (
-      <div className="container-narrow" style={s.specialWrap}>
+      <div className="container-narrow result-special-wrap" style={s.specialWrap}>
         <span className="meta" data-edit-key="result.specialEyebrow">{c.specialEyebrow}</span>
         <h1 style={s.specialH1} data-edit-key="result.special.fragranceName">{data.fragrance}</h1>
         <p style={s.specialBlurb} data-edit-key="result.special.blurb">{data.blurb}</p>
@@ -70,23 +100,23 @@ export default function ResultClient({ sessionId, copy = {} }) {
 
   // ─── Standard result ───
   return (
-    <div className="container" style={s.wrap}>
-      <header style={s.header}>
-        <span className="meta" data-edit-key="result.eyebrowPrefix">{c.eyebrowPrefix}{data.pattern}</span>
-        <h1 style={s.h1}>
+    <div className="container result-wrap" style={s.wrap}>
+      <header className="result-header" style={s.header}>
+        <span className="meta" data-edit-key="result.eyebrowPrefix">{c.eyebrowPrefix}</span>
+        <h1 className="result-title" style={s.h1}>
           <span data-edit-key="result.titleLine1">{c.titleLine1}</span><br />
           <em style={s.em} data-edit-key="result.card.fragranceName">{data.fragrance}</em>
         </h1>
       </header>
 
-      <article style={s.card}>
-        <div style={s.cardLeft}>
+      <article className="result-card" style={s.card}>
+        <div className="result-card-left" style={s.cardLeft}>
           {data.image
-            ? <img src={data.image} alt={data.fragrance} style={s.bottle} />
+            ? <img className="result-bottle" src={data.image} alt={data.fragrance} style={s.bottle} />
             : <BottleSilhouette />}
         </div>
-        <div style={s.cardRight}>
-          <div style={s.metaRow}>
+        <div className="result-card-right" style={s.cardRight}>
+          <div className="result-meta-row" style={s.metaRow}>
             <div>
               <div className="meta" data-edit-key="result.card.metaLabel">House</div>
               <div style={s.metaVal} data-edit-key="result.card.metaValue">{data.house || '—'}</div>
@@ -108,15 +138,15 @@ export default function ResultClient({ sessionId, copy = {} }) {
             </div>
           )}
 
-          <p style={s.blurb} data-edit-key="result.card.blurb">{data.blurb}</p>
+          <p className="result-blurb" style={s.blurb} data-edit-key="result.card.blurb">{data.blurb}</p>
 
           {/* Why this match — top 3 axes where the user vector and perfume DNA agree */}
           {data.reasons?.length > 0 && (
             <div style={{ marginTop: 28 }}>
               <div className="meta" data-edit-key="result.card.reasonsLabel">Why this match</div>
-              <ul style={s.reasonList}>
+              <ul className="result-reason-list" style={s.reasonList}>
                 {data.reasons.map((r, i) => (
-                  <li key={i} style={s.reasonRow}>
+                  <li key={i} className="result-reason-row" style={s.reasonRow}>
                     <span style={s.reasonParam} data-edit-key="result.card.reasonParam">{r.param}</span>
                     <span style={s.reasonBar}>
                       <ReasonBar user={r.user} perfume={r.perfume} />
@@ -130,7 +160,7 @@ export default function ResultClient({ sessionId, copy = {} }) {
             </div>
           )}
 
-          <div style={s.actions}>
+          <div className="result-actions" style={s.actions}>
             <Link href="/quiz" className="btn" data-edit-key="result.actions.again">{c.actionAgain}</Link>
             <Link href="/" className="btn ghost" data-edit-key="result.actions.home">{c.actionHome}</Link>
           </div>
@@ -139,14 +169,14 @@ export default function ResultClient({ sessionId, copy = {} }) {
 
       {/* Top 2 alternates */}
       {data.alternatives?.length > 0 && (
-        <section style={{ marginTop: 56 }}>
+        <section className="result-alternatives" style={{ marginTop: 56 }}>
           <div style={{ textAlign: 'center', marginBottom: 24 }}>
             <span className="meta" data-edit-key="result.alternatives.eyebrow">{c.altsEyebrow}</span>
             <h3 style={s.altHead} data-edit-key="result.alternatives.title">{c.altsTitle}</h3>
           </div>
-          <div style={s.altGrid}>
+          <div className="result-alt-grid" style={s.altGrid}>
             {data.alternatives.map((alt, i) => (
-              <article key={i} style={s.altCard}>
+              <article key={i} className="result-alt-card" style={s.altCard}>
                 <div className="meta" data-edit-key="result.alt.meta">#{i + 2} · distance {alt.distance}</div>
                 <h4 style={s.altTitle} data-edit-key="result.alt.title">{alt.fragrance}</h4>
                 <div style={{ color: 'var(--grey-2)', fontSize: 13, marginTop: 4 }} data-edit-key="result.alt.subMeta">
@@ -166,11 +196,10 @@ export default function ResultClient({ sessionId, copy = {} }) {
         </section>
       )}
 
-      <div style={s.disclaimer}>
-        <span className="meta" data-edit-key="result.disclaimer.eyebrow">Beta · Disclosure</span>
+      <div className="result-disclaimer" style={s.disclaimer}>
+        <span className="meta" data-edit-key="result.disclaimer.eyebrow">{c.disclosureEyebrow}</span>
         <p style={{ marginTop: 10, color: 'var(--grey-2)', fontSize: 13.5, lineHeight: 1.7 }} data-edit-key="result.disclaimer.body">
-          ผลลัพธ์นี้เป็นคำแนะนำเบื้องต้นจากระบบของเรา ในเวอร์ชัน beta คำตอบมีจำนวนจำกัด —
-          เราจะอัปเดต logic อย่างต่อเนื่องเมื่อเก็บข้อมูลและความเห็นจากผู้ใช้มากขึ้น
+          {c.disclosureBody}
         </p>
       </div>
     </div>
@@ -271,7 +300,6 @@ const s = {
 // shape returned by /api/quiz/result (special: false, has alternatives).
 const PREVIEW_SAMPLE = {
   special: false,
-  pattern: 'A1',
   fragrance: 'Sample Fragrance EDP',
   house: 'Maison Demo',
   family: 'Woody Aromatic',

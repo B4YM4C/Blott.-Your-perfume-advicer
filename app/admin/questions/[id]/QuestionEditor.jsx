@@ -5,14 +5,19 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ui } from '../../_ui';
 
-const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
+const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 export default function QuestionEditor({ initial, isNew, paramConfig }) {
   const router = useRouter();
   const [q, setQ] = useState(() => {
     // Ensure scores object exists on every choice
-    const choices = (initial.choices || []).map((c) => ({ ...c, scores: c.scores || {} }));
-    return { ...initial, multiSelect: !!initial.multiSelect, choices };
+    const choices = (initial.choices || []).map((c) => ({
+      ...c,
+      images: Array.isArray(c.images) ? c.images : [],
+      scores: c.scores || {},
+      i18n: c.i18n || {},
+    }));
+    return { ...initial, copy: { ...(initial.copy || {}) }, i18n: { ...(initial.i18n || {}) }, multiSelect: !!initial.multiSelect, choices };
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -25,6 +30,7 @@ export default function QuestionEditor({ initial, isNew, paramConfig }) {
   }, [paramConfig]);
 
   function update(patch) { setQ((p) => ({ ...p, ...patch })); }
+  function updateCopy(patch) { setQ((p) => ({ ...p, copy: { ...(p.copy || {}), ...patch } })); }
   function updateChoice(i, patch) {
     setQ((p) => ({ ...p, choices: p.choices.map((c, idx) => (idx === i ? { ...c, ...patch } : c)) }));
   }
@@ -42,7 +48,7 @@ export default function QuestionEditor({ initial, isNew, paramConfig }) {
   }
   function addChoice() {
     if (q.choices.length >= LETTERS.length) return;
-    setQ((p) => ({ ...p, choices: [...p.choices, { code: LETTERS[p.choices.length], label: '', image: null, scores: {} }] }));
+    setQ((p) => ({ ...p, choices: [...p.choices, { code: LETTERS[p.choices.length], label: '', image: null, scores: {}, i18n: {} }] }));
   }
   function removeChoice(i) {
     if (!confirm(`Remove choice ${q.choices[i]?.code}?`)) return;
@@ -110,7 +116,7 @@ export default function QuestionEditor({ initial, isNew, paramConfig }) {
           <Field label="Title (TH)">
             <input type="text" value={q.title} onChange={(e) => update({ title: e.target.value })} style={ui.input} placeholder="งบประมาณของคุณ" />
           </Field>
-          <Field label="Subtitle (EN)">
+          <Field label="Title (EN)">
             <input type="text" value={q.subtitle || ''} onChange={(e) => update({ subtitle: e.target.value })} style={ui.input} placeholder="What is your budget?" />
           </Field>
         </div>
@@ -127,6 +133,36 @@ export default function QuestionEditor({ initial, isNew, paramConfig }) {
             <span style={{ width: 8, height: 8, background: q.multiSelect ? 'var(--paper)' : 'var(--grey-4)', borderRadius: 2 }} />
             {q.multiSelect ? 'Multi-select (เลือกได้หลายข้อ)' : 'Single-select (เลือกได้ 1 ข้อ)'}
           </button>
+        </Field>
+      </div>
+
+      <div style={{ ...ui.panel, marginTop: 16 }}>
+        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 22, fontWeight: 400, marginBottom: 6 }}>Per-question page copy</h2>
+        <p style={{ color: 'var(--grey-3)', fontSize: 12, marginBottom: 16 }}>
+          ข้อความชุดนี้จะตาม question id นี้โดยตรง ถ้าเพิ่ม/ลด quiz ระบบจะอ่าน dynamic ตามจำนวนข้อจริง
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }}>
+          <Field label="Eyebrow override">
+            <input style={ui.input} value={q.copy?.eyebrow || ''} onChange={(e) => updateCopy({ eyebrow: e.target.value })} placeholder="Question · {current} / {total}" />
+          </Field>
+          <Field label="Continue label">
+            <input style={ui.input} value={q.copy?.continueLabel || ''} onChange={(e) => updateCopy({ continueLabel: e.target.value })} placeholder="Confirm →" />
+          </Field>
+          <Field label="Finish label">
+            <input style={ui.input} value={q.copy?.finishLabel || ''} onChange={(e) => updateCopy({ finishLabel: e.target.value })} placeholder="Confirm & Finish →" />
+          </Field>
+          <Field label="Back label">
+            <input style={ui.input} value={q.copy?.backLabel || ''} onChange={(e) => updateCopy({ backLabel: e.target.value })} placeholder="← Back" />
+          </Field>
+          <Field label="Single-select hint">
+            <input style={ui.input} value={q.copy?.singleHint || ''} onChange={(e) => updateCopy({ singleHint: e.target.value })} placeholder="เลือกได้ 1 ข้อ — เลือกอันใหม่จะเปลี่ยนคำตอบเดิม" />
+          </Field>
+          <Field label="Multi-select hint">
+            <input style={ui.input} value={q.copy?.multiHint || ''} onChange={(e) => updateCopy({ multiHint: e.target.value })} placeholder="เลือกได้มากกว่า 1 ข้อ — กดอีกครั้งเพื่อยกเลิก" />
+          </Field>
+        </div>
+        <Field label="Question body / description override">
+          <textarea style={ui.textarea} rows={3} value={q.copy?.body || ''} onChange={(e) => updateCopy({ body: e.target.value })} placeholder="คำอธิบายเพิ่มเติมของข้อนี้" />
         </Field>
       </div>
 
@@ -172,18 +208,40 @@ export default function QuestionEditor({ initial, isNew, paramConfig }) {
 }
 
 function ChoiceCard({ c, i, allParams, onChange, onScoreChange, onRemove, onUpload, uploading, canRemove }) {
+  function updateChoiceI18n(locale, patch) {
+    onChange({
+      i18n: {
+        ...(c.i18n || {}),
+        [locale]: { ...(c.i18n?.[locale] || {}), ...patch },
+      },
+    });
+  }
   return (
     <div style={cardStyle}>
-      <div style={{ display: 'grid', gridTemplateColumns: '40px 1fr 220px 100px', gap: 12, alignItems: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '40px minmax(180px, 1fr) minmax(260px, 1.1fr) 100px', gap: 12, alignItems: 'center' }}>
         <div style={codeBadge}>{c.code}</div>
-        <input
-          type="text" value={c.label} onChange={(e) => onChange({ label: e.target.value })}
-          style={ui.input} placeholder={`Choice ${c.code} label`}
-        />
+        <div>
+          <input
+            type="text" value={c.label} onChange={(e) => onChange({ label: e.target.value })}
+            style={ui.input} placeholder={`Choice ${c.code} label`}
+          />
+          <input
+            type="text" value={c.i18n?.en?.label || ''} onChange={(e) => updateChoiceI18n('en', { label: e.target.value })}
+            style={{ ...ui.input, marginTop: 8 }} placeholder="English label cache"
+          />
+        </div>
         <div>
           <input
             type="text" value={c.image || ''} onChange={(e) => onChange({ image: e.target.value || null })}
             style={ui.input} placeholder="Image URL (optional)"
+          />
+          <textarea
+            value={(c.images || []).join('\n')}
+            onChange={(e) => onChange({
+              images: e.target.value.split(/\n|,/).map((url) => url.trim()).filter(Boolean),
+            })}
+            style={{ ...ui.input, minHeight: 64, marginTop: 8, resize: 'vertical' }}
+            placeholder="Choice image list, one URL per line"
           />
           <label style={smallUpload}>
             <input
@@ -196,9 +254,11 @@ function ChoiceCard({ c, i, allParams, onChange, onScoreChange, onRemove, onUplo
         <button className="btn ghost btn-sm" onClick={onRemove} disabled={!canRemove}>Remove</button>
       </div>
 
-      {c.image && (
-        <div style={{ marginTop: 10 }}>
-          <img src={c.image} alt="" style={{ maxHeight: 80, border: '1px solid var(--grey-5)', borderRadius: 6 }} />
+      {(c.image || (c.images || []).length > 0) && (
+        <div style={{ marginTop: 10, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          {[...(c.images || []), ...(c.image && !(c.images || []).includes(c.image) ? [c.image] : [])].map((src) => (
+            <img key={src} src={src} alt="" style={{ maxHeight: 80, border: '1px solid var(--grey-5)', borderRadius: 6 }} />
+          ))}
         </div>
       )}
 

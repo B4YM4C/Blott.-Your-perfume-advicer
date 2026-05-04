@@ -15,12 +15,14 @@ export default async function EditQuestionPage({ params }) {
       title: '',
       subtitle: '',
       image: null,
+      copy: {},
+      i18n: {},
       multiSelect: false,
       choices: [
-        { code: 'A', label: '', image: null, scores: {} },
-        { code: 'B', label: '', image: null, scores: {} },
-        { code: 'C', label: '', image: null, scores: {} },
-        { code: 'D', label: '', image: null, scores: {} },
+        { code: 'A', label: '', image: null, scores: {}, i18n: {} },
+        { code: 'B', label: '', image: null, scores: {}, i18n: {} },
+        { code: 'C', label: '', image: null, scores: {}, i18n: {} },
+        { code: 'D', label: '', image: null, scores: {}, i18n: {} },
       ],
     };
   }

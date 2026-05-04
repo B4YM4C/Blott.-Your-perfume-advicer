@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS questions (
   title         VARCHAR(255) NOT NULL,
   subtitle      VARCHAR(255),
   image         VARCHAR(512),
+  copy          JSONB        NOT NULL DEFAULT '{}'::jsonb,
+  i18n          JSONB        NOT NULL DEFAULT '{}'::jsonb,
   multi_select  BOOLEAN      NOT NULL DEFAULT FALSE,
   created_at    TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
   updated_at    TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
@@ -54,7 +56,9 @@ CREATE TABLE IF NOT EXISTS choices (
   code         VARCHAR(4)   NOT NULL,
   label        VARCHAR(255) NOT NULL,
   image        VARCHAR(512),
+  images       JSONB        NOT NULL DEFAULT '[]'::jsonb,
   scores       JSONB        NOT NULL DEFAULT '{}'::jsonb,
+  i18n         JSONB        NOT NULL DEFAULT '{}'::jsonb,
   UNIQUE (question_id, code)
 );
 
@@ -121,6 +125,7 @@ CREATE TABLE IF NOT EXISTS perfumes (
   blurb       TEXT,
   image       VARCHAR(512),
   dna         JSONB        NOT NULL DEFAULT '{}'::jsonb,
+  i18n        JSONB        NOT NULL DEFAULT '{}'::jsonb,
   updated_at  TIMESTAMPTZ  NOT NULL DEFAULT NOW()
 );
 CREATE INDEX IF NOT EXISTS idx_perfumes_house  ON perfumes(house);

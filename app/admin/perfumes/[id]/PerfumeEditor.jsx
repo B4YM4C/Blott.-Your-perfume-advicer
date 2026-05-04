@@ -11,8 +11,10 @@ export default function PerfumeEditor({ initial, isNew, paramConfig }) {
     ...initial,
     notes: Array.isArray(initial.notes) ? initial.notes : [],
     dna: initial.dna || {},
+    i18n: initial.i18n || {},
   }));
   const [notesText, setNotesText] = useState(() => (initial.notes || []).join(', '));
+  const [notesEnText, setNotesEnText] = useState(() => (initial.i18n?.en?.notes || []).join(', '));
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
@@ -24,6 +26,15 @@ export default function PerfumeEditor({ initial, isNew, paramConfig }) {
   }, [paramConfig]);
 
   function update(patch) { setP((prev) => ({ ...prev, ...patch })); }
+  function setI18n(locale, field, value) {
+    setP((prev) => ({
+      ...prev,
+      i18n: {
+        ...(prev.i18n || {}),
+        [locale]: { ...(prev.i18n?.[locale] || {}), [field]: value },
+      },
+    }));
+  }
   function setDna(name, val) {
     setP((prev) => {
       const dna = { ...(prev.dna || {}) };
@@ -58,7 +69,15 @@ export default function PerfumeEditor({ initial, isNew, paramConfig }) {
     try {
       // commit notesText into array
       const notes = notesText.split(',').map((s) => s.trim()).filter(Boolean);
-      const body = { ...p, notes };
+      const notesEn = notesEnText.split(',').map((s) => s.trim()).filter(Boolean);
+      const body = {
+        ...p,
+        notes,
+        i18n: {
+          ...(p.i18n || {}),
+          en: { ...(p.i18n?.en || {}), notes: notesEn },
+        },
+      };
       const url = isNew ? '/api/admin/perfumes' : `/api/admin/perfumes/${p.id}`;
       const r = await fetch(url, {
         method: isNew ? 'POST' : 'PUT',
@@ -126,6 +145,30 @@ export default function PerfumeEditor({ initial, isNew, paramConfig }) {
               <img src={p.image} alt="" style={{ maxHeight: 160, border: '1px solid var(--grey-5)', borderRadius: 6 }} />
             </div>
           )}
+        </Field>
+      </div>
+
+      <div style={{ ...ui.panel, marginTop: 16 }}>
+        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 22, fontWeight: 400, marginBottom: 6 }}>English cache</h2>
+        <p style={{ color: 'var(--grey-3)', fontSize: 12, marginBottom: 16 }}>
+          Public EN mode reads this cached translation directly, so visitors do not wait for a translation API on result pages.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }}>
+          <Field label="Family (EN)">
+            <input style={ui.input} value={p.i18n?.en?.family || ''} onChange={(e) => setI18n('en', 'family', e.target.value)} placeholder="Citrus Aromatic" />
+          </Field>
+          <Field label="Key notes (EN, comma-separated)">
+            <input style={ui.input} value={notesEnText} onChange={(e) => setNotesEnText(e.target.value)} placeholder="Bergamot, Fig leaves, Cedar" />
+          </Field>
+        </div>
+        <Field label="Blurb / description (EN)">
+          <textarea
+            style={ui.textarea}
+            rows={4}
+            value={p.i18n?.en?.blurb || ''}
+            onChange={(e) => setI18n('en', 'blurb', e.target.value)}
+            placeholder="Cached English description for bilingual result pages"
+          />
         </Field>
       </div>
 

@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Blot. — Design System, CI & Colorway</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Italiana&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#0a0a0a;
+    --paper:#ffffff;
+    --offwhite:#f8f8f8;
+    --grey-5:#e8e8e8;
+    --grey-4:#bfbfbf;
+    --grey-3:#8a8a8a;
+    --grey-2:#4a4a4a;
+    --grey-1:#1a1a1a;
+    --line:#e6e3dc;
+    --warm:#f7f2e8;
+    --gold:#c9b27b;
+    --sage:#cfe1d5;
+    --rose:#e7d1cf;
+    --blue:#d8e0ea;
+    --success:#0a7a3a;
+    --danger:#b91c1c;
+    --font-serif:'Cormorant Garamond', Georgia, serif;
+    --font-sans:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono:'JetBrains Mono', ui-monospace, monospace;
+    --font-logo:'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing:border-box; }
+  html, body { margin:0; background:var(--offwhite); color:var(--ink); }
+  body {
+    font-family:var(--font-sans);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a { color:inherit; }
+  .page { max-width:1180px; margin:0 auto; padding:42px 26px 110px; }
+  .meta {
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:0;
+    text-transform:uppercase;
+    color:var(--grey-3);
+  }
+  .hero {
+    min-height:520px;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    background:var(--paper);
+    border:1px solid var(--line);
+  }
+  .hero-copy {
+    padding:56px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .hero h1 {
+    font-family:var(--font-serif);
+    font-size:82px;
+    line-height:.98;
+    font-weight:700;
+    letter-spacing:0;
+    margin:32px 0 24px;
+  }
+  .hero h1 span {
+    display:block;
+    font-family:var(--font-sans);
+    font-size:22px;
+    font-weight:500;
+    margin-top:20px;
+  }
+  .hero p { max-width:650px; color:var(--grey-2); margin:0; }
+  .hero-board {
+    background:var(--ink);
+    color:var(--paper);
+    padding:40px;
+    display:grid;
+    align-content:space-between;
+    gap:34px;
+  }
+  .hero-board p { color:#d4d4d4; }
+  .logo-slab {
+    background:var(--paper);
+    min-height:210px;
+    display:grid;
+    place-items:center;
+    border:1px solid rgba(255,255,255,.2);
+  }
+  .logo-slab.dark { background:var(--ink); border-color:#2a2a2a; }
+  .logo-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .kpi-grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .kpi {
+    background:var(--paper);
+    min-height:136px;
+    padding:22px 18px;
+  }
+  .kpi strong {
+    display:block;
+    font-family:var(--font-serif);
+    font-size:46px;
+    line-height:1;
+    margin-top:16px;
+  }
+  section { margin-top:34px; }
+  .section-head {
+    margin:56px 0 18px;
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:24px;
+  }
+  h2 {
+    font-family:var(--font-serif);
+    font-size:48px;
+    line-height:1;
+    letter-spacing:0;
+    margin:0;
+  }
+  h3 {
+    font-family:var(--font-serif);
+    font-size:26px;
+    line-height:1.15;
+    letter-spacing:0;
+    margin:0 0 8px;
+  }
+  h4 {
+    font-size:15px;
+    margin:0 0 6px;
+  }
+  p { margin:8px 0 0; color:var(--grey-2); }
+  code {
+    font-family:var(--font-mono);
+    font-size:.9em;
+    background:var(--offwhite);
+    border:1px solid var(--line);
+    padding:1px 6px;
+  }
+  .band {
+    background:var(--paper);
+    border:1px solid var(--line);
+    padding:30px;
+  }
+  .band.dark {
+    background:var(--ink);
+    color:var(--paper);
+    border-color:var(--ink);
+  }
+  .band.dark p, .band.dark li { color:#d4d4d4; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .card {
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px;
+    min-height:190px;
+  }
+  .card.fill { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .card.fill p, .card.fill li { color:#d4d4d4; }
+  .principle {
+    min-height:230px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .principle .num {
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--paper);
+    display:grid;
+    place-items:center;
+    font-family:var(--font-mono);
+    font-size:12px;
+  }
+  .swatches {
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:10px;
+  }
+  .swatch {
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+  }
+  .swatch .paint { height:112px; border-bottom:1px solid var(--line); }
+  .swatch .info { padding:12px; min-height:92px; }
+  .swatch b { display:block; font-size:13px; margin-bottom:3px; }
+  .swatch small { display:block; color:var(--grey-3); font-family:var(--font-mono); font-size:10px; }
+  .type-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:14px;
+  }
+  .type-card {
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px;
+    min-height:250px;
+  }
+  .specimen-serif { font-family:var(--font-serif); font-size:46px; line-height:1; }
+  .specimen-sans { font-family:var(--font-sans); font-size:34px; line-height:1.08; font-weight:700; }
+  .specimen-mono { font-family:var(--font-mono); font-size:19px; line-height:1.35; }
+  .token-table {
+    display:grid;
+    border:1px solid var(--line);
+    background:var(--paper);
+  }
+  .token-row {
+    display:grid;
+    grid-template-columns:230px 1fr 220px;
+    border-top:1px solid var(--line);
+  }
+  .token-row:first-child { border-top:0; background:var(--warm); }
+  .token-cell {
+    padding:13px 14px;
+    border-left:1px solid var(--line);
+    font-size:13px;
+  }
+  .token-cell:first-child { border-left:0; }
+  .token-row:first-child .token-cell {
+    font-family:var(--font-mono);
+    font-size:10px;
+    text-transform:uppercase;
+    color:var(--grey-3);
+  }
+  .component-preview {
+    margin-top:16px;
+    display:grid;
+    gap:12px;
+  }
+  .button-demo {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:44px;
+    padding:0 22px;
+    border-radius:999px;
+    font-family:var(--font-mono);
+    font-size:11px;
+    background:var(--ink);
+    color:var(--paper);
+    border:1px solid var(--ink);
+    width:max-content;
+  }
+  .button-demo.ghost {
+    background:transparent;
+    color:var(--ink);
+  }
+  .input-demo {
+    border:1px solid var(--grey-5);
+    border-radius:8px;
+    padding:13px 14px;
+    background:var(--paper);
+    color:var(--grey-3);
+  }
+  .choice-demo {
+    display:grid;
+    grid-template-columns:54px 1fr;
+    gap:14px;
+    align-items:center;
+    border:1px solid var(--grey-5);
+    border-radius:8px;
+    padding:14px;
+  }
+  .choice-demo .letter {
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--paper);
+    display:grid;
+    place-items:center;
+    font-family:var(--font-mono);
+    font-size:12px;
+  }
+  .ratio {
+    display:grid;
+    grid-template-columns:8fr 1.5fr .5fr;
+    height:42px;
+    overflow:hidden;
+    border-radius:8px;
+    border:1px solid var(--line);
+    margin-top:16px;
+  }
+  .ratio div:first-child { background:var(--paper); }
+  .ratio div:nth-child(2) { background:var(--grey-5); }
+  .ratio div:nth-child(3) { background:var(--gold); }
+  .pill-list { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+  .pill {
+    border:1px solid var(--line);
+    background:var(--paper);
+    border-radius:999px;
+    padding:6px 10px;
+    font-family:var(--font-mono);
+    font-size:10px;
+    text-transform:uppercase;
+  }
+  .do-dont {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  .list {
+    list-style:none;
+    padding:0;
+    margin:14px 0 0;
+    display:grid;
+    gap:8px;
+  }
+  .list li {
+    border-top:1px solid var(--line);
+    padding-top:8px;
+    color:var(--grey-2);
+    font-size:14px;
+  }
+  .band.dark .list li { border-color:#2a2a2a; }
+  .flow {
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+  }
+  .flow-step {
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:18px;
+    min-height:150px;
+    position:relative;
+  }
+  .flow-step:not(:last-child)::after {
+    content:"";
+    position:absolute;
+    top:50%;
+    right:-10px;
+    width:10px;
+    height:1px;
+    background:var(--ink);
+  }
+  .footer-note {
+    margin-top:54px;
+    background:var(--ink);
+    color:var(--paper);
+    padding:30px;
+    display:flex;
+    justify-content:space-between;
+    gap:24px;
+  }
+  .footer-note p { color:#d4d4d4; max-width:760px; margin:0; }
+
+  @media (max-width: 980px) {
+    .hero, .grid-2 { grid-template-columns:1fr; }
+    .kpi-grid, .grid-4, .swatches { grid-template-columns:repeat(2,1fr); }
+    .grid-3, .type-grid, .flow { grid-template-columns:1fr 1fr; }
+    .flow-step:not(:last-child)::after { display:none; }
+  }
+  @media (max-width: 640px) {
+    .page { padding:18px 14px 70px; }
+    .hero-copy, .hero-board, .band { padding:24px; }
+    .hero h1 { font-size:52px; }
+    h2 { font-size:36px; }
+    .kpi-grid, .grid-3, .grid-4, .swatches, .type-grid, .flow, .do-dont { grid-template-columns:1fr; }
+    .token-row { grid-template-columns:1fr; }
+    .token-cell { border-left:0; border-top:1px solid var(--line); }
+    .token-cell:first-child { border-top:0; }
+    .footer-note { display:block; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <div class="hero-copy">
+      <div>
+        <div class="meta">Design documentation · 2026-05-02</div>
+        <h1>Blot.<br>Design System<span>Corporate Identity, UI rules and colorway for the perfume advisor.</span></h1>
+        <p>เอกสารนี้เป็น part งาน design สำหรับระบบ Blot. ที่เราทำกัน: สรุปตัวตนของแบรนด์, visual language, design token, component rules, colorway และวิธีที่ทีม dev ควรผูกดีไซน์เข้ากับ code จริง.</p>
+      </div>
+      <div class="pill-list">
+        <span class="pill">Editorial perfume quiz</span>
+        <span class="pill">Monochrome first</span>
+        <span class="pill">Mobile readable</span>
+        <span class="pill">Admin editable</span>
+      </div>
+    </div>
+    <aside class="hero-board">
+      <div class="logo-row">
+        <div class="logo-slab">
+          <img src="../public/site-logo.svg" alt="Blot. logo" width="150">
+        </div>
+        <div class="logo-slab dark">
+          <img src="../public/site-logo.svg" alt="Blot. logo inverse" width="150" style="filter:invert(1) hue-rotate(180deg)">
+        </div>
+      </div>
+      <div>
+        <div class="meta" style="color:#bfbfbf">Brand essence</div>
+        <p style="font-size:18px;margin-top:12px">A quiet editorial fragrance advisor: minimal, tactile, curious, and personal without feeling like a sales funnel.</p>
+      </div>
+    </aside>
+  </header>
+
+  <section>
+    <div class="kpi-grid">
+      <div class="kpi"><div class="meta">Primary mode</div><strong>B/W</strong><p>Monochrome editorial base.</p></div>
+      <div class="kpi"><div class="meta">Core fonts</div><strong>4</strong><p>Cormorant, Inter, JetBrains, Logo stack.</p></div>
+      <div class="kpi"><div class="meta">Radius</div><strong>8</strong><p>Docs/component max radius, pill only for CTA.</p></div>
+      <div class="kpi"><div class="meta">Source of truth</div><strong>CSS</strong><p><code>app/globals.css</code> + admin theme overrides.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>01 · Brand CI</h2>
+      <div class="meta">Corporate Identity</div>
+    </div>
+    <div class="grid-2">
+      <div class="band">
+        <h3>Brand Positioning</h3>
+        <p>Blot. คือผู้ช่วยเลือกน้ำหอมที่ให้ความรู้สึกเหมือน editorial concierge มากกว่า quiz ทั่วไป: นิ่ง, มีรสนิยม, ไม่ตะโกนขาย, และทำให้ผู้ใช้รู้สึกว่ากลิ่นที่ได้เป็นของเขาจริงๆ.</p>
+        <ul class="list">
+          <li><strong>Personality:</strong> refined, observant, intimate, slightly playful.</li>
+          <li><strong>Promise:</strong> One dip. One match.</li>
+          <li><strong>Primary audience:</strong> คนที่อยากหาน้ำหอมให้เหมาะกับบุคลิก งบ และ lifestyle โดยไม่ต้องรู้ note ลึกมาก่อน.</li>
+          <li><strong>Product mood:</strong> luxury-lite, accessible, editorial, Bangkok-aware.</li>
+        </ul>
+      </div>
+      <div class="band dark">
+        <h3>Voice & Copy Rules</h3>
+        <p>ภาษาควรสั้น มี texture และไม่เป็น sales copy หนักเกินไป ใช้คำไทยที่อ่านง่ายคู่กับ English cue ที่เป็นแบรนด์.</p>
+        <ul class="list">
+          <li>ใช้ sentence สั้นและมีจังหวะ เช่น “Found in a few dips.”</li>
+          <li>หลีกเลี่ยงการเคลมเกินจริง เช่น “ดีที่สุดตลอดกาล” หรือ “เหมาะกับทุกคน”.</li>
+          <li>Result copy ต้องอธิบายเหตุผลจากคำตอบ ไม่ใช่แค่โชว์ชื่อขวด.</li>
+          <li>Admin copy ใช้ภาษาตรงและ functional กว่า public site.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>02 · Design Principles</h2>
+      <div class="meta">Decision filters</div>
+    </div>
+    <div class="grid-4">
+      <div class="card principle">
+        <div class="num">01</div>
+        <div>
+          <h3>Editorial Quiet</h3>
+          <p>ใช้ whitespace, high contrast และ type hierarchy ให้เหมือนนิตยสารน้ำหอม ไม่ใช่ dashboard marketing.</p>
+        </div>
+      </div>
+      <div class="card principle">
+        <div class="num">02</div>
+        <div>
+          <h3>One Clear Action</h3>
+          <p>ทุกหน้าควรมี action หลักเดียว: start quiz, choose answer, submit, view result, edit admin data.</p>
+        </div>
+      </div>
+      <div class="card principle">
+        <div class="num">03</div>
+        <div>
+          <h3>Tactile Choices</h3>
+          <p>Choice card ต้องแตะง่าย เห็นสถานะชัด รูป outfit ต้องช่วยเลือก ไม่แย่ง attention จากคำถาม.</p>
+        </div>
+      </div>
+      <div class="card principle">
+        <div class="num">04</div>
+        <div>
+          <h3>Mobile First Reading</h3>
+          <p>มือถือซ่อน media หนัก, menu เป็น hamburger, section สำคัญขึ้นก่อน, footer สั้นและแบ่งกลุ่ม.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>03 · Logo System</h2>
+      <div class="meta">Usage, spacing, mistakes</div>
+    </div>
+    <div class="grid-2">
+      <div class="band">
+        <h3>Logo Usage</h3>
+        <div class="logo-row" style="margin-top:18px">
+          <div class="logo-slab">
+            <img src="../public/site-logo.svg" alt="Blot. logo" width="135">
+          </div>
+          <div class="logo-slab dark">
+            <img src="../public/site-logo.svg" alt="Blot. logo inverse" width="135" style="filter:invert(1) hue-rotate(180deg)">
+          </div>
+        </div>
+        <ul class="list">
+          <li><strong>Primary:</strong> black logo on paper/offwhite background.</li>
+          <li><strong>Inverse:</strong> white logo on ink background.</li>
+          <li><strong>Clear space:</strong> อย่างน้อย 1 เท่าความสูงตัว B รอบ logo.</li>
+          <li><strong>Minimum size:</strong> 84px width บน mobile header, 120px+ สำหรับ footer/presentation.</li>
+        </ul>
+      </div>
+      <div class="band">
+        <h3>Do / Don't</h3>
+        <div class="do-dont">
+          <div>
+            <h4>Do</h4>
+            <ul class="list">
+              <li>วางบนพื้นเรียบ contrast สูง.</li>
+              <li>ใช้สัดส่วนเดิมจาก <code>/public/site-logo.svg</code>.</li>
+              <li>ใช้ inverse เฉพาะบน dark surface.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Don't</h4>
+            <ul class="list">
+              <li>อย่ายืด บีบ หมุน หรือใส่เงา.</li>
+              <li>อย่าใช้บนภาพที่ busy จนอ่านไม่ออก.</li>
+              <li>อย่า recolor เป็นสี accent ยกเว้น campaign ที่กำหนดใหม่.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>04 · Colorway</h2>
+      <div class="meta">Palette and application</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch"><div class="paint" style="background:#0a0a0a"></div><div class="info"><b>Ink</b><small>#0A0A0A</small><p>Text, header, footer, CTA.</p></div></div>
+      <div class="swatch"><div class="paint" style="background:#ffffff"></div><div class="info"><b>Paper</b><small>#FFFFFF</small><p>Main surfaces.</p></div></div>
+      <div class="swatch"><div class="paint" style="background:#f8f8f8"></div><div class="info"><b>Offwhite</b><small>#F8F8F8</small><p>Page background.</p></div></div>
+      <div class="swatch"><div class="paint" style="background:#e8e8e8"></div><div class="info"><b>Grey 5</b><small>#E8E8E8</small><p>Lines, borders.</p></div></div>
+      <div class="swatch"><div class="paint" style="background:#8a8a8a"></div><div class="info"><b>Grey 3</b><small>#8A8A8A</small><p>Meta text.</p></div></div>
+      <div class="swatch"><div class="paint" style="background:#c9b27b"></div><div class="info"><b>Warm Gold</b><small>#C9B27B</small><p>Rare highlight.</p></div></div>
+      <div class="swatch"><div class="paint" style="background:#cfe1d5"></div><div class="info"><b>Sage</b><small>#CFE1D5</small><p>Soft positive.</p></div></div>
+      <div class="swatch"><div class="paint" style="background:#e7d1cf"></div><div class="info"><b>Rose</b><small>#E7D1CF</small><p>Soft emotional.</p></div></div>
+    </div>
+    <div class="grid-2" style="margin-top:18px">
+      <div class="band">
+        <h3>Usage Ratio</h3>
+        <p>แบรนด์ควรอ่านเป็น black/white editorial ก่อน แล้วใช้ accent เพื่อแยกข้อมูลหรือทำ presentation ไม่ใช่ตกแต่งทั่วหน้า.</p>
+        <div class="ratio"><div></div><div></div><div></div></div>
+        <div class="pill-list">
+          <span class="pill">80% paper/offwhite</span>
+          <span class="pill">15% ink/grey</span>
+          <span class="pill">5% accent</span>
+        </div>
+      </div>
+      <div class="band dark">
+        <h3>Semantic Colors</h3>
+        <ul class="list">
+          <li><strong>Success:</strong> <code>#0a7a3a</code> for admin save/import success only.</li>
+          <li><strong>Error:</strong> <code>#b91c1c</code> with pale red surface for destructive/error states.</li>
+          <li><strong>Selected:</strong> ink border + paper/ink inversion, not bright color.</li>
+          <li><strong>Disabled:</strong> opacity reduction and no hover lift.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>05 · Typography</h2>
+      <div class="meta">Current product font system</div>
+    </div>
+    <div class="type-grid">
+      <div class="type-card">
+        <div class="meta">Editorial headline</div>
+        <div class="specimen-serif">Your perfume, in a few dips.</div>
+        <p><strong>Cormorant Garamond</strong> ใช้กับ hero, result title, section headline และ footer links เพื่อให้กลิ่น editorial/luxury.</p>
+      </div>
+      <div class="type-card">
+        <div class="meta">Body and controls</div>
+        <div class="specimen-sans">Inter keeps choices clear.</div>
+        <p><strong>Inter</strong> ใช้กับ body, quiz choices, admin form, compact UI และเอกสาร technical เพื่ออ่านง่ายบนมือถือ.</p>
+      </div>
+      <div class="type-card">
+        <div class="meta">Meta label</div>
+        <div class="specimen-mono">Q3 · STYLE · SELECTED</div>
+        <p><strong>JetBrains Mono</strong> ใช้กับ meta label, code, admin ids และ microcopy ที่ต้องดูเป็น system cue.</p>
+      </div>
+    </div>
+    <div class="token-table" style="margin-top:18px">
+      <div class="token-row"><div class="token-cell">Role</div><div class="token-cell">Token</div><div class="token-cell">Use</div></div>
+      <div class="token-row"><div class="token-cell">Logo</div><div class="token-cell"><code>--font-logo</code></div><div class="token-cell">Fallback when rendering text logo, asset remains primary.</div></div>
+      <div class="token-row"><div class="token-cell">Serif</div><div class="token-cell"><code>--font-serif</code></div><div class="token-cell">Editorial emotion and fragrance storytelling.</div></div>
+      <div class="token-row"><div class="token-cell">Sans</div><div class="token-cell"><code>--font-sans</code></div><div class="token-cell">Readable interface text and quiz choices.</div></div>
+      <div class="token-row"><div class="token-cell">Mono</div><div class="token-cell"><code>--font-mono</code></div><div class="token-cell">Labels, ids, admin metadata, tiny system text.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>06 · Design Tokens</h2>
+      <div class="meta">Mapped to code</div>
+    </div>
+    <div class="token-table">
+      <div class="token-row"><div class="token-cell">Group</div><div class="token-cell">Tokens</div><div class="token-cell">Source</div></div>
+      <div class="token-row"><div class="token-cell">Color</div><div class="token-cell"><code>--ink</code>, <code>--paper</code>, <code>--offwhite</code>, <code>--grey-1..5</code></div><div class="token-cell"><code>app/globals.css</code></div></div>
+      <div class="token-row"><div class="token-cell">Typography</div><div class="token-cell"><code>--font-serif</code>, <code>--font-sans</code>, <code>--font-mono</code>, <code>--font-logo</code></div><div class="token-cell"><code>app/layout.jsx</code> loads fonts</div></div>
+      <div class="token-row"><div class="token-cell">Radius</div><div class="token-cell"><code>--radius-sm: 8px</code>, <code>--radius-md: 14px</code>, <code>--radius-lg: 22px</code>, <code>--radius-pill</code></div><div class="token-cell">Use 8px for most new docs/components; pill for CTA.</div></div>
+      <div class="token-row"><div class="token-cell">Shadow</div><div class="token-cell"><code>--shadow-soft</code>, <code>--shadow-card</code></div><div class="token-cell">Soft elevation only, never heavy drop shadow.</div></div>
+      <div class="token-row"><div class="token-cell">Editable theme</div><div class="token-cell"><code>ink</code>, <code>paper</code>, <code>offwhite</code>, <code>grey1..5</code>, fonts</div><div class="token-cell"><code>lib/theme.js</code> maps admin theme to CSS vars.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>07 · Component System</h2>
+      <div class="meta">Reusable UI rules</div>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Buttons</h3>
+        <p>Primary CTA is ink pill, ghost is outline/paper. Hover can lift subtly, but no bright color jump.</p>
+        <div class="component-preview">
+          <span class="button-demo">Begin the dip →</span>
+          <span class="button-demo ghost">Back</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Inputs</h3>
+        <p>Paper background, grey border, 8px radius, focus ring in ink with low opacity.</p>
+        <div class="component-preview">
+          <div class="input-demo">Your name</div>
+          <div class="input-demo">you@example.com</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Quiz Choice</h3>
+        <p>Choice must be scannable, touch-friendly and stable in size. Outfit images stay centered and uncropped.</p>
+        <div class="component-preview">
+          <div class="choice-demo"><div class="letter">B</div><div><strong>Sport</strong><p style="margin-top:2px">Selected choice state</p></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Result Card</h3>
+        <p>Perfume image + fragrance name + notes + reason. Internal pattern code is hidden from public client.</p>
+        <ul class="list"><li>Image not decorative</li><li>Notes visible</li><li>Reasons explain match</li></ul>
+      </div>
+      <div class="card">
+        <h3>Admin Table</h3>
+        <p>Dense but quiet: offwhite header, mono labels, paper rows, clear row actions.</p>
+        <ul class="list"><li>Fast scanning</li><li>No marketing hero</li><li>Bulk import/export visible</li></ul>
+      </div>
+      <div class="card">
+        <h3>Alerts</h3>
+        <p>Use semantic color sparingly. Error red only for blocking issue/destructive warning; success green only after save/import.</p>
+        <ul class="list"><li>Success: green text or bordered box</li><li>Error: pale red surface + red border</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>08 · Layout System</h2>
+      <div class="meta">Responsive product rules</div>
+    </div>
+    <div class="flow">
+      <div class="flow-step"><div class="meta">Desktop</div><h3>Editorial spread</h3><p>ใช้ wide grid, video texture, whitespace และ full-width bands.</p></div>
+      <div class="flow-step"><div class="meta">Tablet</div><h3>Reduce media</h3><p>ซ่อน hero video หนัก, ใช้ 2-column cards เฉพาะที่อ่านง่าย.</p></div>
+      <div class="flow-step"><div class="meta">Mobile</div><h3>Content first</h3><p>Header compact, hamburger menu, quiz card one column, image centered.</p></div>
+      <div class="flow-step"><div class="meta">Footer</div><h3>Balanced groups</h3><p>Brand, Discover, Legal, Contact ต้องไม่ยาวลงเป็นเสาเดียวเกินไป.</p></div>
+      <div class="flow-step"><div class="meta">Admin</div><h3>Operational density</h3><p>ใช้ table/form layout ที่ scan เร็วกว่า editorial hero.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>09 · Imagery & Motion</h2>
+      <div class="meta">Assets and art direction</div>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Video</h3>
+        <p>ใช้เป็น texture/atmosphere บน desktop เท่านั้น ถ้ากินพื้นที่หรือทำ mobile อ่านยาก ให้ซ่อน.</p>
+        <ul class="list"><li><code>public/blotter.mp4</code></li><li><code>public/process.mp4</code></li><li><code>public/footer.mp4</code></li></ul>
+      </div>
+      <div class="card">
+        <h3>Outfit Images</h3>
+        <p>รูป Q3 เป็น functional choice imagery ต้องไม่มีตัวอักษรติดมาและต้องเห็นตัวละครเต็มตัว.</p>
+        <ul class="list"><li>Centered subject</li><li>No accidental crop</li><li>Consistent scale between men/women</li></ul>
+      </div>
+      <div class="card">
+        <h3>Perfume Bottles</h3>
+        <p>รูปขวดต้องช่วยยืนยันผลลัพธ์ ไม่ใช่ decorative blur. ให้เห็น bottle และ brand clearly เท่าที่ asset อนุญาต.</p>
+        <ul class="list"><li><code>public/bottles/*</code></li><li>Use real product image when possible</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>10 · Implementation Notes</h2>
+      <div class="meta">How design lives in the codebase</div>
+    </div>
+    <div class="grid-2">
+      <div class="band">
+        <h3>Code Ownership</h3>
+        <ul class="list">
+          <li><code>app/globals.css</code>: design tokens, base components, responsive public layout.</li>
+          <li><code>app/components/Header.jsx</code>: sticky header, nav, hamburger menu.</li>
+          <li><code>app/components/Footer.jsx</code>: global footer structure and legal/contact grouping.</li>
+          <li><code>app/quiz/QuizClient.jsx</code>: quiz choice layout, auto-scroll, Q3 images.</li>
+          <li><code>app/result/ResultClient.jsx</code>: result card, sound, reasons, alternatives.</li>
+          <li><code>lib/theme.js</code>: admin editable theme map into CSS variables.</li>
+        </ul>
+      </div>
+      <div class="band dark">
+        <h3>Governance</h3>
+        <ul class="list">
+          <li>สีหลักต้องมาจาก CSS variables ก่อน hard-code.</li>
+          <li>UI ใหม่ควร reuse <code>.btn</code>, <code>.card</code>, <code>.input</code> pattern.</li>
+          <li>Admin theme editor เปลี่ยน token ได้ แต่ควรจำกัดให้ไม่ทำลาย contrast.</li>
+          <li>ก่อน deploy ให้ตรวจ mobile quiz/result และ admin editor ด้วยตาเสมอ.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-note">
+    <div>
+      <div class="meta" style="color:#bfbfbf">Source files</div>
+      <p>Built from current Blot. implementation: <code>app/globals.css</code>, <code>app/layout.jsx</code>, <code>app/components/Header.jsx</code>, <code>app/components/Footer.jsx</code>, <code>lib/theme.js</code>, and visual assets in <code>public/</code>.</p>
+    </div>
+    <div class="meta" style="color:#bfbfbf">Blot. · One dip. One match.</div>
+  </div>
+</main>
+</body>
+</html>

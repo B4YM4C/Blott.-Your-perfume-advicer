@@ -48,6 +48,85 @@ export default function PreviewBridge() {
         outline: 2px solid var(--ink, #0a0a0a);
         outline-offset: 3px;
       }
+      html[data-blot-structure="1"] [data-structure-list] {
+        outline: 2px solid rgba(10,10,10,.42);
+        outline-offset: 5px;
+        cursor: grab !important;
+      }
+      html[data-blot-structure="1"] [data-structure-list]:hover {
+        outline-color: rgba(10,10,10,.82);
+      }
+      html[data-blot-structure="1"] [data-structure-list][data-blot-drop="1"] {
+        outline-color: #14532d;
+        box-shadow: 0 0 0 6px rgba(20,83,45,.12);
+      }
+      .blot-structure-overlay {
+        position: absolute;
+        z-index: 99998;
+        display: inline-flex;
+        gap: 4px;
+        padding: 4px;
+        border: 1px solid rgba(10,10,10,.18);
+        border-radius: 999px;
+        background: rgba(255,255,255,.94);
+        box-shadow: 0 10px 26px rgba(10,10,10,.16);
+        backdrop-filter: blur(8px);
+      }
+      .blot-structure-overlay button {
+        border: 1px solid rgba(10,10,10,.14);
+        border-radius: 999px;
+        background: #fff;
+        color: #0a0a0a;
+        min-width: 28px;
+        height: 28px;
+        padding: 0 8px;
+        font: 600 10px Inter, system-ui, sans-serif;
+        cursor: pointer;
+      }
+      .blot-structure-overlay button:hover {
+        background: #0a0a0a;
+        color: #fff;
+      }
+      .blot-structure-trash {
+        position: fixed;
+        left: 50%;
+        bottom: 18px;
+        z-index: 99999;
+        transform: translateX(-50%);
+        min-width: 172px;
+        min-height: 54px;
+        display: none;
+        place-items: center;
+        gap: 2px;
+        padding: 8px 18px;
+        border-radius: 999px;
+        background: rgba(10,10,10,.88);
+        color: #fff;
+        box-shadow: 0 20px 50px rgba(10,10,10,.32);
+        font-family: Inter, system-ui, sans-serif;
+        text-align: center;
+        pointer-events: auto;
+      }
+      html[data-blot-structure="1"] .blot-structure-trash {
+        display: grid;
+      }
+      .blot-structure-trash.is-hot {
+        background: #b91c1c;
+        transform: translateX(-50%) scale(1.04);
+      }
+      .blot-structure-trash strong {
+        display: block;
+        font-size: 12px;
+        line-height: 1.1;
+      }
+      .blot-structure-trash small {
+        display: block;
+        font-size: 10px;
+        opacity: .72;
+      }
+      .blot-structure-dragging {
+        opacity: .42 !important;
+      }
     `;
     document.head.appendChild(chrome);
 
@@ -62,6 +141,18 @@ export default function PreviewBridge() {
     document.querySelectorAll('[data-edit-key]').forEach((el) => {
       originalText.set(el, el.textContent);
     });
+
+    const STRUCTURE_SELECTOR = '[data-structure-list][data-structure-index]';
+    let structureMode = false;
+    let dragPayload = null;
+    let dragEl = null;
+    let rebuildFrame = 0;
+    let overlayEls = [];
+    const trashEl = document.createElement('div');
+    trashEl.className = 'blot-structure-trash';
+    trashEl.setAttribute('data-blot-preview-control', 'true');
+    trashEl.innerHTML = '<strong>Delete</strong><small>drag here</small>';
+    document.body.appendChild(trashEl);
 
     function applyTheme(theme) {
       if (!theme || typeof theme !== 'object') return;
@@ -124,8 +215,166 @@ export default function PreviewBridge() {
       });
     }
 
+    function post(type, payload = {}) {
+      window.parent?.postMessage({ type, ...payload }, window.location.origin);
+    }
+
+    function structureItems() {
+      return [...document.querySelectorAll(STRUCTURE_SELECTOR)].filter((el) => {
+        const rect = el.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0;
+      });
+    }
+
+    function metaFor(el) {
+      return {
+        path: el?.getAttribute('data-structure-list') || '',
+        index: Number(el?.getAttribute('data-structure-index') || 0),
+        id: el?.getAttribute('data-structure-id') || '',
+        kind: el?.getAttribute('data-structure-kind') || 'item',
+      };
+    }
+
+    function setStructureMode(next) {
+      structureMode = !!next;
+      if (structureMode) {
+        root.setAttribute('data-blot-structure', '1');
+        structureItems().forEach((el) => el.setAttribute('draggable', 'true'));
+        scheduleStructureOverlays();
+      } else {
+        root.removeAttribute('data-blot-structure');
+        document.querySelectorAll(STRUCTURE_SELECTOR).forEach((el) => el.removeAttribute('draggable'));
+        clearStructureOverlays();
+        trashEl.classList.remove('is-hot');
+      }
+    }
+
+    function clearStructureOverlays() {
+      overlayEls.forEach((el) => el.remove());
+      overlayEls = [];
+      document.querySelectorAll('[data-blot-drop="1"]').forEach((el) => el.removeAttribute('data-blot-drop'));
+    }
+
+    function scheduleStructureOverlays() {
+      if (!structureMode) return;
+      window.cancelAnimationFrame(rebuildFrame);
+      rebuildFrame = window.requestAnimationFrame(rebuildStructureOverlays);
+    }
+
+    function rebuildStructureOverlays() {
+      if (!structureMode) return;
+      clearStructureOverlays();
+      for (const el of structureItems()) {
+        el.setAttribute('draggable', 'true');
+        const meta = metaFor(el);
+        if (!meta.path) continue;
+        const rect = el.getBoundingClientRect();
+        const overlay = document.createElement('div');
+        overlay.className = 'blot-structure-overlay';
+        overlay.setAttribute('data-blot-preview-control', 'true');
+        overlay.style.top = `${window.scrollY + rect.top - 16}px`;
+        overlay.style.left = `${Math.max(window.scrollX + 8, Math.min(window.scrollX + rect.right - 238, window.scrollX + window.innerWidth - 248))}px`;
+        overlay.innerHTML = `
+          <button type="button" data-action="before" title="Add new item before">+↑</button>
+          <button type="button" data-action="duplicate" title="Clone this item">Clone +</button>
+          <button type="button" data-action="after" title="Add new item after">+↓</button>
+          <button type="button" data-action="edit" title="Edit text/style in Element tab">Edit</button>
+        `;
+        overlay.addEventListener('click', (ev) => {
+          const btn = ev.target.closest('button');
+          if (!btn) return;
+          ev.preventDefault();
+          ev.stopPropagation();
+          const action = btn.dataset.action;
+          if (action === 'edit') {
+            pickElement(el.querySelector('[data-edit-key]') || el);
+            return;
+          }
+          if (action === 'duplicate') {
+            clonePreviewNode(el, 'after');
+            post('blot-structure-add', { path: meta.path, index: meta.index, id: meta.id, mode: 'duplicate' });
+            return;
+          }
+          clonePreviewNode(el, action === 'before' ? 'before' : 'after', true);
+          post('blot-structure-add', { path: meta.path, index: meta.index, id: meta.id, where: action === 'before' ? 'before' : 'after' });
+        });
+        document.body.appendChild(overlay);
+        overlayEls.push(overlay);
+      }
+    }
+
+    function pickElement(el) {
+      if (!el) return;
+      const editEl = el.matches('[data-edit-key]') ? el : el.querySelector('[data-edit-key]');
+      if (!editEl) return;
+      clearSelection();
+      editEl.setAttribute('data-blot-selected', '1');
+      const rect = editEl.getBoundingClientRect();
+      const computed = window.getComputedStyle(editEl);
+      post('blot-pick', {
+        key: editEl.getAttribute('data-edit-key'),
+        text: editEl.textContent || '',
+        computed: {
+          color: rgbToHex(computed.color),
+          fontFamily: computed.fontFamily,
+          fontSize: computed.fontSize,
+          fontWeight: computed.fontWeight,
+          letterSpacing: computed.letterSpacing,
+        },
+        rect: {
+          top: rect.top + window.scrollY,
+          left: rect.left + window.scrollX,
+          width: rect.width,
+          height: rect.height,
+        },
+      });
+    }
+
+    function clonePreviewNode(el, where, markNew = false) {
+      const clone = el.cloneNode(true);
+      clone.removeAttribute('data-blot-selected');
+      clone.classList.remove('blot-structure-dragging');
+      clone.querySelectorAll('[data-blot-selected]').forEach((x) => x.removeAttribute('data-blot-selected'));
+      if (markNew) {
+        clone.style.opacity = '.72';
+        const firstText = clone.querySelector('[data-edit-key]');
+        if (firstText) firstText.textContent = labelForPath(metaFor(el).path);
+      }
+      if (where === 'before') el.parentNode?.insertBefore(clone, el);
+      else el.parentNode?.insertBefore(clone, el.nextSibling);
+      updateVisibleIndexes(metaFor(el).path);
+      scheduleStructureOverlays();
+    }
+
+    function labelForPath(path) {
+      if (path === 'navigation.items') return 'New menu';
+      if (path === 'navigation.ctas') return 'New CTA';
+      if (path === 'method.steps') return 'New card';
+      if (path === 'home.sections') return 'New content box';
+      if (/^footer\.columns\.\d+\.links$/.test(path)) return 'New link';
+      if (path === 'footer.columns') return 'New footer column';
+      return 'New item';
+    }
+
+    function updateVisibleIndexes(path) {
+      structureItems()
+        .filter((el) => el.getAttribute('data-structure-list') === path)
+        .forEach((el, index) => el.setAttribute('data-structure-index', String(index)));
+    }
+
+    function movePreviewNode(source, target) {
+      if (!source || !target || source === target || source.parentNode !== target.parentNode) return;
+      const from = metaFor(source).index;
+      const to = metaFor(target).index;
+      if (from < to) target.parentNode.insertBefore(source, target.nextSibling);
+      else target.parentNode.insertBefore(source, target);
+      updateVisibleIndexes(metaFor(source).path);
+      scheduleStructureOverlays();
+    }
+
     // ---- Click-to-pick ---------------------------------------------
     function onClickCapture(ev) {
+      if (ev.target.closest('[data-blot-preview-control="true"]')) return;
       const el = ev.target.closest('[data-edit-key]');
       if (!el) return;
       // Block default for anchors / buttons so the iframe doesn't
@@ -133,32 +382,116 @@ export default function PreviewBridge() {
       ev.preventDefault();
       ev.stopPropagation();
       clearSelection();
-      el.setAttribute('data-blot-selected', '1');
-      const rect = el.getBoundingClientRect();
-      const computed = window.getComputedStyle(el);
-      window.parent?.postMessage(
-        {
-          type: 'blot-pick',
-          key:  el.getAttribute('data-edit-key'),
-          text: el.textContent || '',
-          computed: {
-            color:        rgbToHex(computed.color),
-            fontFamily:   computed.fontFamily,
-            fontSize:     computed.fontSize,
-            fontWeight:   computed.fontWeight,
-            letterSpacing: computed.letterSpacing,
-          },
-          rect: {
-            top:   rect.top + window.scrollY,
-            left:  rect.left + window.scrollX,
-            width: rect.width,
-            height: rect.height,
-          },
-        },
-        window.location.origin,
-      );
+      pickElement(el);
     }
     document.addEventListener('click', onClickCapture, true);
+
+    function onDragStart(ev) {
+      if (!structureMode || ev.target.closest('[data-blot-preview-control="true"]')) return;
+      const el = ev.target.closest(STRUCTURE_SELECTOR);
+      if (!el) return;
+      dragEl = el;
+      dragPayload = metaFor(el);
+      el.classList.add('blot-structure-dragging');
+      ev.dataTransfer.effectAllowed = 'move';
+      ev.dataTransfer.setData('text/plain', JSON.stringify(dragPayload));
+    }
+
+    function onDragOver(ev) {
+      if (!structureMode) return;
+      if (trashEl.contains(ev.target)) {
+        if (!dragPayload) return;
+        ev.preventDefault();
+        trashEl.classList.add('is-hot');
+        return;
+      }
+      const el = ev.target.closest(STRUCTURE_SELECTOR);
+      if (!el) return;
+      const meta = metaFor(el);
+      const externalTemplate = !dragPayload && hasExternalTemplate(ev);
+      if (!externalTemplate && meta.path !== dragPayload?.path) return;
+      if (externalTemplate && meta.path !== 'home.sections') return;
+      ev.preventDefault();
+      document.querySelectorAll('[data-blot-drop="1"]').forEach((x) => x.removeAttribute('data-blot-drop'));
+      el.setAttribute('data-blot-drop', '1');
+    }
+
+    function onDrop(ev) {
+      if (!structureMode) return;
+      if (trashEl.contains(ev.target)) {
+        if (!dragPayload) return;
+        ev.preventDefault();
+        if (dragEl) {
+          const meta = dragPayload;
+          dragEl.remove();
+          updateVisibleIndexes(meta.path);
+          post('blot-structure-remove', meta);
+        }
+        clearDragState();
+        return;
+      }
+      const el = ev.target.closest(STRUCTURE_SELECTOR);
+      if (!el) return;
+      const meta = metaFor(el);
+      if (!dragPayload) {
+        const templatePayload = readExternalTemplate(ev);
+        if (!templatePayload || meta.path !== templatePayload.path) return;
+        ev.preventDefault();
+        clonePreviewNode(el, 'after', true);
+        post('blot-structure-add-template', {
+          path: meta.path,
+          index: meta.index,
+          id: meta.id,
+          where: 'after',
+          item: templatePayload.item,
+        });
+        clearDragState();
+        return;
+      }
+      if (meta.path !== dragPayload.path) return;
+      ev.preventDefault();
+      const from = dragPayload.index;
+      const to = meta.index;
+      movePreviewNode(dragEl, el);
+      post('blot-structure-move', { path: meta.path, from, to, fromId: dragPayload.id, toId: meta.id });
+      clearDragState();
+    }
+
+    function onDragEnd() {
+      clearDragState();
+    }
+
+    function clearDragState() {
+      dragEl?.classList.remove('blot-structure-dragging');
+      dragEl = null;
+      dragPayload = null;
+      trashEl.classList.remove('is-hot');
+      document.querySelectorAll('[data-blot-drop="1"]').forEach((x) => x.removeAttribute('data-blot-drop'));
+      scheduleStructureOverlays();
+    }
+
+    function hasExternalTemplate(ev) {
+      return Array.from(ev.dataTransfer?.types || []).includes('application/x-blot-template');
+    }
+
+    function readExternalTemplate(ev) {
+      if (!hasExternalTemplate(ev)) return null;
+      try {
+        return JSON.parse(ev.dataTransfer.getData('application/x-blot-template') || 'null');
+      } catch (_) {
+        return null;
+      }
+    }
+
+    trashEl.addEventListener('dragover', onDragOver);
+    trashEl.addEventListener('drop', onDrop);
+    trashEl.addEventListener('dragleave', () => trashEl.classList.remove('is-hot'));
+    document.addEventListener('dragstart', onDragStart, true);
+    document.addEventListener('dragover', onDragOver, true);
+    document.addEventListener('drop', onDrop, true);
+    document.addEventListener('dragend', onDragEnd, true);
+    window.addEventListener('scroll', scheduleStructureOverlays, true);
+    window.addEventListener('resize', scheduleStructureOverlays);
 
     // ---- postMessage from parent -----------------------------------
     function onMessage(ev) {
@@ -167,6 +500,7 @@ export default function PreviewBridge() {
       if (!data || typeof data !== 'object') return;
       switch (data.type) {
         case 'blot-preview':
+          if ('mode' in data) setStructureMode(data.mode === 'structure');
           if ('theme'  in data) applyTheme(data.theme);
           if ('styles' in data) applyStyles(data.styles);
           if ('text'   in data) applyText(data.text);
@@ -194,10 +528,19 @@ export default function PreviewBridge() {
 
     return () => {
       document.removeEventListener('click', onClickCapture, true);
+      document.removeEventListener('dragstart', onDragStart, true);
+      document.removeEventListener('dragover', onDragOver, true);
+      document.removeEventListener('drop', onDrop, true);
+      document.removeEventListener('dragend', onDragEnd, true);
+      window.removeEventListener('scroll', scheduleStructureOverlays, true);
+      window.removeEventListener('resize', scheduleStructureOverlays);
       window.removeEventListener('message', onMessage);
       styleEl.remove();
       chrome.remove();
+      clearStructureOverlays();
+      trashEl.remove();
       document.documentElement.removeAttribute('data-blot-preview');
+      document.documentElement.removeAttribute('data-blot-structure');
       resetAll();
     };
   }, []);

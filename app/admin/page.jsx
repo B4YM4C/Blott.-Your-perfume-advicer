@@ -134,6 +134,7 @@ export default async function AdminDashboard() {
         <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 20, fontWeight: 400, marginBottom: 12 }}>Quick actions</h2>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
           <Link className="btn" href="/admin/sessions">Browse sessions</Link>
+          <Link className="btn ghost" href="/admin/copy">Site copy</Link>
           <Link className="btn ghost" href="/admin/questions">Edit questions</Link>
           <Link className="btn ghost" href="/admin/perfumes">Manage perfumes</Link>
           <Link className="btn ghost" href="/admin/easter-eggs">Easter eggs</Link>
