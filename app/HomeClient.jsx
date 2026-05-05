@@ -1,24 +1,17 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import LoadingAnimation from './components/LoadingAnimation';
 
 export default function HomeClient({ copy }) {
   const [loaded, setLoaded] = useState(false);
-  const bannerVideoRef = useRef(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && sessionStorage.getItem('blott_loaded')) {
       setLoaded(true);
     }
   }, []);
-
-  useEffect(() => {
-    if (loaded && bannerVideoRef.current) {
-      bannerVideoRef.current.play().catch(() => {});
-    }
-  }, [loaded]);
 
   // copy is the merged object — every field comes from /data/copy.json
   // unless overridden via /admin/copy in the DB.
@@ -39,35 +32,17 @@ export default function HomeClient({ copy }) {
         }} />
       )}
 
-      <section className="home-banner" style={s.banner} aria-label="Blot. animation banner">
-        <video
-          ref={bannerVideoRef}
-          className="home-banner-video"
-          style={s.bannerVideo}
-          src="/loading.mp4"
-          muted
-          loop
-          autoPlay
-          playsInline
-          preload="auto"
-          poster="/site-logo.svg"
-        />
-        <div style={s.bannerOverlay} />
-      </section>
-
-      <section id="home" className="home-section home-section-hero" style={{ ...s.section, ...s.homeSection, ...s.white, ...s.bgWrap }}>
-        <video
-          className="home-bg-video home-bg-video-left-25"
-          style={s.bgVideoLeft25}
-          src="/blotter.mp4"
-          muted
-          loop
-          autoPlay
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        />
-        <div className="container home-content-over" style={{ textAlign: 'center', ...s.contentOver }}>
+      <section id="home" className="home-section home-section-hero phase2-scene" style={{ ...s.section, ...s.homeSection, ...s.bgWrap }}>
+        <div className="phase2-hero-art" aria-hidden="true">
+          <span className="phase2-pipette" />
+          <span className="phase2-perfume-dust" />
+          <span className="phase2-drop phase2-drop-main" />
+          <span className="phase2-drop phase2-drop-small" />
+          <span className="phase2-blotter-card"><span>Blott.</span></span>
+          <span className="phase2-soft-fold phase2-soft-fold-right" />
+          <span className="phase2-soft-fold phase2-soft-fold-bottom" />
+        </div>
+        <div className="container home-content-over home-hero-centered" style={{ ...s.contentOver }}>
           <h1 className="home-h1" style={s.h1}>
             <em style={s.em} data-edit-key="home.title">{home?.title}</em>
           </h1>
@@ -76,21 +51,22 @@ export default function HomeClient({ copy }) {
             <Link href="/quiz" className="btn btn-lg" data-edit-key="home.ctaPrimary" data-puzzle-trigger="home.ctaPrimary">{home?.ctaPrimary}</Link>
             <Link href="#method" className="btn ghost btn-lg" data-edit-key="home.ctaSecondary" data-puzzle-trigger="home.ctaSecondary">{home?.ctaSecondary}</Link>
           </div>
+
+          <blockquote className="home-signature-quote" style={s.quote}>
+            <span aria-hidden="true" style={s.quoteMark}>“</span>
+            <span>Your scent is your signature.</span>
+            <small>We help you find it.</small>
+          </blockquote>
         </div>
       </section>
 
-      <section id="method" className="home-section home-section-method" style={{ ...s.section, ...s.methodSection, ...s.grey, ...s.bgWrap }}>
-        <video
-          className="home-bg-video home-bg-video-left-15"
-          style={s.bgVideoLeft15}
-          src="/process.mp4"
-          muted
-          loop
-          autoPlay
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        />
+      <section id="method" className="home-section home-section-method phase2-scene" style={{ ...s.section, ...s.methodSection, ...s.bgWrap }}>
+        <div className="phase2-section-art phase2-method-art" aria-hidden="true">
+          <span className="phase2-method-blotter" />
+          <span className="phase2-method-drop" />
+          <span className="phase2-method-fold" />
+          <span className="phase2-method-dust" />
+        </div>
         <div className="container home-content-over" style={s.contentOver}>
           <div className="home-section-head" style={s.sectionHead}>
             <span className="meta" data-edit-key="method.eyebrow">{method?.eyebrow}</span>
@@ -119,18 +95,14 @@ export default function HomeClient({ copy }) {
         </div>
       </section>
 
-      <section id="about" className="home-section home-section-about" style={{ ...s.section, ...s.white, ...s.bgWrap }}>
-        <video
-          className="home-bg-video home-bg-video-left-75"
-          style={s.bgVideoLeft75}
-          src="/footer.mp4"
-          muted
-          loop
-          autoPlay
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        />
+      <section id="about" className="home-section home-section-about phase2-scene" style={{ ...s.section, ...s.bgWrap }}>
+        <div className="phase2-section-art phase2-about-art" aria-hidden="true">
+          <span className="phase2-about-pipette" />
+          <span className="phase2-about-drop" />
+          <span className="phase2-about-fold-left" />
+          <span className="phase2-about-fold-right" />
+          <span className="phase2-about-dust" />
+        </div>
         <div className="container-narrow home-content-over" style={{ textAlign: 'center', ...s.contentOver }}>
           <span className="meta" data-edit-key="about.eyebrow">{about?.eyebrow}</span>
           <h2 className="home-h2" style={s.h2} data-edit-key="about.title">{about?.title}</h2>
@@ -142,8 +114,13 @@ export default function HomeClient({ copy }) {
       </section>
 
       {extraSections.length > 0 && (
-        <section id="content" className="home-section home-section-content" style={{ ...s.section, ...s.grey }}>
-          <div className="container" style={s.contentGrid}>
+        <section id="content" className="home-section home-section-content phase2-scene" style={{ ...s.section, ...s.bgWrap }}>
+          <div className="phase2-section-art phase2-content-art" aria-hidden="true">
+            <span className="phase2-content-blotter" />
+            <span className="phase2-content-drop" />
+            <span className="phase2-content-fold" />
+          </div>
+          <div className="container home-content-over" style={s.contentGrid}>
             {extraSections.map((section, i) => (
               <DynamicContentBox
                 key={`${section.id || 'section'}-${section.__index}`}
@@ -278,30 +255,15 @@ const contentVariantStyles = {
 };
 
 const s = {
-  banner: {
-    position: 'relative',
-    width: '100%',
-    height: 'clamp(126px, 15vw, 210px)',
-    overflow: 'hidden',
-    background: 'var(--paper)',
-  },
-  bannerVideo: {
-    position: 'absolute',
-    inset: 0,
-    width: '100%',
-    height: '100%',
-    objectFit: 'contain',
-    transform: 'scale(5.5)',
-    transformOrigin: 'center center',
-    filter: 'contrast(1.45) brightness(1.05) saturate(1.05)',
-    mixBlendMode: 'multiply',
-    pointerEvents: 'none',
-  },
-  bannerOverlay: { display: 'none' },
-
   section: { padding: '110px 0' },
-  white:   { background: 'var(--paper)' },
-  grey:    { background: 'var(--offwhite)' },
+  /* Ivory satin section */
+  white: { background: 'linear-gradient(180deg, var(--paper), #F5EEE2)' },
+  /* Cashmere linen section */
+  grey:  {
+    background:
+      'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(100,78,52,.007) 2px, rgba(100,78,52,.007) 2.4px),' +
+      'linear-gradient(180deg, var(--offwhite), #EAE0CE)',
+  },
 
   bgWrap: { position: 'relative', overflow: 'hidden', isolation: 'isolate' },
   bgVideoLeft25: {
@@ -328,20 +290,61 @@ const s = {
     filter: 'contrast(1.4) brightness(1.05) saturate(1)',
     mixBlendMode: 'multiply', pointerEvents: 'none', zIndex: 0,
   },
-  methodSection: { paddingTop: 72, paddingBottom: 110 },
-  homeSection:   { paddingTop: 12, paddingBottom: 110 },
+  methodSection: { paddingTop: 84, paddingBottom: 112 },
+  homeSection:   { minHeight: 'calc(100vh - 104px)', paddingTop: 'clamp(86px, 12vh, 140px)', paddingBottom: 82 },
   contentOver:   { position: 'relative', zIndex: 1 },
 
   h1: {
     fontFamily: 'var(--font-serif)', fontSize: 'clamp(44px, 7vw, 88px)',
-    fontWeight: 300, letterSpacing: '-.025em', lineHeight: 1.05, marginBottom: 32,
+    maxWidth: 720,
+    margin: '0 auto 24px',
+    fontWeight: 300, letterSpacing: 0, lineHeight: .98,
+    textAlign: 'center',
   },
   em: { fontStyle: 'italic', fontWeight: 400 },
   lead: {
-    maxWidth: 620, margin: '0 auto',
-    fontSize: 16, color: 'var(--grey-2)', lineHeight: 1.7, marginBottom: 36,
+    maxWidth: 460,
+    margin: '0 auto 36px',
+    fontSize: 16, color: 'var(--grey-3)', lineHeight: 1.78,
+    textAlign: 'center',
   },
   ctas: { display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap' },
+  featurePanel: {
+    marginTop: 'clamp(92px, 18vh, 170px)',
+    width: 'min(660px, 100%)',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+    gap: 0,
+  },
+  featureItem: {
+    minHeight: 148,
+    padding: '28px 26px',
+    textAlign: 'center',
+  },
+  featureTitle: {
+    marginTop: 14,
+    fontFamily: 'var(--font-sans)',
+    fontSize: 13,
+    fontWeight: 600,
+    letterSpacing: '.02em',
+  },
+  featureBody: {
+    margin: '8px auto 0',
+    maxWidth: 140,
+    color: 'var(--grey-2)',
+    fontSize: 12,
+    lineHeight: 1.65,
+  },
+  quote: {
+    margin: 'clamp(64px, 10vh, 120px) auto 0',
+    color: 'var(--ink)',
+    fontFamily: 'var(--font-serif)',
+    fontSize: 24,
+    lineHeight: 1.4,
+    textAlign: 'center',
+    maxWidth: 520,
+  },
+  quoteMark: { marginRight: 8, fontSize: 26 },
 
   sectionHead: { textAlign: 'center', marginBottom: 64 },
   h2: {
@@ -353,10 +356,12 @@ const s = {
     gap: 18,
   },
   stepCard: {
-    background: 'var(--paper)', padding: '40px 32px',
-    border: '1px solid var(--grey-5)',
+    background: 'linear-gradient(148deg, rgba(252,248,242,.84), rgba(238,226,210,.7))',
+    padding: '40px 32px',
+    border: '1px solid rgba(255,252,246,.84)',
     borderRadius: 'var(--radius-lg)',
-    boxShadow: 'var(--shadow-soft)',
+    boxShadow: 'var(--shadow-raised), var(--shadow-inset)',
+    backdropFilter: 'blur(18px)',
   },
   stepNum: {
     fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '.3em',
@@ -370,11 +375,12 @@ const s = {
     gap: 18,
   },
   contentBox: {
-    background: 'var(--paper)',
-    border: '1px solid var(--grey-5)',
-    borderRadius: 'var(--radius-sm)',
+    background: 'linear-gradient(148deg, rgba(252,248,242,.84), rgba(238,226,210,.7))',
+    border: '1px solid rgba(255,252,246,.84)',
+    borderRadius: 'var(--radius-lg)',
     padding: 36,
-    boxShadow: 'var(--shadow-soft)',
+    boxShadow: 'var(--shadow-raised), var(--shadow-inset)',
+    backdropFilter: 'blur(18px)',
   },
   contentMedia: {
     width: '100%',
